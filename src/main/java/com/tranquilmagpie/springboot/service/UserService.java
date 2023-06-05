@@ -6,5 +6,6 @@ import com.tranquilmagpie.springboot.domain.User;
 
 public interface UserService {
     List<User> getAll();
+    User get(Long id);
     User createUser(User user);
 }

@@ -22,10 +22,16 @@ public class UserServiceDB implements UserService {
         return this.repo.findAll();
     }
 
+    //TODO: specify a suitable exception
+    @Override
+    public User get(Long id){
+        return this.repo.findById(id).orElseThrow();
+    }
+
     @Override
     public User createUser(User user) {
         return this.repo.save(user);
     }
-    // TODO: /get/id
+
     // TODO: /remove/id
 }

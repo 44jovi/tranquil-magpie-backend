@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Primary
 @Service
 public class UserServiceDB implements UserService {
@@ -20,4 +21,11 @@ public class UserServiceDB implements UserService {
     public List<User> getAll() {
         return this.repo.findAll();
     }
+
+    @Override
+    public User createUser(User user) {
+        return this.repo.save(user);
+    }
+    // TODO: /get/id
+    // TODO: /remove/id
 }

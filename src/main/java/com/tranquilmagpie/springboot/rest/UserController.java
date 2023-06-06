@@ -11,27 +11,27 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private UserService service;
+  private UserService service;
 
-    public UserController(UserService service) {
-        super();
-        this.service = service;
-    }
+  public UserController(UserService service) {
+    super();
+    this.service = service;
+  }
 
-    @GetMapping("/users/getAll")
-    public List<User> getAll() {
-        return this.service.getAll();
-    }
+  @GetMapping("/users/getAll")
+  public List<User> getAll() {
+    return this.service.getAll();
+  }
 
-    @GetMapping("/users/get/{id}")
-    // @PathVariable binds 'id' value in HTTP request to template var '{id}'
-    public User get(@PathVariable int id) {
-        return this.service.get((long) id);
-    }
+  @GetMapping("/users/get/{id}")
+  // @PathVariable binds 'id' value in HTTP request to template var '{id}'
+  public User get(@PathVariable int id) {
+    return this.service.get((long) id);
+  }
 
-    @PostMapping("/users/create")
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User createdUser = this.service.createUser(user);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
-    }
+  @PostMapping("/users/create")
+  public ResponseEntity<User> createUser(@RequestBody User user) {
+    User createdUser = this.service.createUser(user);
+    return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+  }
 }

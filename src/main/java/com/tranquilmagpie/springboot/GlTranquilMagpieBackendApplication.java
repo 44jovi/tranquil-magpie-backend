@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class GlTranquilMagpieBackendApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GlTranquilMagpieBackendApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(GlTranquilMagpieBackendApplication.class, args);
+  }
 }

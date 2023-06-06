@@ -10,28 +10,28 @@ import java.util.List;
 @Primary
 @Service
 public class UserServiceDB implements UserService {
-    private UserRepo repo;
+  private UserRepo repo;
 
-    public UserServiceDB(UserRepo repo) {
-        super();
-        this.repo = repo;
-    }
+  public UserServiceDB(UserRepo repo) {
+    super();
+    this.repo = repo;
+  }
 
-    @Override
-    public List<User> getAll() {
-        return this.repo.findAll();
-    }
+  @Override
+  public List<User> getAll() {
+    return this.repo.findAll();
+  }
 
-    //TODO: specify a suitable exception
-    @Override
-    public User get(Long id){
-        return this.repo.findById(id).orElseThrow();
-    }
+  // TODO: specify a suitable exception
+  @Override
+  public User get(Long id) {
+    return this.repo.findById(id).orElseThrow();
+  }
 
-    @Override
-    public User createUser(User user) {
-        return this.repo.save(user);
-    }
+  @Override
+  public User createUser(User user) {
+    return this.repo.save(user);
+  }
 
-    // TODO: /remove/id
+  // TODO: /remove/id
 }

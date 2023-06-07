@@ -1,0 +1,14 @@
+.openapi-generator-ignore
+README.md
+pom.xml
+src/main/gen/com/tranquilmagpie/user/OpenApiGeneratorApplication.java
+src/main/gen/com/tranquilmagpie/user/RFC3339DateFormat.java
+src/main/gen/com/tranquilmagpie/user/api/ApiUtil.java
+src/main/gen/com/tranquilmagpie/user/api/UsersApi.java
+src/main/gen/com/tranquilmagpie/user/api/UsersApiController.java
+src/main/gen/com/tranquilmagpie/user/config/HomeController.java
+src/main/gen/com/tranquilmagpie/user/config/SpringDocConfiguration.java
+src/main/gen/com/tranquilmagpie/user/model/User.java
+src/main/resources/application.properties
+src/main/resources/openapi.yaml
+src/test/java/com/tranquilmagpie/user/OpenApiGeneratorApplicationTests.java

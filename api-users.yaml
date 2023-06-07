@@ -1,0 +1,60 @@
+openapi: 3.0.2
+info:
+  title: user
+  version: 1.0.0
+  description: Users
+servers:
+  - url: http://localhost:8080/v1
+    description: Localhost
+paths:
+  /users:
+    summary: Path used to interact with a list of users
+    description: WIP - initial goal is to get a list of existing users
+    get:
+      tags:
+        - user
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/user'
+          description: Successful response - returns an array of `user` entities.
+      operationId: getUsers
+      summary: List All users
+      description: Gets a list of all `user` entities.
+
+components:
+  schemas:
+    user:
+      title: Users
+      description: All users
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dob:
+          # TODO: format - revert to 'date-time' if needed
+          format: date
+          type: string
+      example:
+        value:
+          id: 44
+          email: example1@example.com
+          username: example1
+          firstName: Example
+          lastName: One
+          dob: 1944-04-04
+tags:
+  - name: user
+    description: 'User '

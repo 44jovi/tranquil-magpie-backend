@@ -85,3 +85,8 @@ nb-configuration.xml
 .DS_Store
 
 HELP.md
+
+##############################
+## OpenApi
+##############################
+openapi-gen.sh

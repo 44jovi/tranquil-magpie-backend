@@ -1,0 +1,57 @@
+# WIP - NOT WORKING
+openapi: '3.1.0'
+
+info:
+  title: User
+  version: "1"
+  description: User resources
+
+servers:
+# TODO: use env vars
+# TODO: check path - remove /api/ ?
+  - url: http://localhost:8080/api
+    description: Local host server
+
+paths:
+
+  /user:
+    post:
+      summary: Save user
+      operationId: saveUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+      responses:
+        200:
+          description: OK
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+
+components:
+  schemas:
+    UserDTO:
+      type: object
+      description: Data element for a user
+      properties:
+        # TODO: check if this needs to match exactly with database
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+        username:
+          type: string
+        firstName:
+          type: string
+          minLength: 3
+          maxLength: 50
+        lastName:
+          type: string
+          minLength: 3
+          maxLength: 50
+        dob:
+          # TODO: check for data type of 'date'
+          type: string

@@ -21,6 +21,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -41,6 +43,22 @@ public class UsersApiController implements UsersApi {
     @Override
     public Optional<NativeWebRequest> getRequest() {
         return Optional.ofNullable(request);
+    }
+
+    // Return stubbed 'user' data
+    @Override
+    public ResponseEntity<List<User>> getUsers() {
+        User exampleUser = new User();
+        exampleUser.setDob(LocalDate.parse("1234-05-06"));
+        exampleUser.setEmail("joe.bloggs@example.com");
+        exampleUser.setId("1234");
+        exampleUser.setUsername("joe1234");
+        exampleUser.setFirstName("Joe");
+        exampleUser.setLastName("Bloggs");
+        // ".ok" for status code 200
+        return ResponseEntity.ok(Arrays.asList(exampleUser));
+        // Original generated return statement:
+        // return UsersApi.super.getUsers();
     }
 
 }

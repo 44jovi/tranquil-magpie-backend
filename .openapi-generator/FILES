@@ -1,6 +1,4 @@
-.openapi-generator-ignore
 README.md
-pom.xml
 src/main/gen/com/tranquilmagpie/user/OpenApiGeneratorApplication.java
 src/main/gen/com/tranquilmagpie/user/RFC3339DateFormat.java
 src/main/gen/com/tranquilmagpie/user/api/ApiUtil.java

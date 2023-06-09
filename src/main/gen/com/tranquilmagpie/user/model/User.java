@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 
 @Schema(name = "user", description = "All users")
 @JsonTypeName("user")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-07T17:15:20.356286+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-09T13:56:09.424558+01:00[Europe/London]")
 public class User {
 
   private String id;
@@ -48,7 +48,7 @@ public class User {
    * Get id
    * @return id
   */
-
+  
   @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("id")
   public String getId() {
@@ -68,7 +68,7 @@ public class User {
    * Get email
    * @return email
   */
-
+  
   @Schema(name = "email", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("email")
   public String getEmail() {
@@ -88,7 +88,7 @@ public class User {
    * Get username
    * @return username
   */
-
+  
   @Schema(name = "username", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("username")
   public String getUsername() {
@@ -108,7 +108,7 @@ public class User {
    * Get firstName
    * @return firstName
   */
-
+  
   @Schema(name = "firstName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("firstName")
   public String getFirstName() {
@@ -128,7 +128,7 @@ public class User {
    * Get lastName
    * @return lastName
   */
-
+  
   @Schema(name = "lastName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("lastName")
   public String getLastName() {
@@ -148,7 +148,7 @@ public class User {
    * Get dob
    * @return dob
   */
-  @Valid
+  @Valid 
   @Schema(name = "dob", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("dob")
   public LocalDate getDob() {
@@ -206,3 +206,4 @@ public class User {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-07T17:15:20.356286+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-09T13:56:09.424558+01:00[Europe/London]")
 @Validated
 @Tag(name = "user", description = "User ")
 public interface UsersApi {
@@ -64,7 +64,7 @@ public interface UsersApi {
         produces = { "application/json" }
     )
     default ResponseEntity<List<User>> getUsers(
-
+        
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {

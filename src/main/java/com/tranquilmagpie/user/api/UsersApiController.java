@@ -2,7 +2,6 @@ package com.tranquilmagpie.user.api;
 
 import com.tranquilmagpie.user.model.User;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,7 +27,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-07T17:15:20.356286+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-09T13:56:09.424558+01:00[Europe/London]")
 @Controller
 @RequestMapping("${openapi.user.base-path:/v1}")
 public class UsersApiController implements UsersApi {
@@ -45,7 +44,7 @@ public class UsersApiController implements UsersApi {
         return Optional.ofNullable(request);
     }
 
-    // Return stubbed 'user' data
+    //    Return stubbed 'user' data
     @Override
     public ResponseEntity<List<User>> getUsers() {
         User exampleUser = new User();
@@ -55,10 +54,9 @@ public class UsersApiController implements UsersApi {
         exampleUser.setUsername("joe1234");
         exampleUser.setFirstName("Joe");
         exampleUser.setLastName("Bloggs");
+//        return UsersApi.super.getUsers();
         // ".ok" for status code 200
         return ResponseEntity.ok(Arrays.asList(exampleUser));
-        // Original generated return statement:
-        // return UsersApi.super.getUsers();
     }
 
 }

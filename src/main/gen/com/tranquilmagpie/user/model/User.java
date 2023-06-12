@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 
 @Schema(name = "user", description = "All users")
 @JsonTypeName("user")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-12T12:13:43.909206+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-12T13:45:18.754877+01:00[Europe/London]")
 public class User {
 
   private Long id = null;

@@ -34,6 +34,7 @@ components:
       type: object
       properties:
         id:
+          # TODO: format - review using 'integer' or 'number'
           type: long
         email:
           type: string

@@ -45,7 +45,7 @@ components:
           dob: 1944-04-04
       properties:
         id:
-          type: string
+          type: long
         email:
           type: string
         username:

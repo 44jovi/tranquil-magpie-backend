@@ -34,7 +34,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: long
         email:
           type: string
         username:

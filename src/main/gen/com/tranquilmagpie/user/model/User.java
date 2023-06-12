@@ -23,10 +23,10 @@ import javax.annotation.Generated;
 
 @Schema(name = "user", description = "All users")
 @JsonTypeName("user")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-09T13:56:09.424558+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-12T12:13:43.909206+01:00[Europe/London]")
 public class User {
 
-  private String id;
+  private Long id = null;
 
   private String email;
 
@@ -39,7 +39,7 @@ public class User {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate dob;
 
-  public User id(String id) {
+  public User id(Long id) {
     this.id = id;
     return this;
   }
@@ -51,11 +51,11 @@ public class User {
   
   @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("id")
-  public String getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

@@ -50,7 +50,7 @@ public class UsersApiController implements UsersApi {
         User exampleUser = new User();
         exampleUser.setDob(LocalDate.parse("1234-05-06"));
         exampleUser.setEmail("joe.bloggs@example.com");
-        exampleUser.setId("1234");
+        exampleUser.setId(1234L);
         exampleUser.setUsername("joe1234");
         exampleUser.setFirstName("Joe");
         exampleUser.setLastName("Bloggs");

@@ -64,10 +64,24 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/api-users.yaml</inputSpec>
                             <generatorName>spring</generatorName>
+                            <!-- Spring Boot server application -->
+                            <!-- 'spring-boot' is in fact already the default value -->
+                            <inputSpec>${project.basedir}/api-users.yaml</inputSpec>
+                            <library>spring-boot</library>
+                            <!-- Generate code inside project in addition to /target -->
+                            <output>${project.basedir}</output>
                             <configOptions>
+                                <!-- TODO: review use of 'serializableModel' tag-->
+                                <artifactId>${project.artifactId}</artifactId>
+                                <groupId>${project.groupId}</groupId>
+                                <version>${project.version}</version>
                                 <sourceFolder>src/main/gen</sourceFolder>
+                                <basePackage>com.tranquilmagpie.user</basePackage>
+                                <invokerPackage>com.tranquilmagpie.user</invokerPackage>
+                                <configPackage>com.tranquilmagpie.user.config</configPackage>
+                                <modelPackage>com.tranquilmagpie.user.model</modelPackage>
+                                <apiPackage>com.tranquilmagpie.user.api</apiPackage>
                                 <dateLibrary>java8</dateLibrary>
                             </configOptions>
                         </configuration>

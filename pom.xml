@@ -51,6 +51,7 @@
                 </configuration>
             </plugin>
             <plugin>
+                <!-- TODO: review <configOptions> -->
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <!-- RELEASE_VERSION -->
@@ -75,6 +76,7 @@
         </plugins>
     </build>
     <dependencies>
+        <!-- Build web, including RESTful, applications using Spring MVC. Uses Apache Tomcat as the default embedded container -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -116,6 +118,30 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <!-- A JDBC and R2DBC driver that allows Java programs to connect to a PostgreSQL database using standard, database independent Java code -->
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <!-- Persist data in SQL stores with Java Persistence API using Spring Data and Hibernate -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <!-- Exposing Spring Data repositories over REST via Spring Data REST -->
+            <!-- Automatically expose repositories as RESTful APIs -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+        <dependency>
+            <!-- Provides fast application restarts, LiveReload, and configurations for enhanced development experience -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

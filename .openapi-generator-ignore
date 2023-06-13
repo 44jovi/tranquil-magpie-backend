@@ -24,5 +24,6 @@
 pom.xml
 TODO: review classes to be excluded
 **/*Controller.java
+**/*UsersApi.java
 **/*User.java
 **/*.properties

@@ -13,17 +13,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import java.time.OffsetDateTime;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import java.util.*;
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 
 /**
  * All users
@@ -32,7 +32,7 @@ import javax.annotation.Generated;
 @Entity
 @Table(name = "users")
 // TODO: check schema name
-@Schema(name = "user", description = "All users")
+@Schema(name = "backend", description = "All users")
 @JsonTypeName("user")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-12T13:45:18.754877+01:00[Europe/London]")
 public class User {

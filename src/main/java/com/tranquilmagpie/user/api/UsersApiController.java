@@ -1,62 +1,26 @@
 package com.tranquilmagpie.user.api;
 
 import com.tranquilmagpie.user.model.User;
+import com.tranquilmagpie.user.service.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.context.request.NativeWebRequest;
-
-import jakarta.validation.constraints.*;
-import jakarta.validation.Valid;
-
-import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-09T13:56:09.424558+01:00[Europe/London]")
-@Controller
-@RequestMapping("${openapi.user.base-path:/v1}")
-public class UsersApiController implements UsersApi {
+@RestController
+public class UsersApiController {
 
-    private final NativeWebRequest request;
+    private final UserService service;
 
-    @Autowired
-    public UsersApiController(NativeWebRequest request) {
-        this.request = request;
+    public UsersApiController(UserService service) {
+        super();
+        this.service = service;
     }
 
-    @Override
-    public Optional<NativeWebRequest> getRequest() {
-        return Optional.ofNullable(request);
+    @GetMapping("users/getAll")
+    public List<User> getAll() {
+        return this.service.getAll();
     }
 
-    //    Return stubbed 'user' data
-    @Override
-    public ResponseEntity<List<User>> getUsers() {
-        User exampleUser = new User();
-        exampleUser.setDob(LocalDate.parse("1234-05-06"));
-        exampleUser.setEmail("joe.bloggs@example.com");
-        exampleUser.setId(1234L);
-        exampleUser.setUsername("joe1234");
-        exampleUser.setFirstName("Joe");
-        exampleUser.setLastName("Bloggs");
-//        return UsersApi.super.getUsers();
-        // ".ok" for status code 200
-        return ResponseEntity.ok(Arrays.asList(exampleUser));
-    }
 
 }

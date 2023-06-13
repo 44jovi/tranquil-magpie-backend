@@ -13,6 +13,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import java.time.OffsetDateTime;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -26,10 +29,15 @@ import javax.annotation.Generated;
  * All users
  */
 
+@Entity
+@Table(name = "users")
+// TODO: check schema name
 @Schema(name = "user", description = "All users")
 @JsonTypeName("user")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-12T13:45:18.754877+01:00[Europe/London]")
 public class User {
+    @Id
+    // TODO: check usage of @GeneratedValue
     private Long id = null;
 
     private String email;

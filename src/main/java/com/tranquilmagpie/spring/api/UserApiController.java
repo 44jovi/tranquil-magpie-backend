@@ -36,5 +36,9 @@ public class UserApiController {
 
     }
 
+    @DeleteMapping("users/deleteOneById/{id}")
+    public User deleteOnebyId(@PathVariable int id) {
+        return this.service.deleteOneById((long) id);
+    }
 
 }

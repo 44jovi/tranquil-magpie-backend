@@ -35,4 +35,11 @@ public class UserServiceDB implements UserService {
     public User createOne(User user) {
         return this.repo.save(user);
     }
+
+    @Override
+    public User deleteOneById(Long id) {
+        User selectedUser = this.getOneById(id);
+        this.repo.deleteById(id);
+        return selectedUser;
+    }
 }

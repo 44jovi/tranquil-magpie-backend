@@ -1,4 +1,4 @@
-package com.tranquilmagpie.user.config;
+package com.tranquilmagpie.spring.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 @Configuration
 public class SpringDocConfiguration {
 
-    @Bean(name = "com.tranquilmagpie.user.config.SpringDocConfiguration.apiInfo")
+    @Bean(name = "com.tranquilmagpie.spring.config.SpringDocConfiguration.apiInfo")
     OpenAPI apiInfo() {
         return new OpenAPI()
                 .info(

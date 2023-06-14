@@ -1,4 +1,4 @@
-package com.tranquilmagpie.user.config;
+package com.tranquilmagpie.spring.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;

@@ -1,7 +1,7 @@
-package com.tranquilmagpie.user.api;
+package com.tranquilmagpie.spring.api;
 
-import com.tranquilmagpie.user.model.User;
-import com.tranquilmagpie.user.service.UserService;
+import com.tranquilmagpie.spring.model.User;
+import com.tranquilmagpie.spring.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

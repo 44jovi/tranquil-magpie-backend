@@ -1,4 +1,4 @@
-package com.tranquilmagpie.user;
+package com.tranquilmagpie.spring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,7 +1,7 @@
-package com.tranquilmagpie.user.service;
+package com.tranquilmagpie.spring.service;
 
-import com.tranquilmagpie.user.model.User;
-import com.tranquilmagpie.user.repo.UsersRepo;
+import com.tranquilmagpie.spring.model.User;
+import com.tranquilmagpie.spring.repo.UsersRepo;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 

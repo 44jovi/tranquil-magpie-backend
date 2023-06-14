@@ -1,6 +1,6 @@
-package com.tranquilmagpie.user.service;
+package com.tranquilmagpie.spring.service;
 
-import com.tranquilmagpie.user.model.User;
+import com.tranquilmagpie.spring.model.User;
 
 import java.util.List;
 

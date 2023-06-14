@@ -1,4 +1,4 @@
-package com.tranquilmagpie.user;
+package com.tranquilmagpie.spring;
 
 import com.fasterxml.jackson.databind.util.StdDateFormat;
 

@@ -1,4 +1,4 @@
-package com.tranquilmagpie.user;
+package com.tranquilmagpie.spring;
 
 import com.fasterxml.jackson.databind.Module;
 import org.openapitools.jackson.nullable.JsonNullableModule;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGe
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 @ComponentScan(
-    basePackages = {"com.tranquilmagpie.user", "com.tranquilmagpie.user.api" , "com.tranquilmagpie.user.config"},
+    basePackages = {"com.tranquilmagpie.spring", "com.tranquilmagpie.spring.api" , "com.tranquilmagpie.spring.config"},
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 public class OpenApiGeneratorApplication {
@@ -22,7 +22,7 @@ public class OpenApiGeneratorApplication {
         SpringApplication.run(OpenApiGeneratorApplication.class, args);
     }
 
-    @Bean(name = "com.tranquilmagpie.user.OpenApiGeneratorApplication.jsonNullableModule")
+    @Bean(name = "com.tranquilmagpie.spring.OpenApiGeneratorApplication.jsonNullableModule")
     public Module jsonNullableModule() {
         return new JsonNullableModule();
     }

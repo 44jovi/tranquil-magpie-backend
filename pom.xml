@@ -47,7 +47,7 @@
                 <version>2.7.6</version>
                 <configuration>
                     <!-- App entry point for Maven build-->
-                    <mainClass>com.tranquilmagpie.user.OpenApiGeneratorApplication</mainClass>
+                    <mainClass>com.tranquilmagpie.spring.OpenApiGeneratorApplication</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -77,11 +77,11 @@
                                 <groupId>${project.groupId}</groupId>
                                 <version>${project.version}</version>
                                 <sourceFolder>src/main/gen</sourceFolder>
-                                <basePackage>com.tranquilmagpie.user</basePackage>
-                                <invokerPackage>com.tranquilmagpie.user</invokerPackage>
-                                <configPackage>com.tranquilmagpie.user.config</configPackage>
-                                <modelPackage>com.tranquilmagpie.user.model</modelPackage>
-                                <apiPackage>com.tranquilmagpie.user.api</apiPackage>
+                                <basePackage>com.tranquilmagpie.spring</basePackage>
+                                <invokerPackage>com.tranquilmagpie.spring</invokerPackage>
+                                <configPackage>com.tranquilmagpie.spring.config</configPackage>
+                                <modelPackage>com.tranquilmagpie.spring.model</modelPackage>
+                                <apiPackage>com.tranquilmagpie.spring.api</apiPackage>
                                 <dateLibrary>java8</dateLibrary>
                                 <useSpringBoot3>true</useSpringBoot3>
                                 <useSpringController>true</useSpringController>

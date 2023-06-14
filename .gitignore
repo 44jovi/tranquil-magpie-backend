@@ -89,4 +89,4 @@ HELP.md
 ##############################
 ## OpenApi
 ##############################
-openapi-gen.sh
+openapi-gen-*.sh

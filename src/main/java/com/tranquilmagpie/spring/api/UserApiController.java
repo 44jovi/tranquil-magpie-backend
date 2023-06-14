@@ -33,11 +33,10 @@ public class UserApiController {
     public ResponseEntity<User> createOne(@RequestBody User user) {
         User createdUser = this.service.createOne(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
-
     }
 
     @DeleteMapping("users/deleteOneById/{id}")
-    public User deleteOnebyId(@PathVariable int id) {
+    public User deleteOneById(@PathVariable int id) {
         return this.service.deleteOneById((long) id);
     }
 

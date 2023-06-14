@@ -5,6 +5,7 @@ import com.tranquilmagpie.spring.repo.UserRepo;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Primary
@@ -42,4 +43,25 @@ public class UserServiceDB implements UserService {
         this.repo.deleteById(id);
         return selectedUser;
     }
+
+    @Override
+    public User updateOneById(Long id, String email, String username, String firstName, String lastName, LocalDate dob) {
+        User selectedUser = this.getOneById(id);
+
+//        TODO: use ternary statements?
+        if (email != null)
+            selectedUser.setEmail(email);
+        if (username != null)
+            selectedUser.setUsername(username);
+        if (firstName != null)
+            selectedUser.setFirstName(firstName);
+        if (lastName != null)
+            selectedUser.setLastName(lastName);
+        if (dob != null)
+            selectedUser.setDob(dob);
+
+        //  .save - JPA calls entityManager.merge if entity already exists (otherwise entityManager.persist)
+        return this.repo.save(selectedUser);
+    }
+
 }

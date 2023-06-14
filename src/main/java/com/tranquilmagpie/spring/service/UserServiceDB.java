@@ -1,7 +1,7 @@
 package com.tranquilmagpie.spring.service;
 
 import com.tranquilmagpie.spring.model.User;
-import com.tranquilmagpie.spring.repo.UsersRepo;
+import com.tranquilmagpie.spring.repo.UserRepo;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +12,9 @@ import java.util.List;
 public class UserServiceDB implements UserService {
 //    private UserRepo repo;
 
-    private UsersRepo repo;
+    private UserRepo repo;
 
-    public UserServiceDB(UsersRepo repo) {
+    public UserServiceDB(UserRepo repo) {
         super();
         this.repo = repo;
     }

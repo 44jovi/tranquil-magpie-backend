@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class UsersApiController {
+public class UserApiController {
 
     private final UserService service;
 
-    public UsersApiController(UserService service) {
+    public UserApiController(UserService service) {
         super();
         this.service = service;
     }

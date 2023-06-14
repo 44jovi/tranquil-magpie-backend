@@ -7,11 +7,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.Valid;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,10 +26,9 @@ import jakarta.annotation.Generated;
 // TODO: check schema name
 @Schema(name = "backend", description = "All users")
 @JsonTypeName("user")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-12T13:45:18.754877+01:00[Europe/London]")
 public class User {
     @Id
-    // TODO: check usage of @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id = null;
 
     private String email;

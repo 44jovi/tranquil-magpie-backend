@@ -2,9 +2,9 @@ package com.tranquilmagpie.spring.api;
 
 import com.tranquilmagpie.spring.model.User;
 import com.tranquilmagpie.spring.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +29,12 @@ public class UsersApiController {
         return this.service.getOneById((long) id);
     }
 
+    @PostMapping("/users/createOne")
+    public ResponseEntity<User> createOne(@RequestBody User user) {
+        User createdUser = this.service.createOne(user);
+        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+
+    }
 
 
 }

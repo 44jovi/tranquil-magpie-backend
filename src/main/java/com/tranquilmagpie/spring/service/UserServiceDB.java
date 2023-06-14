@@ -28,9 +28,11 @@ public class UserServiceDB implements UserService {
     public User getOneById(Long id) {
         // TODO: review how to handle Optional
         // WIP - return null if entity not found
-        User user = this.repo.findById(id).orElse(null);
-        return user;
+        return this.repo.findById(id).orElse(null);
     }
 
-
+    @Override
+    public User createOne(User user) {
+        return this.repo.save(user);
+    }
 }

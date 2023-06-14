@@ -9,5 +9,6 @@ public interface UserService {
 
     User getOneById(Long id);
 
+    User createOne(User user);
     //TODO: remaining standard DB operations
 }

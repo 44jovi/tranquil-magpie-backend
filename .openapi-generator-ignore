@@ -23,6 +23,7 @@
 #!docs/README.md
 pom.xml
 TODO: review classes to be excluded
+**/*SpringDocConfiguration.java
 **/*Controller.java
 **/*UsersApi.java
 **/*ApiUtil.java

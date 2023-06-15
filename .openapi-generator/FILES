@@ -1,6 +1,5 @@
 README.md
 src/main/gen/com/tranquilmagpie/spring/OpenApiGeneratorApplication.java
 src/main/gen/com/tranquilmagpie/spring/RFC3339DateFormat.java
-src/main/gen/com/tranquilmagpie/spring/config/SpringDocConfiguration.java
 src/main/resources/openapi.yaml
 src/test/java/com/tranquilmagpie/spring/OpenApiGeneratorApplicationTests.java

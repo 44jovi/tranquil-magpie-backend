@@ -18,8 +18,8 @@ public class SpringDocConfiguration {
         return new OpenAPI()
                 .info(
                         new Info()
-                                .title("user")
-                                .description("Users")
+                                .title("Project: Tranquil Magpie")
+                                .description("A Spring Boot application.")
                                 .version("1.0.0")
                 )
         ;

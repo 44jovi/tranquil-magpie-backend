@@ -27,11 +27,11 @@ public class UserApiController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    // TODO: ResponseEntity
     @GetMapping("/{id}")
     // @PathVariable binds 'id' value in HTTP request to template var '{id}'
-    public User getOneById(@PathVariable int id) {
-        return this.service.getOneById((long) id);
+    public ResponseEntity<User> getOneById(@PathVariable int id) {
+        User user = this.service.getOneById((long) id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping("/")
@@ -40,16 +40,16 @@ public class UserApiController {
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
-    // TODO: ResponseEntity
     @DeleteMapping("/delete/{id}")
-    public User deleteOneById(@PathVariable int id) {
-        return this.service.deleteOneById((long) id);
+    public ResponseEntity<User> deleteOneById(@PathVariable int id) {
+        User deletedUser = this.service.deleteOneById((long) id);
+        return new ResponseEntity<>(deletedUser, HttpStatus.OK);
     }
 
-    // TODO: ResponseEntity
     @PatchMapping("/patch/{id}")
-    public User updateOneById(@PathVariable int id, @RequestBody User user) {
-        return this.service.patchOneById((long) id, user);
+    public ResponseEntity<User> updateOneById(@PathVariable int id, @RequestBody User user) {
+        User patchedUser = this.service.patchOneById((long) id, user);
+        return new ResponseEntity<>(patchedUser, HttpStatus.OK);
     }
 
 }

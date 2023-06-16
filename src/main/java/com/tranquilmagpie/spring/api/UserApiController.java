@@ -22,10 +22,12 @@ public class UserApiController {
     }
 
     @GetMapping("/")
-    public List<User> getAll() {
-        return this.service.getAll();
+    public ResponseEntity<List<User>> getAll() {
+        List<User> users = this.service.getAll();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+    // TODO: ResponseEntity
     @GetMapping("/{id}")
     // @PathVariable binds 'id' value in HTTP request to template var '{id}'
     public User getOneById(@PathVariable int id) {
@@ -38,11 +40,13 @@ public class UserApiController {
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
+    // TODO: ResponseEntity
     @DeleteMapping("/delete/{id}")
     public User deleteOneById(@PathVariable int id) {
         return this.service.deleteOneById((long) id);
     }
 
+    // TODO: ResponseEntity
     @PatchMapping("/patch/{id}")
     public User updateOneById(@PathVariable int id, @RequestBody User user) {
         return this.service.patchOneById((long) id, user);

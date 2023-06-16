@@ -44,16 +44,15 @@ public class UserApiController {
         return this.service.deleteOneById((long) id);
     }
 
-
-    //    TODO: @PutMapping and use request body?
-    @PatchMapping("/updateOneById/{id}")
+//    TODO: change to @RequestBody?
+    @PatchMapping("/patchOneById/{id}")
     public User updateOneById(@PathVariable int id,
                               @RequestParam(name = "email", required = false) String email,
                               @RequestParam(name = "username", required = false) String username,
                               @RequestParam(name = "firstName", required = false) String firstName,
                               @RequestParam(name = "lastName", required = false) String lastName,
                               @RequestParam(name = "dob", required = false) LocalDate dob) {
-        return this.service.updateOneById((long) id, email, username, firstName, lastName, dob);
+        return this.service.patchOneById((long) id, email, username, firstName, lastName, dob);
     }
 
 }

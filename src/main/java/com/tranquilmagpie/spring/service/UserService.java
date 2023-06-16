@@ -14,6 +14,6 @@ public interface UserService {
 
     User deleteOneById(Long id);
 
-    User updateOneById(Long id, String email, String username, String firstName, String lastName, LocalDate dob);
+    User patchOneById(Long id, String email, String username, String firstName, String lastName, LocalDate dob);
 
 }

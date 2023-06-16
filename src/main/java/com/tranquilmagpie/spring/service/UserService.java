@@ -2,7 +2,6 @@ package com.tranquilmagpie.spring.service;
 
 import com.tranquilmagpie.spring.model.User;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface UserService {
@@ -14,6 +13,5 @@ public interface UserService {
 
     User deleteOneById(Long id);
 
-    User patchOneById(Long id, String email, String username, String firstName, String lastName, LocalDate dob);
-
+    User patchOneById(Long id, User user);
 }

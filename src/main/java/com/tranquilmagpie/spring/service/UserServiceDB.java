@@ -45,7 +45,14 @@ public class UserServiceDB implements UserService {
     }
 
     @Override
-    public User patchOneById(Long id, String email, String username, String firstName, String lastName, LocalDate dob) {
+    public User patchOneById(Long id, User user) {
+
+        String email = user.getEmail();
+        String username = user.getUsername();
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+        LocalDate dob = user.getDob();
+
         User selectedUser = this.getOneById(id);
 
 //        TODO: use ternary statements?

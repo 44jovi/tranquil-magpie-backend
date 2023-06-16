@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -39,20 +38,14 @@ public class UserApiController {
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/deleteOneById/{id}")
+    @DeleteMapping("/delete/{id}")
     public User deleteOneById(@PathVariable int id) {
         return this.service.deleteOneById((long) id);
     }
 
-//    TODO: change to @RequestBody?
-    @PatchMapping("/patchOneById/{id}")
-    public User updateOneById(@PathVariable int id,
-                              @RequestParam(name = "email", required = false) String email,
-                              @RequestParam(name = "username", required = false) String username,
-                              @RequestParam(name = "firstName", required = false) String firstName,
-                              @RequestParam(name = "lastName", required = false) String lastName,
-                              @RequestParam(name = "dob", required = false) LocalDate dob) {
-        return this.service.patchOneById((long) id, email, username, firstName, lastName, dob);
+    @PatchMapping("/patch/{id}")
+    public User updateOneById(@PathVariable int id, @RequestBody User user) {
+        return this.service.patchOneById((long) id, user);
     }
 
 }

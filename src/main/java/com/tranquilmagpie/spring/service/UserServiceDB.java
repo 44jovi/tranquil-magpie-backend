@@ -28,9 +28,10 @@ public class UserServiceDB implements UserService {
     }
     // TODO: check use of Optional - consider Optional<User>
     @Override
-    public Optional getOneById(UUID id) {
-        // TODO: review how to handle Optional
-        return this.repo.findByUuid(id);
+    public User getOneById(UUID id) {
+        // TODO: review how to handle empty/null Optional
+        // TODO: review usage of isPresent()
+        return this.repo.findByUuid(id).get();
     }
 
     @Override

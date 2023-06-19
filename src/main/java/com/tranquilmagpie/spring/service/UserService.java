@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface UserService {
     List<User> getAll();
 
-    Optional<User> getOneById(UUID id);
+    User getOneById(UUID id);
 
     User createOne(User user);
 

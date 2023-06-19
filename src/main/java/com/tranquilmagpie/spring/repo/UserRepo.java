@@ -12,6 +12,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
     // JpaRepository provides standard CRUD functions
     // Custom methods:
 
+//    TODO: review method name
     Optional<User> findByUuid(UUID id);
 //    TODO: fix this method
 //    Optional<User> deleteByUuid(UUID id);

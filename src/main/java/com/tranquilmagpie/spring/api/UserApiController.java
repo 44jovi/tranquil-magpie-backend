@@ -30,9 +30,8 @@ public class UserApiController {
     }
 
     @GetMapping("/{id}")
-    // @PathVariable binds 'id' value in HTTP request to template var '{id}'
-    public ResponseEntity<Optional<User>> getOneById(@PathVariable UUID id) {
-        Optional<User> user = this.service.getOneById(id);
+    public ResponseEntity<User> getOneById(@PathVariable UUID id) {
+        User user = this.service.getOneById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

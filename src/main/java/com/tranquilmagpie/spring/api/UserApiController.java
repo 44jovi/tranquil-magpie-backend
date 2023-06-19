@@ -45,11 +45,12 @@ public class UserApiController {
         User deletedUser = this.service.deleteOneById(id);
         return new ResponseEntity<>(deletedUser, HttpStatus.OK);
     }
-//TODO: reimplement this method
-//    @PatchMapping("/patch/{id}")
-//    public ResponseEntity<User> updateOneById(@PathVariable UUID id, @RequestBody User user) {
-//        User patchedUser = this.service.patchOneById(id, user);
-//        return new ResponseEntity<>(patchedUser, HttpStatus.OK);
-//    }
 
+    @PatchMapping("/patch/{id}")
+    public ResponseEntity<User> updateOneById(@PathVariable UUID id, @RequestBody User user) {
+        User patchedUser = this.service.patchOneById(id, user);
+        return new ResponseEntity<>(patchedUser, HttpStatus.OK);
+    }
 }
+
+

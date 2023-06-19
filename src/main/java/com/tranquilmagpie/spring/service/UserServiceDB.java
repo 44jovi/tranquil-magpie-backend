@@ -44,31 +44,31 @@ public class UserServiceDB implements UserService {
         return selectedUser;
     }
 
-//    @Override
-//    public User patchOneById(UUID id, User user) {
-//
-//        String email = user.getEmail();
-//        String username = user.getUsername();
-//        String firstName = user.getFirstName();
-//        String lastName = user.getLastName();
-//        LocalDate dob = user.getDob();
-//
-//        User selectedUser = this.getOneById(id);
-//
-////        TODO: use ternary statements?
-//        if (email != null)
-//            selectedUser.setEmail(email);
-//        if (username != null)
-//            selectedUser.setUsername(username);
-//        if (firstName != null)
-//            selectedUser.setFirstName(firstName);
-//        if (lastName != null)
-//            selectedUser.setLastName(lastName);
-//        if (dob != null)
-//            selectedUser.setDob(dob);
-//
-//        //  .save - JPA calls entityManager.merge if entity already exists (otherwise entityManager.persist)
-//        return this.repo.save(selectedUser);
-//    }
+    @Override
+    public User patchOneById(UUID id, User user) {
+
+        String email = user.getEmail();
+        String username = user.getUsername();
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+        LocalDate dob = user.getDob();
+
+        User selectedUser = this.getOneById(id);
+
+//        TODO: use ternary statements?
+        if (email != null)
+            selectedUser.setEmail(email);
+        if (username != null)
+            selectedUser.setUsername(username);
+        if (firstName != null)
+            selectedUser.setFirstName(firstName);
+        if (lastName != null)
+            selectedUser.setLastName(lastName);
+        if (dob != null)
+            selectedUser.setDob(dob);
+
+        //  .save - JPA calls entityManager.merge if entity already exists (otherwise entityManager.persist)
+        return this.repo.save(selectedUser);
+    }
 
 }

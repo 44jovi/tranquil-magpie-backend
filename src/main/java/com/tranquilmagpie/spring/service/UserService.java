@@ -3,7 +3,6 @@ package com.tranquilmagpie.spring.service;
 import com.tranquilmagpie.spring.model.User;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface UserService {
@@ -15,5 +14,5 @@ public interface UserService {
 
     User deleteOneById(UUID id);
 
-//    User patchOneById(UUID id, User user);
+    User patchOneById(UUID id, User user);
 }

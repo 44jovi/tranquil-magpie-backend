@@ -7,13 +7,11 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Primary
 @Service
 public class UserServiceDB implements UserService {
-//    private UserRepo repo;
 
     private UserRepo repo;
 
@@ -26,7 +24,7 @@ public class UserServiceDB implements UserService {
     public List<User> getAll() {
         return this.repo.findAll();
     }
-    // TODO: check use of Optional - consider Optional<User>
+
     @Override
     public User getOneById(UUID id) {
         // TODO: review how to handle empty/null Optional
@@ -39,13 +37,12 @@ public class UserServiceDB implements UserService {
         return this.repo.save(user);
     }
 
-    // TODO: fix this method
-//    @Override
-//    public Optional<User> deleteOneById(UUID id) {
-////        Optional<User> selectedUser = this.getOneById(id);
-//        return this.repo.deleteByUuid(id);
-////        return selectedUser;
-//    }
+    @Override
+    public User deleteOneById(UUID id) {
+        User selectedUser = this.getOneById(id);
+        this.repo.deleteByUuid(id);
+        return selectedUser;
+    }
 
 //    @Override
 //    public User patchOneById(UUID id, User user) {

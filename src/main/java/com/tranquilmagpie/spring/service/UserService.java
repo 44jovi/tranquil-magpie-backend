@@ -13,8 +13,7 @@ public interface UserService {
 
     User createOne(User user);
 
-//    TODO: fix this method:
-//    Optional<User> deleteOneById(UUID id);
+    User deleteOneById(UUID id);
 
 //    User patchOneById(UUID id, User user);
 }

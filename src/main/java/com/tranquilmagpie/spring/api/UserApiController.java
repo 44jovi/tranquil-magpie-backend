@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -29,8 +31,8 @@ public class UserApiController {
 
     @GetMapping("/{id}")
     // @PathVariable binds 'id' value in HTTP request to template var '{id}'
-    public ResponseEntity<User> getOneById(@PathVariable int id) {
-        User user = this.service.getOneById((long) id);
+    public ResponseEntity<Optional<User>> getOneById(@PathVariable UUID id) {
+        Optional<User> user = this.service.getOneById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
@@ -40,16 +42,16 @@ public class UserApiController {
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<User> deleteOneById(@PathVariable int id) {
-        User deletedUser = this.service.deleteOneById((long) id);
-        return new ResponseEntity<>(deletedUser, HttpStatus.OK);
-    }
-
-    @PatchMapping("/patch/{id}")
-    public ResponseEntity<User> updateOneById(@PathVariable int id, @RequestBody User user) {
-        User patchedUser = this.service.patchOneById((long) id, user);
-        return new ResponseEntity<>(patchedUser, HttpStatus.OK);
-    }
+//    @DeleteMapping("/delete/{id}")
+//    public ResponseEntity<Optional<User>> deleteOneById(@PathVariable UUID id) {
+//        Optional<User> deletedUser = this.service.deleteOneById(id);
+//        return new ResponseEntity<>(deletedUser, HttpStatus.OK);
+//    }
+//TODO: reimplement this method
+//    @PatchMapping("/patch/{id}")
+//    public ResponseEntity<User> updateOneById(@PathVariable UUID id, @RequestBody User user) {
+//        User patchedUser = this.service.patchOneById(id, user);
+//        return new ResponseEntity<>(patchedUser, HttpStatus.OK);
+//    }
 
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,8 +15,6 @@ import jakarta.validation.Valid;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-
-import jakarta.annotation.Generated;
 
 /**
  * All users
@@ -28,8 +27,9 @@ import jakarta.annotation.Generated;
 @JsonTypeName("user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id = null;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(unique = true, updatable = false)
+    private UUID uuid;
 
     private String email;
 
@@ -42,8 +42,8 @@ public class User {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dob;
 
-    public User id(Long id) {
-        this.id = id;
+    public User id(UUID id) {
+        this.uuid = id;
         return this;
     }
 
@@ -55,12 +55,12 @@ public class User {
 
     @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @JsonProperty("id")
-    public Long getId() {
-        return id;
+    public UUID getId() {
+        return this.uuid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(UUID id) {
+        this.uuid = id;
     }
 
     public User email(String email) {
@@ -177,7 +177,7 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(this.id, user.id) &&
+        return Objects.equals(this.uuid, user.uuid) &&
                 Objects.equals(this.email, user.email) &&
                 Objects.equals(this.username, user.username) &&
                 Objects.equals(this.firstName, user.firstName) &&
@@ -187,14 +187,14 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, username, firstName, lastName, dob);
+        return Objects.hash(uuid, email, username, firstName, lastName, dob);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class User {\n");
-        sb.append("    id: ").append(toIndentedString(id)).append("\n");
+        sb.append("    id: ").append(toIndentedString(uuid)).append("\n");
         sb.append("    email: ").append(toIndentedString(email)).append("\n");
         sb.append("    username: ").append(toIndentedString(username)).append("\n");
         sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");

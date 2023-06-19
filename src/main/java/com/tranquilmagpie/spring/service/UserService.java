@@ -3,15 +3,18 @@ package com.tranquilmagpie.spring.service;
 import com.tranquilmagpie.spring.model.User;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface UserService {
     List<User> getAll();
 
-    User getOneById(Long id);
+    Optional<User> getOneById(UUID id);
 
     User createOne(User user);
 
-    User deleteOneById(Long id);
+//    TODO: fix this method:
+//    Optional<User> deleteOneById(UUID id);
 
-    User patchOneById(Long id, User user);
+//    User patchOneById(UUID id, User user);
 }

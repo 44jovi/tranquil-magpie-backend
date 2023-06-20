@@ -4,6 +4,7 @@ import com.tranquilmagpie.spring.model.User;
 import com.tranquilmagpie.spring.repo.UserRepo;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -40,8 +41,11 @@ public class UserServiceDB implements UserService {
     }
 
     @Override
+    // Manage multiple database calls
+    @Transactional
     public User deleteOneById(UUID id) {
-        User selectedUser = this.getOneById(id);
+        // TODO: review usage of isPresent()
+        User selectedUser = this.repo.findByUuid(id).get();
         this.repo.deleteByUuid(id);
         return selectedUser;
     }

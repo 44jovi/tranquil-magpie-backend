@@ -18,5 +18,3 @@ public interface UserRepo extends JpaRepository<User, UUID> {
     // TODO: remove from Swagger UI render
     Long deleteByUuid(UUID id);
 }
-
-

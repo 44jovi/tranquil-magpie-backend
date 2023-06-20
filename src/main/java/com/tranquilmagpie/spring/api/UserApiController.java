@@ -52,5 +52,3 @@ public class UserApiController {
         return new ResponseEntity<>(patchedUser, HttpStatus.OK);
     }
 }
-
-

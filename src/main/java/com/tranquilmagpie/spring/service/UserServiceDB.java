@@ -34,6 +34,8 @@ public class UserServiceDB implements UserService {
 
     @Override
     public User createOne(User user) {
+        // TODO: do not allow creation of user if UUID already exists
+        // TODO: review whether Optional should be returned for getOneById
         return this.repo.save(user);
     }
 

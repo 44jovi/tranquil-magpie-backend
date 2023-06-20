@@ -1,7 +1,8 @@
-package com.tranquilmagpie.spring.service;
+package com.tranquilmagpie.spring.service.impl;
 
 import com.tranquilmagpie.spring.model.User;
 import com.tranquilmagpie.spring.repo.UserRepo;
+import com.tranquilmagpie.spring.service.UserService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,11 +13,11 @@ import java.util.UUID;
 
 @Primary
 @Service
-public class UserServiceDB implements UserService {
+public class UserServiceImpl implements UserService {
 
     private UserRepo repo;
 
-    public UserServiceDB(UserRepo repo) {
+    public UserServiceImpl(UserRepo repo) {
         super();
         this.repo = repo;
     }

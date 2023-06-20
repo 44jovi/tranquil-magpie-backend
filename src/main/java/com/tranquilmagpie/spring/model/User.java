@@ -59,7 +59,7 @@ public class User {
         return this.uuid;
     }
 
-    public void setId(UUID id) {
+    public void setUuid(UUID id) {
         this.uuid = id;
     }
 

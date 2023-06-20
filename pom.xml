@@ -47,48 +47,8 @@
                 <version>2.7.6</version>
                 <configuration>
                     <!-- App entry point for Maven build-->
-                    <mainClass>com.tranquilmagpie.spring.OpenApiGeneratorApplication</mainClass>
+                    <mainClass>com.tranquilmagpie.spring.TranquilMagpieApiApp</mainClass>
                 </configuration>
-            </plugin>
-            <plugin>
-                <!-- TODO: review <configOptions> -->
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator-maven-plugin</artifactId>
-                <!-- RELEASE_VERSION -->
-                <version>6.6.0</version>
-                <!-- /RELEASE_VERSION -->
-                <executions>
-                    <execution>
-                        <!-- Default phase is generate-sources phase-->
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <generatorName>spring</generatorName>
-                            <!-- Spring Boot server application -->
-                            <!-- 'spring-boot' is in fact already the default value -->
-                            <inputSpec>${project.basedir}/api-users.yaml</inputSpec>
-                            <library>spring-boot</library>
-                            <!-- Generate code inside project in addition to /target -->
-                            <output>${project.basedir}</output>
-                            <configOptions>
-                                <!-- TODO: review use of 'serializableModel' tag-->
-                                <artifactId>${project.artifactId}</artifactId>
-                                <groupId>${project.groupId}</groupId>
-                                <version>${project.version}</version>
-                                <sourceFolder>src/main/gen</sourceFolder>
-                                <basePackage>com.tranquilmagpie.spring</basePackage>
-                                <invokerPackage>com.tranquilmagpie.spring</invokerPackage>
-                                <configPackage>com.tranquilmagpie.spring.config</configPackage>
-                                <modelPackage>com.tranquilmagpie.spring.model</modelPackage>
-                                <apiPackage>com.tranquilmagpie.spring.api</apiPackage>
-                                <dateLibrary>java8</dateLibrary>
-                                <useSpringBoot3>true</useSpringBoot3>
-                                <useSpringController>true</useSpringController>
-                            </configOptions>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

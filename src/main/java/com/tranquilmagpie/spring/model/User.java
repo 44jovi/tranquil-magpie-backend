@@ -42,11 +42,6 @@ public class User {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dob;
 
-    public User id(UUID id) {
-        this.uuid = id;
-        return this;
-    }
-
     /**
      * Get id
      *
@@ -61,11 +56,6 @@ public class User {
 
     public void setUuid(UUID id) {
         this.uuid = id;
-    }
-
-    public User email(String email) {
-        this.email = email;
-        return this;
     }
 
     /**
@@ -84,11 +74,6 @@ public class User {
         this.email = email;
     }
 
-    public User username(String username) {
-        this.username = username;
-        return this;
-    }
-
     /**
      * Get username
      *
@@ -103,11 +88,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public User firstName(String firstName) {
-        this.firstName = firstName;
-        return this;
     }
 
     /**
@@ -126,11 +106,6 @@ public class User {
         this.firstName = firstName;
     }
 
-    public User lastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
     /**
      * Get lastName
      *
@@ -145,11 +120,6 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public User dob(LocalDate dob) {
-        this.dob = dob;
-        return this;
     }
 
     /**

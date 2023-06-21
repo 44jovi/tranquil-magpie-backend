@@ -14,7 +14,7 @@ public class UserTest {
     User user2 = new User();
 
     @BeforeEach
-    void setup() {
+    public void testSetup() {
         // Alternative method: UUID.randomUUID()
         user1.setUuid(UUID.fromString("446d5db4-70dc-433e-a4f8-c2bbec0d25ab"));
         user1.setEmail("joey1@test.com");

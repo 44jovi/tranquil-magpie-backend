@@ -1,6 +1,7 @@
 package com.tranquilmagpie.spring.repo;
 
 import com.tranquilmagpie.spring.model.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,16 +18,20 @@ public class UserRepoTest {
     @Autowired
     private UserRepo userRepo;
 
+    private User user1 = new User();
+
+    @BeforeEach
+    public void testSetup(){
+        user1.setEmail("ross1@test.com");
+        user1.setUsername("ross1");
+        user1.setFirstName("ross");
+        user1.setLastName("geller");
+        user1.setDob(LocalDate.parse("1967-10-18"));
+    }
+
     @Test
     public void testFindByUuid() {
-        User user = new User();
-        user.setEmail("ross1@test.com");
-        user.setUsername("ross1");
-        user.setFirstName("ross");
-        user.setLastName("geller");
-        user.setDob(LocalDate.parse("1967-10-18"));
-
-        User savedUser = userRepo.save(user);
+        User savedUser = userRepo.save(user1);
         // TODO: review usage of .isPresent()
         User foundUser = userRepo.findByUuid(savedUser.getUuid()).get();
 
@@ -42,14 +47,7 @@ public class UserRepoTest {
 
     @Test
     public void testDeleteByUuid() {
-        User user = new User();
-        user.setEmail("ross1@test.com");
-        user.setUsername("ross1");
-        user.setFirstName("ross");
-        user.setLastName("geller");
-        user.setDob(LocalDate.parse("1967-10-18"));
-
-        User savedUser = userRepo.save(user);
+        User savedUser = userRepo.save(user1);
 
         Long dbRowsDeleted = userRepo.deleteByUuid(savedUser.getUuid());
 

@@ -1,6 +1,5 @@
-package com.tranquilmagpie.spring;
+package com.tranquilmagpie.spring.model;
 
-import com.tranquilmagpie.spring.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

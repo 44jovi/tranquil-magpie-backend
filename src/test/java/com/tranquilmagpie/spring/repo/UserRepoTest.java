@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,19 +19,25 @@ public class UserRepoTest {
 
     @Test
     public void testFindByUuid() {
+        User user = new User();
+        user.setEmail("ross1@test.com");
+        user.setUsername("ross1");
+        user.setFirstName("ross");
+        user.setLastName("geller");
+        user.setDob(LocalDate.parse("1967-10-18"));
 
-        // TODO: review alternative as this is dependent on an entity with this UUID in the database
-        UUID uuid = UUID.fromString("dfb68f04-b0ac-42a9-b9a3-97f843791f4c");
-
+        User savedUser = userRepo.save(user);
         // TODO: review usage of .isPresent()
-        User user = userRepo.findByUuid(uuid).get();
+        User foundUser = userRepo.findByUuid(savedUser.getUuid()).get();
 
-        assertEquals(user.getUuid(), uuid);
-        assertEquals("joe1@test.com", user.getEmail());
-        assertEquals("joe1", user.getUsername());
-        assertEquals("joe", user.getFirstName());
-        assertEquals("joeman", user.getLastName());
-        assertEquals(LocalDate.parse("1900-12-31"), user.getDob());
+        assertEquals(savedUser.getUuid(), foundUser.getUuid());
+        assertEquals("ross1@test.com", foundUser.getEmail());
+        assertEquals("ross1", foundUser.getUsername());
+        assertEquals("ross", foundUser.getFirstName());
+        assertEquals("geller", foundUser.getLastName());
+        assertEquals(LocalDate.parse("1967-10-18"), foundUser.getDob());
+
+        userRepo.deleteByUuid(savedUser.getUuid());
     }
 
     @Test

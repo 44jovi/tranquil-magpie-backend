@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// TODO: review converting this to a pure unit test using mocks
 @SpringBootTest
 @TestPropertySource("classpath:application-test.properties")
 public class UserRepoTest {
@@ -18,7 +19,7 @@ public class UserRepoTest {
     @Autowired
     private UserRepo userRepo;
 
-    private User user1 = new User();
+    private final User user1 = new User();
 
     @BeforeEach
     public void testSetup(){

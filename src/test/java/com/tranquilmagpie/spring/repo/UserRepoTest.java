@@ -27,7 +27,7 @@ public class UserRepoTest {
         // TODO: review usage of .isPresent()
         User user = userRepo.findByUuid(uuid).get();
 
-        assertEquals(user.getId(), uuid);
+        assertEquals(user.getUuid(), uuid);
         assertEquals("joe1@test.com", user.getEmail());
         assertEquals("joe1", user.getUsername());
         assertEquals("joe", user.getFirstName());
@@ -46,7 +46,7 @@ public class UserRepoTest {
 
         User savedUser = userRepo.save(user);
 
-        Long dbRowsDeleted = userRepo.deleteByUuid(savedUser.getId());
+        Long dbRowsDeleted = userRepo.deleteByUuid(savedUser.getUuid());
 
         assertEquals(1, dbRowsDeleted);
     }

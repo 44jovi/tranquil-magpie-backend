@@ -17,14 +17,14 @@ public class UserTest {
     void setup() {
         // Alternative method: UUID.randomUUID()
         user1.setUuid(UUID.fromString("446d5db4-70dc-433e-a4f8-c2bbec0d25ab"));
-        user1.setEmail("joey@test.com");
+        user1.setEmail("joey1@test.com");
         user1.setUsername("joey1");
         user1.setFirstName("joey");
         user1.setLastName("tribbiani");
         user1.setDob(LocalDate.parse("1968-01-09"));
 
         user2.setUuid(UUID.fromString("9fd17a2f-8bb2-4289-906a-4b7ae16c080e"));
-        user2.setEmail("chandler@test.com");
+        user2.setEmail("chandler1@test.com");
         user2.setUsername("chandler1");
         user2.setFirstName("chandler");
         user2.setLastName("bing");
@@ -33,8 +33,8 @@ public class UserTest {
 
     @Test
     public void testGetters() {
-        assertEquals(UUID.fromString("446d5db4-70dc-433e-a4f8-c2bbec0d25ab"), user1.getId());
-        assertEquals("joey@test.com", user1.getEmail());
+        assertEquals(UUID.fromString("446d5db4-70dc-433e-a4f8-c2bbec0d25ab"), user1.getUuid());
+        assertEquals("joey1@test.com", user1.getEmail());
         assertEquals("joey1", user1.getUsername());
         assertEquals("joey", user1.getFirstName());
         assertEquals("tribbiani", user1.getLastName());
@@ -46,7 +46,7 @@ public class UserTest {
         assertEquals(
                 "class User {\n" +
                         "    id: 446d5db4-70dc-433e-a4f8-c2bbec0d25ab\n" +
-                        "    email: joey@test.com\n" +
+                        "    email: joey1@test.com\n" +
                         "    username: joey1\n" +
                         "    firstName: joey\n" +
                         "    lastName: tribbiani\n" +
@@ -64,8 +64,8 @@ public class UserTest {
 
     @Test
     public void testHashCode() {
-        assertEquals(1728114719, user1.hashCode());
-        assertEquals(1115807026, user2.hashCode());
+        assertEquals(231396512, user1.hashCode());
+        assertEquals(-2031932401, user2.hashCode());
     }
 
 }

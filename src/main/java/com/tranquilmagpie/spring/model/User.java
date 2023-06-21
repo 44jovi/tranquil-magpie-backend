@@ -50,7 +50,7 @@ public class User {
 
     @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @JsonProperty("id")
-    public UUID getId() {
+    public UUID getUuid() {
         return this.uuid;
     }
 

@@ -42,6 +42,19 @@ public class User {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dob;
 
+    //    TODO: review usage of no-parameter constructor
+    public User() {
+    }
+
+    // Current purpose of this constructor is for tests
+    public User(String email, String username, String firstName, String lastName, LocalDate dob) {
+        this.email = email;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+    }
+
     /**
      * Get id
      *

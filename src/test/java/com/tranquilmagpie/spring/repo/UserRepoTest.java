@@ -22,7 +22,7 @@ public class UserRepoTest {
     private final User user1 = new User();
 
     @BeforeEach
-    public void testSetup(){
+    void testSetup(){
         user1.setEmail("ross1@test.com");
         user1.setUsername("ross1");
         user1.setFirstName("ross");
@@ -31,7 +31,7 @@ public class UserRepoTest {
     }
 
     @Test
-    public void testFindByUuid() {
+    void testFindByUuid() {
         User savedUser = userRepo.save(user1);
         // TODO: review usage of .isPresent()
         User foundUser = userRepo.findByUuid(savedUser.getUuid()).get();
@@ -47,7 +47,7 @@ public class UserRepoTest {
     }
 
     @Test
-    public void testDeleteByUuid() {
+    void testDeleteByUuid() {
         User savedUser = userRepo.save(user1);
 
         Long dbRowsDeleted = userRepo.deleteByUuid(savedUser.getUuid());

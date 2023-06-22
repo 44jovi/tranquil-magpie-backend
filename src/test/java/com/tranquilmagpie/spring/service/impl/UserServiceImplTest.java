@@ -21,7 +21,7 @@ class UserServiceImplTest {
     UserServiceImpl userServiceImpl;
 
     @BeforeEach
-    public void testSetup() {
+    void testSetup() {
         usersList = new ArrayList<>();
         user1 = new User("phoebe1@test.com", "phoebe1", "phoebe", "buffay", LocalDate.parse("1966-02-16"));
         user2 = new User("monica1@test.com", "monica1", "monica", "geller", LocalDate.parse("1969-01-01"));
@@ -37,28 +37,28 @@ class UserServiceImplTest {
     }
 
     @Test
-    public void testGetAll() {
+    void testGetAll() {
         userServiceImpl.getAll();
 
         verify(UserRepoMock, times(1)).findAll();
     }
 
     @Test
-    public void testGetOneById() {
+    void testGetOneById() {
         userServiceImpl.getOneById(UUID.randomUUID());
 
         verify(UserRepoMock, times(1)).findByUuid(any(UUID.class));
     }
 
     @Test
-    public void testCreateOne() {
+    void testCreateOne() {
         userServiceImpl.createOne(user1);
 
         verify(UserRepoMock, times(1)).save(any(User.class));
     }
 
     @Test
-    public void testDeleteOneById() {
+    void testDeleteOneById() {
         userServiceImpl.deleteOneById(UUID.randomUUID());
 
         verify(UserRepoMock, times(1)).findByUuid(any(UUID.class));
@@ -66,7 +66,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    public void testPatchOneById() {
+    void testPatchOneById() {
         // TODO: test the method's conditional logic
         userServiceImpl.patchOneById(UUID.randomUUID(), user1);
 

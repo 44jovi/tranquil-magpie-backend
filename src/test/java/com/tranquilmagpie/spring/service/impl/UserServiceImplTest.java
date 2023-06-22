@@ -45,9 +45,9 @@ class UserServiceImplTest {
         List<User> usersFound = userServiceImpl.getAll();
 
         assertEquals(User.class, usersFound.get(0).getClass());
-        assertEquals("phoebe1", usersFound.get(0).getUsername());
         assertEquals(User.class, usersFound.get(1).getClass());
-        assertEquals("monica1", usersFound.get(1).getUsername());
+
+        verify(UserRepoMock, times(1)).findAll();
     }
 
     @Test

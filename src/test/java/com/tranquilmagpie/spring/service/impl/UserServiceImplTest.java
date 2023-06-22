@@ -65,4 +65,10 @@ class UserServiceImplTest {
         assertEquals("rachel1", userCreated.getUsername());
     }
 
+    @Test
+    public void testDeleteOneById(){
+        User userDeleted = userServiceImpl.deleteOneById(UUID.randomUUID());
+        assertEquals(User.class, userDeleted.getClass());
+    }
+
 }

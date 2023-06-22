@@ -59,7 +59,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    public void createOne(){
+    public void testCreateOne(){
         User userCreated = userServiceImpl.createOne(user3);
         assertEquals(User.class, userCreated.getClass());
         assertEquals("rachel1", userCreated.getUsername());

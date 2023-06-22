@@ -18,9 +18,7 @@ class UserServiceImplTest {
     List<User> usersList;
     User user1;
     User user2;
-    User user3;
     UserRepo UserRepoMock;
-
     UserServiceImpl userServiceImpl;
 
     @BeforeEach
@@ -28,14 +26,13 @@ class UserServiceImplTest {
         usersList = new ArrayList<>();
         user1 = new User("phoebe1@test.com", "phoebe1", "phoebe", "buffay", LocalDate.parse("1966-02-16"));
         user2 = new User("monica1@test.com", "monica1", "monica", "geller", LocalDate.parse("1969-01-01"));
-        user3 = new User("rachel1@test.com", "rachel1", "rachel", "green", LocalDate.parse("1969-05-05"));
         usersList.add(user1);
         usersList.add(user2);
 
         UserRepoMock = mock(UserRepo.class);
         when(UserRepoMock.findAll()).thenReturn(usersList);
         when(UserRepoMock.findByUuid(any(UUID.class))).thenReturn(Optional.ofNullable(user1));
-        when(UserRepoMock.save(user3)).thenReturn(user3);
+        when(UserRepoMock.save(user1)).thenReturn(user1);
 
         userServiceImpl = new UserServiceImpl(UserRepoMock);
     }
@@ -46,7 +43,6 @@ class UserServiceImplTest {
 
         assertEquals(User.class, usersFound.get(0).getClass());
         assertEquals(User.class, usersFound.get(1).getClass());
-
         verify(UserRepoMock, times(1)).findAll();
     }
 
@@ -55,20 +51,24 @@ class UserServiceImplTest {
         User userFound = userServiceImpl.getOneById(UUID.randomUUID());
 
         assertEquals(User.class, userFound.getClass());
-        assertEquals("phoebe1", userFound.getUsername());
+        verify(UserRepoMock, times(1)).findByUuid(any(UUID.class));
     }
 
     @Test
-    public void testCreateOne(){
-        User userCreated = userServiceImpl.createOne(user3);
+    public void testCreateOne() {
+        User userCreated = userServiceImpl.createOne(user1);
+
         assertEquals(User.class, userCreated.getClass());
-        assertEquals("rachel1", userCreated.getUsername());
+        verify(UserRepoMock, times(1)).save(any(User.class));
     }
 
     @Test
-    public void testDeleteOneById(){
+    public void testDeleteOneById() {
         User userDeleted = userServiceImpl.deleteOneById(UUID.randomUUID());
+
         assertEquals(User.class, userDeleted.getClass());
+        verify(UserRepoMock, times(1)).findByUuid(any(UUID.class));
+        verify(UserRepoMock, times(1)).deleteByUuid(any(UUID.class));
     }
 
 }

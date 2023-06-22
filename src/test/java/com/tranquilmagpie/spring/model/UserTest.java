@@ -45,7 +45,7 @@ public class UserTest {
     public void testToString() {
         assertEquals(
                 "class User {\n" +
-                        "    id: 446d5db4-70dc-433e-a4f8-c2bbec0d25ab\n" +
+                        "    uuid: 446d5db4-70dc-433e-a4f8-c2bbec0d25ab\n" +
                         "    email: joey1@test.com\n" +
                         "    username: joey1\n" +
                         "    firstName: joey\n" +

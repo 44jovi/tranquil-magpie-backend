@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserRepoTest {
 
     @Autowired
-    private UserRepo userRepo;
+    private UserRepo repo;
 
     private final User user1 = new User();
 
@@ -32,9 +32,9 @@ class UserRepoTest {
 
     @Test
     void testFindByUuid() {
-        User savedUser = userRepo.save(user1);
+        User savedUser = repo.save(user1);
         // TODO: review usage of .isPresent()
-        User foundUser = userRepo.findByUuid(savedUser.getUuid()).get();
+        User foundUser = repo.findByUuid(savedUser.getUuid()).get();
 
         assertEquals(savedUser.getUuid(), foundUser.getUuid());
         assertEquals("ross1@test.com", foundUser.getEmail());
@@ -43,14 +43,14 @@ class UserRepoTest {
         assertEquals("geller", foundUser.getLastName());
         assertEquals(LocalDate.parse("1967-10-18"), foundUser.getDob());
 
-        userRepo.deleteByUuid(savedUser.getUuid());
+        repo.deleteByUuid(savedUser.getUuid());
     }
 
     @Test
     void testDeleteByUuid() {
-        User savedUser = userRepo.save(user1);
+        User savedUser = repo.save(user1);
 
-        Long dbRowsDeleted = userRepo.deleteByUuid(savedUser.getUuid());
+        Long dbRowsDeleted = repo.deleteByUuid(savedUser.getUuid());
 
         assertEquals(1, dbRowsDeleted);
     }

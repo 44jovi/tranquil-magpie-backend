@@ -11,12 +11,16 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 class UserServiceImplTest {
     List<User> usersList;
     User user1;
     User user2;
     UserRepo UserRepoMock;
+
+    UserServiceImpl userServiceImpl;
 
     @BeforeEach
     public void testSetup() {
@@ -28,13 +32,14 @@ class UserServiceImplTest {
 
         UserRepoMock = mock(UserRepo.class);
         when(UserRepoMock.findAll()).thenReturn(usersList);
+        when(UserRepoMock.findByUuid(any(UUID.class))).thenReturn(Optional.ofNullable(user1));
+
+        userServiceImpl = new UserServiceImpl(UserRepoMock);
     }
 
     @Test
     public void testGetAll() {
-        UserServiceImpl impl = new UserServiceImpl(UserRepoMock);
-
-        List<User> usersFound = impl.getAll();
+        List<User> usersFound = userServiceImpl.getAll();
 
         assertEquals(User.class, usersFound.get(0).getClass());
         assertEquals("phoebe1", usersFound.get(0).getUsername());
@@ -42,8 +47,12 @@ class UserServiceImplTest {
         assertEquals("monica1", usersFound.get(1).getUsername());
     }
 
-//    @Test
-//    public void testGetOneById(){
-//    }
+    @Test
+    public void testGetOneById() {
+        User userFound = userServiceImpl.getOneById(UUID.randomUUID());
+
+        assertEquals(User.class, userFound.getClass());
+        assertEquals("phoebe1", userFound.getUsername());
+    }
 
 }

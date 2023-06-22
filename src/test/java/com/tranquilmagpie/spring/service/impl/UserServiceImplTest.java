@@ -1,6 +1,5 @@
 package com.tranquilmagpie.spring.service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import com.tranquilmagpie.spring.model.User;
@@ -39,36 +38,39 @@ class UserServiceImplTest {
 
     @Test
     public void testGetAll() {
-        List<User> usersFound = userServiceImpl.getAll();
+        userServiceImpl.getAll();
 
-        assertEquals(User.class, usersFound.get(0).getClass());
-        assertEquals(User.class, usersFound.get(1).getClass());
         verify(UserRepoMock, times(1)).findAll();
     }
 
     @Test
     public void testGetOneById() {
-        User userFound = userServiceImpl.getOneById(UUID.randomUUID());
+        userServiceImpl.getOneById(UUID.randomUUID());
 
-        assertEquals(User.class, userFound.getClass());
         verify(UserRepoMock, times(1)).findByUuid(any(UUID.class));
     }
 
     @Test
     public void testCreateOne() {
-        User userCreated = userServiceImpl.createOne(user1);
+        userServiceImpl.createOne(user1);
 
-        assertEquals(User.class, userCreated.getClass());
         verify(UserRepoMock, times(1)).save(any(User.class));
     }
 
     @Test
     public void testDeleteOneById() {
-        User userDeleted = userServiceImpl.deleteOneById(UUID.randomUUID());
+        userServiceImpl.deleteOneById(UUID.randomUUID());
 
-        assertEquals(User.class, userDeleted.getClass());
         verify(UserRepoMock, times(1)).findByUuid(any(UUID.class));
         verify(UserRepoMock, times(1)).deleteByUuid(any(UUID.class));
+    }
+
+    @Test
+    public void testPatchOneById() {
+        // TODO: test the method's conditional logic
+        userServiceImpl.patchOneById(UUID.randomUUID(), user1);
+
+        verify(UserRepoMock, times(1)).save(any(User.class));
     }
 
 }

@@ -16,6 +16,7 @@ class UserServiceImplTest {
     List<User> usersList;
     User user1;
     User user2;
+    UserRepo UserRepoMock;
 
     @BeforeEach
     public void testSetup() {
@@ -24,13 +25,13 @@ class UserServiceImplTest {
         user2 = new User("monica1@test.com", "monica1", "monica", "geller", LocalDate.parse("1969-01-01"));
         usersList.add(user1);
         usersList.add(user2);
+
+        UserRepoMock = mock(UserRepo.class);
+        when(UserRepoMock.findAll()).thenReturn(usersList);
     }
 
     @Test
     public void testGetAll() {
-        UserRepo UserRepoMock = mock(UserRepo.class);
-        when(UserRepoMock.findAll()).thenReturn(usersList);
-
         UserServiceImpl impl = new UserServiceImpl(UserRepoMock);
 
         List<User> usersFound = impl.getAll();
@@ -40,5 +41,9 @@ class UserServiceImplTest {
         assertEquals(User.class, usersFound.get(1).getClass());
         assertEquals("monica1", usersFound.get(1).getUsername());
     }
+
+//    @Test
+//    public void testGetOneById(){
+//    }
 
 }

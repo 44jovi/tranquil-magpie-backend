@@ -14,7 +14,7 @@ public class UserTest {
     User user2 = new User();
 
     @BeforeEach
-    public void testSetup() {
+    void testSetup() {
         // Alternative method: UUID.randomUUID()
         user1.setUuid(UUID.fromString("446d5db4-70dc-433e-a4f8-c2bbec0d25ab"));
         user1.setEmail("joey1@test.com");
@@ -32,7 +32,7 @@ public class UserTest {
     }
 
     @Test
-    public void testGetters() {
+    void testGetters() {
         assertEquals(UUID.fromString("446d5db4-70dc-433e-a4f8-c2bbec0d25ab"), user1.getUuid());
         assertEquals("joey1@test.com", user1.getEmail());
         assertEquals("joey1", user1.getUsername());
@@ -42,7 +42,7 @@ public class UserTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         assertEquals(
                 "class User {\n" +
                         "    uuid: 446d5db4-70dc-433e-a4f8-c2bbec0d25ab\n" +
@@ -56,14 +56,14 @@ public class UserTest {
     }
 
     @Test
-    public void testEquals() {
+    void testEquals() {
         assertTrue(user1.equals(user1));
         assertFalse(user1.equals(null));
         assertFalse(user1.equals(user2));
     }
 
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         assertEquals(231396512, user1.hashCode());
         assertEquals(-2031932401, user2.hashCode());
     }

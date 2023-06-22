@@ -56,19 +56,19 @@ public class User {
     }
 
     /**
-     * Get id
+     * Get uuid
      *
-     * @return id
+     * @return uuid
      */
 
-    @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-    @JsonProperty("id")
+    @Schema(name = "uuid", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @JsonProperty("uuid")
     public UUID getUuid() {
         return this.uuid;
     }
 
-    public void setUuid(UUID id) {
-        this.uuid = id;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     /**
@@ -177,7 +177,7 @@ public class User {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class User {\n");
-        sb.append("    id: ").append(toIndentedString(uuid)).append("\n");
+        sb.append("    uuid: ").append(toIndentedString(uuid)).append("\n");
         sb.append("    email: ").append(toIndentedString(email)).append("\n");
         sb.append("    username: ").append(toIndentedString(username)).append("\n");
         sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 // TODO: review converting this to a pure unit test using mocks
 @SpringBootTest
 @TestPropertySource("classpath:application-test.properties")
-public class UserRepoTest {
+class UserRepoTest {
 
     @Autowired
     private UserRepo userRepo;

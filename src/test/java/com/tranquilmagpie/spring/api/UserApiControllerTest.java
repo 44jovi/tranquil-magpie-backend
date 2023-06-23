@@ -19,7 +19,7 @@ class UserApiControllerTest {
     User user2;
     UserService UserServiceImplMock;
     UserApiController controller;
-    UUID testUuid;
+    UUID uuid;
 
     @BeforeEach
     void setUp() {
@@ -29,11 +29,11 @@ class UserApiControllerTest {
         usersList.add(user1);
         usersList.add(user2);
 
-        testUuid = UUID.fromString("f95bce3c-2146-47b4-b89e-8de113f5379a");
+        uuid = UUID.fromString("f95bce3c-2146-47b4-b89e-8de113f5379a");
 
         UserServiceImplMock = mock(UserServiceImpl.class);
         when(UserServiceImplMock.getAll()).thenReturn(usersList);
-        when(UserServiceImplMock.getOneById(testUuid)).thenReturn(user1);
+        when(UserServiceImplMock.getOneById(uuid)).thenReturn(user1);
 
         controller = new UserApiController(UserServiceImplMock);
     }
@@ -47,12 +47,16 @@ class UserApiControllerTest {
 
     @Test
     void testGetOneById(){
-        controller.getOneById(testUuid);
+        controller.getOneById(uuid);
 
-        verify(UserServiceImplMock, times(1)).getOneById(testUuid);
+        verify(UserServiceImplMock, times(1)).getOneById(uuid);
     }
-//    @Test
-//    void testCreateOne(){}
+    @Test
+    void testCreateOne(){
+        controller.createOne(user1);
+
+        verify(UserServiceImplMock, times(1)).createOne(user1);
+    }
 //    @Test
 //    void testDeleteOneById(){}
 //    @Test

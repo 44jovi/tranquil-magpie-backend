@@ -11,9 +11,9 @@ public class PlaceholderHasher {
     }
 
     public static void main(String[] args) {
-        PlaceholderHasher tempClass = new PlaceholderHasher();
+        PlaceholderHasher hasher = new PlaceholderHasher();
 
-        String hashedPassword = tempClass.getHashedPassword("password");
+        String hashedPassword = hasher.getHashedPassword("password");
 
         System.out.println(hashedPassword);
     }

@@ -42,30 +42,33 @@ public class User {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dob;
 
-    public User id(UUID id) {
-        this.uuid = id;
-        return this;
+    //    TODO: review usage of no-parameter constructor
+    public User() {
+    }
+
+    // Current purpose of this constructor is for tests
+    public User(String email, String username, String firstName, String lastName, LocalDate dob) {
+        this.email = email;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
     }
 
     /**
-     * Get id
+     * Get uuid
      *
-     * @return id
+     * @return uuid
      */
 
-    @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-    @JsonProperty("id")
-    public UUID getId() {
+    @Schema(name = "uuid", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @JsonProperty("uuid")
+    public UUID getUuid() {
         return this.uuid;
     }
 
-    public void setId(UUID id) {
-        this.uuid = id;
-    }
-
-    public User email(String email) {
-        this.email = email;
-        return this;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     /**
@@ -84,11 +87,6 @@ public class User {
         this.email = email;
     }
 
-    public User username(String username) {
-        this.username = username;
-        return this;
-    }
-
     /**
      * Get username
      *
@@ -103,11 +101,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public User firstName(String firstName) {
-        this.firstName = firstName;
-        return this;
     }
 
     /**
@@ -126,11 +119,6 @@ public class User {
         this.firstName = firstName;
     }
 
-    public User lastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
     /**
      * Get lastName
      *
@@ -145,11 +133,6 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public User dob(LocalDate dob) {
-        this.dob = dob;
-        return this;
     }
 
     /**
@@ -194,7 +177,7 @@ public class User {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class User {\n");
-        sb.append("    id: ").append(toIndentedString(uuid)).append("\n");
+        sb.append("    uuid: ").append(toIndentedString(uuid)).append("\n");
         sb.append("    email: ").append(toIndentedString(email)).append("\n");
         sb.append("    username: ").append(toIndentedString(username)).append("\n");
         sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
@@ -215,4 +198,3 @@ public class User {
         return o.toString().replace("\n", "\n    ");
     }
 }
-

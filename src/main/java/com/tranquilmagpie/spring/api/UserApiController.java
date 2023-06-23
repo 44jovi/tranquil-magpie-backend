@@ -1,5 +1,3 @@
-
-
 package com.tranquilmagpie.spring.api;
 
 import com.tranquilmagpie.spring.model.User;
@@ -47,10 +45,8 @@ public class UserApiController {
     }
 
     @PatchMapping("/patch/{id}")
-    public ResponseEntity<User> updateOneById(@PathVariable UUID id, @RequestBody User user) {
+    public ResponseEntity<User> patchOneById(@PathVariable UUID id, @RequestBody User user) {
         User patchedUser = this.service.patchOneById(id, user);
         return new ResponseEntity<>(patchedUser, HttpStatus.OK);
     }
 }
-
-

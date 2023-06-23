@@ -50,6 +50,7 @@ class UserApiControllerTest {
         when(UserServiceImplMock.getOneById(uuid)).thenReturn(user1);
         when(UserServiceImplMock.createOne(user1)).thenReturn(user1);
         when(UserServiceImplMock.deleteOneById(uuid)).thenReturn(user1);
+        when(UserServiceImplMock.patchOneById(uuid, user1)).thenReturn(user1);
 
         controller = new UserApiController(UserServiceImplMock);
     }
@@ -83,6 +84,12 @@ class UserApiControllerTest {
         assertEquals(user1ResEntOK, deletedUser);
         verify(UserServiceImplMock, times(1)).deleteOneById(uuid);
     }
-//    @Test
-//    void testUpdateOneById(){}
+
+    @Test
+    void testPatchOneById() {
+        ResponseEntity<User> patchedUser = controller.patchOneById(uuid, user1);
+
+        assertEquals(user1ResEntOK, patchedUser);
+        verify(UserServiceImplMock, times(1)).patchOneById(uuid, user1);
+    }
 }

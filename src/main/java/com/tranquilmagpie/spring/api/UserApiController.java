@@ -1,5 +1,3 @@
-
-
 package com.tranquilmagpie.spring.api;
 
 import com.tranquilmagpie.spring.model.User;

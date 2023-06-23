@@ -20,7 +20,9 @@ class UserApiControllerTest {
     List<User> usersList;
     ResponseEntity<List<User>> usersListResEnt;
     User user1;
+    ResponseEntity<User> user1ResEnt;
     User user2;
+
     UserService UserServiceImplMock;
     UserApiController controller;
     UUID uuid;
@@ -31,6 +33,7 @@ class UserApiControllerTest {
         usersList = new ArrayList<>();
         usersListResEnt = new ResponseEntity<>(usersList, HttpStatus.OK);
         user1 = new User("phoebe1@test.com", "phoebe1", "phoebe", "buffay", LocalDate.parse("1966-02-16"));
+        user1ResEnt = new ResponseEntity<>(user1, HttpStatus.OK);
         user2 = new User("monica1@test.com", "monica1", "monica", "geller", LocalDate.parse("1969-01-01"));
         usersList.add(user1);
         usersList.add(user2);
@@ -54,8 +57,9 @@ class UserApiControllerTest {
 
     @Test
     void testGetOneById(){
-        controller.getOneById(uuid);
+        ResponseEntity<User> foundUser = controller.getOneById(uuid);
 
+        assertEquals(user1ResEnt, foundUser);
         verify(UserServiceImplMock, times(1)).getOneById(uuid);
     }
     @Test

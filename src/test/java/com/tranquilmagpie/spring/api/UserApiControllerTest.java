@@ -20,7 +20,8 @@ class UserApiControllerTest {
     List<User> usersList;
     ResponseEntity<List<User>> usersListResEnt;
     User user1;
-    ResponseEntity<User> user1ResEnt;
+    ResponseEntity<User> user1ResEntOK;
+    ResponseEntity<User> user1ResEntCreated;
     User user2;
 
     UserService UserServiceImplMock;
@@ -32,9 +33,13 @@ class UserApiControllerTest {
     void setUp() {
         usersList = new ArrayList<>();
         usersListResEnt = new ResponseEntity<>(usersList, HttpStatus.OK);
+
         user1 = new User("phoebe1@test.com", "phoebe1", "phoebe", "buffay", LocalDate.parse("1966-02-16"));
-        user1ResEnt = new ResponseEntity<>(user1, HttpStatus.OK);
+        user1ResEntOK = new ResponseEntity<>(user1, HttpStatus.OK);
+        user1ResEntCreated = new ResponseEntity<>(user1, HttpStatus.CREATED);
+
         user2 = new User("monica1@test.com", "monica1", "monica", "geller", LocalDate.parse("1969-01-01"));
+
         usersList.add(user1);
         usersList.add(user2);
 
@@ -43,6 +48,8 @@ class UserApiControllerTest {
         UserServiceImplMock = mock(UserServiceImpl.class);
         when(UserServiceImplMock.getAll()).thenReturn(usersList);
         when(UserServiceImplMock.getOneById(uuid)).thenReturn(user1);
+        when(UserServiceImplMock.createOne(user1)).thenReturn(user1);
+        when(UserServiceImplMock.deleteOneById(uuid)).thenReturn(user1);
 
         controller = new UserApiController(UserServiceImplMock);
     }
@@ -59,17 +66,23 @@ class UserApiControllerTest {
     void testGetOneById(){
         ResponseEntity<User> foundUser = controller.getOneById(uuid);
 
-        assertEquals(user1ResEnt, foundUser);
+        assertEquals(user1ResEntOK, foundUser);
         verify(UserServiceImplMock, times(1)).getOneById(uuid);
     }
     @Test
     void testCreateOne(){
-        controller.createOne(user1);
+        ResponseEntity<User> createdUser = controller.createOne(user1);
 
+        assertEquals(user1ResEntCreated, createdUser);
         verify(UserServiceImplMock, times(1)).createOne(user1);
     }
-//    @Test
-//    void testDeleteOneById(){}
+    @Test
+    void testDeleteOneById(){
+        ResponseEntity<User> deletedUser = controller.deleteOneById(uuid);
+
+        assertEquals(user1ResEntOK, deletedUser);
+        verify(UserServiceImplMock, times(1)).deleteOneById(uuid);
+    }
 //    @Test
 //    void testUpdateOneById(){}
 }

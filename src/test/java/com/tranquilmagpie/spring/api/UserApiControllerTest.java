@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 class UserApiControllerTest {
     List<User> usersList;
@@ -18,6 +19,7 @@ class UserApiControllerTest {
     User user2;
     UserService UserServiceImplMock;
     UserApiController controller;
+    UUID testUuid;
 
     @BeforeEach
     void testSetup() {
@@ -27,8 +29,11 @@ class UserApiControllerTest {
         usersList.add(user1);
         usersList.add(user2);
 
+        testUuid = UUID.fromString("f95bce3c-2146-47b4-b89e-8de113f5379a");
+
         UserServiceImplMock = mock(UserServiceImpl.class);
         when(UserServiceImplMock.getAll()).thenReturn(usersList);
+        when(UserServiceImplMock.getOneById(testUuid)).thenReturn(user1);
 
         controller = new UserApiController(UserServiceImplMock);
     }
@@ -40,12 +45,16 @@ class UserApiControllerTest {
         verify(UserServiceImplMock, times(1)).getAll();
     }
 
+    @Test
+    void testGetOneById(){
+        controller.getOneById(testUuid);
+
+        verify(UserServiceImplMock, times(1)).getOneById(testUuid);
+    }
 //    @Test
-//    void getOneById(){}
+//    void testCreateOne(){}
 //    @Test
-//    void createOne(){}
+//    void testDeleteOneById(){}
 //    @Test
-//    void deleteOneById(){}
-//    @Test
-//    void updateOneById(){}
+//    void testUpdateOneById(){}
 }

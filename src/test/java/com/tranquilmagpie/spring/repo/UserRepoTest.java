@@ -22,7 +22,7 @@ class UserRepoTest {
     private final User user1 = new User();
 
     @BeforeEach
-    void testSetup(){
+    void setUp(){
         user1.setEmail("ross1@test.com");
         user1.setUsername("ross1");
         user1.setFirstName("ross");

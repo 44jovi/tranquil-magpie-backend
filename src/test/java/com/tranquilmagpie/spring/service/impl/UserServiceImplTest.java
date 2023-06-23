@@ -21,7 +21,7 @@ class UserServiceImplTest {
     UserServiceImpl userServiceImpl;
 
     @BeforeEach
-    void testSetup() {
+    void setUp() {
         usersList = new ArrayList<>();
         user1 = new User("phoebe1@test.com", "phoebe1", "phoebe", "buffay", LocalDate.parse("1966-02-16"));
         user2 = new User("monica1@test.com", "monica1", "monica", "geller", LocalDate.parse("1969-01-01"));

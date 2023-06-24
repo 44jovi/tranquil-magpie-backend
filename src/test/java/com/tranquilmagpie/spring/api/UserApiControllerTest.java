@@ -34,11 +34,11 @@ class UserApiControllerTest {
         usersList = new ArrayList<>();
         usersListResEnt = new ResponseEntity<>(usersList, HttpStatus.OK);
 
-        user1 = new User("phoebe1@test.com", "phoebe1", "phoebe", "buffay", LocalDate.parse("1966-02-16"));
+        user1 = new User("phoebe1@test.com", "phoebe1", "phoebe", "buffay", LocalDate.parse("1966-02-16"), "pass123");
         user1ResEntOK = new ResponseEntity<>(user1, HttpStatus.OK);
         user1ResEntCreated = new ResponseEntity<>(user1, HttpStatus.CREATED);
 
-        user2 = new User("monica1@test.com", "monica1", "monica", "geller", LocalDate.parse("1969-01-01"));
+        user2 = new User("monica1@test.com", "monica1", "monica", "geller", LocalDate.parse("1969-01-01"), "pass123");
 
         usersList.add(user1);
         usersList.add(user2);

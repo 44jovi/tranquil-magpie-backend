@@ -28,6 +28,7 @@ class UserRepoSpringBootTest {
         user1.setFirstName("ross");
         user1.setLastName("geller");
         user1.setDob(LocalDate.parse("1967-10-18"));
+        user1.setPasswordHash("pass123");
     }
 
     @Test

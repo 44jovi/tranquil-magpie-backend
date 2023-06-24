@@ -42,17 +42,20 @@ public class User {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dob;
 
+    private String passwordHash;
+
     //    TODO: review usage of no-parameter constructor
     public User() {
     }
 
     // Current purpose of this constructor is for tests
-    public User(String email, String username, String firstName, String lastName, LocalDate dob) {
+    public User(String email, String username, String firstName, String lastName, LocalDate dob, String passwordHash) {
         this.email = email;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
+        this.passwordHash = passwordHash;
     }
 
     /**
@@ -149,6 +152,17 @@ public class User {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+    @Valid
+    @Schema(name = "passwordHash", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @JsonProperty("passwordHash")
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     @Override

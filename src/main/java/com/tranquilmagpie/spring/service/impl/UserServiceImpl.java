@@ -4,6 +4,7 @@ import com.tranquilmagpie.spring.model.User;
 import com.tranquilmagpie.spring.repo.UserRepo;
 import com.tranquilmagpie.spring.service.UserService;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +39,13 @@ public class UserServiceImpl implements UserService {
     public User createOne(User user) {
         // TODO: do not allow creation of user if UUID already exists
         // TODO: review whether Optional should be returned for getOneById
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+
+        // TODO: review User entity field name?
+        String passwordString = user.getPasswordHash();
+        String passwordHashed = encoder.encode((passwordString));
+        user.setPasswordHash(passwordHashed);
+
         return this.repo.save(user);
     }
 

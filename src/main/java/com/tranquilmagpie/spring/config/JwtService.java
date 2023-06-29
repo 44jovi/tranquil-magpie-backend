@@ -7,6 +7,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.util.function.Function;
 
 @Service
 public class JwtService {
@@ -14,7 +15,13 @@ public class JwtService {
     private static final String SECRET_KEY = System.getenv("TRANQUIL_MAGPIE_SK");
 
     public String extractUsername(String jwt) {
-        return "WIP - TBC";
+        // Username should be the JWT's subject
+        return extractOneClaim(jwt, Claims::getSubject);}
+
+    // TODO: review usage of functional interface
+    public <T> T extractOneClaim(String jwt, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(jwt);
+        return claimsResolver.apply(claims);
     }
 
     private Claims extractAllClaims(String jwt) {

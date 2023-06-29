@@ -3,6 +3,8 @@ package com.tranquilmagpie.spring.model;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.*;
@@ -13,12 +15,15 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 /**
  * All users
  */
-// Bundles @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor
+// Bundle @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +33,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 // TODO: check schema name
 @Schema(name = "backend", description = "All users")
 @JsonTypeName("user")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(unique = true, updatable = false)
@@ -48,7 +53,10 @@ public class User {
     // TODO: review field name
     private String passwordHash;
 
-    // TODO: Update tests to use @Builder. Current purpose of this constructor is for tests
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    // TODO: Update tests to use @Builder and review if this is still needed
     public User(String email, String username, String firstName, String lastName, LocalDate dob, String passwordHash) {
         this.email = email;
         this.username = username;
@@ -58,4 +66,40 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
+    // Return list of roles
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // String representation of an authority granted to an Authentication object (principal)
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public String getPassword() {
+        return passwordHash;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

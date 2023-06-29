@@ -14,6 +14,8 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
+
+    private final JwtService jwtService;
     @Override
     protected void doFilterInternal(
             // Intercept each response/request to allow extraction/manipulation of the data
@@ -21,6 +23,18 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
+        final String authHeader = request.getHeader("Authorization");
+        final String jwt;
+        final String username;
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            // Call next filter in chain, or resource if end of chain
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        jwt = authHeader.substring(7);
+        username = jwtService.extractUsername(jwt);
 
     }
 }

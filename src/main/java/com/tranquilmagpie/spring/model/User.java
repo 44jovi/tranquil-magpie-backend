@@ -9,6 +9,10 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.validation.Valid;
@@ -19,7 +23,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 /**
  * All users
  */
-
+// Bundles @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "users")
 // TODO: check schema name
@@ -42,11 +50,8 @@ public class User {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dob;
 
+    // TODO: review field name
     private String passwordHash;
-
-    //    TODO: review usage of no-parameter constructor
-    public User() {
-    }
 
     // Current purpose of this constructor is for tests
     public User(String email, String username, String firstName, String lastName, LocalDate dob, String passwordHash) {

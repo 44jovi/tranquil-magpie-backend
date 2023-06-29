@@ -44,14 +44,7 @@ class UserTest {
     @Test
     void testToString() {
         assertEquals(
-                "class User {\n" +
-                        "    uuid: 446d5db4-70dc-433e-a4f8-c2bbec0d25ab\n" +
-                        "    email: joey1@test.com\n" +
-                        "    username: joey1\n" +
-                        "    firstName: joey\n" +
-                        "    lastName: tribbiani\n" +
-                        "    dob: 1968-01-09\n" +
-                        "}"
+                "User(uuid=446d5db4-70dc-433e-a4f8-c2bbec0d25ab, email=joey1@test.com, username=joey1, firstName=joey, lastName=tribbiani, dob=1968-01-09, passwordHash=null)"
                 , user1.toString());
     }
 
@@ -64,8 +57,8 @@ class UserTest {
 
     @Test
     void testHashCode() {
-        assertEquals(231396512, user1.hashCode());
-        assertEquals(-2031932401, user2.hashCode());
+        assertEquals(-1253687397, user1.hashCode());
+        assertEquals(763840416, user2.hashCode());
     }
 
 }

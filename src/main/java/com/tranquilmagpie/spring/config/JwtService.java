@@ -50,9 +50,26 @@ public class JwtService {
                 .compact();
     }
 
+    private boolean isJWTValid(String jwt, UserDetails userDetails){
+        final String username = extractUsername(jwt);
+        return username.equals(userDetails.getUsername()) && !isJWTExpired(jwt);
+    }
+
+    private boolean isJWTExpired(String jwt){
+        return extractExpiration(jwt).before(new Date());
+    }
+
+    private Date extractExpiration(String jwt) {
+        return extractOneClaim(jwt, Claims::getExpiration);
+    }
+
     private Claims extractAllClaims(String jwt) {
         // Signing key (secret) signs the JWT and used to verify the signature
-        return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(jwt).getBody();
+        return Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(jwt)
+                .getBody();
     }
 
     private Key getSigningKey() {

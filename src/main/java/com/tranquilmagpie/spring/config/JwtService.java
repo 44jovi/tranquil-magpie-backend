@@ -50,7 +50,7 @@ public class JwtService {
                 .compact();
     }
 
-    private boolean isJwtValid(String jwt, UserDetails userDetails) {
+    public boolean isJwtValid(String jwt, UserDetails userDetails) {
         final String username = extractUsername(jwt);
         return username.equals(userDetails.getUsername()) && !isJwtExpired(jwt);
     }

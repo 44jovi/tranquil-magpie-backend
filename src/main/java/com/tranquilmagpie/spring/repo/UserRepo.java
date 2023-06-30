@@ -16,6 +16,8 @@ public interface UserRepo extends JpaRepository<User, UUID> {
     // TODO: review method name
     Optional<User> findByUuid(UUID id);
 
+    Optional<User> findByUsername(String username);
+
     // TODO: remove from Swagger UI render?
     // Current purpose of @Transactional in this interface is for tests only
     @Transactional

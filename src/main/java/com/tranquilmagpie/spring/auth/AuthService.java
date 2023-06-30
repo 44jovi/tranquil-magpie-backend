@@ -42,7 +42,7 @@ public class AuthService {
         return AuthResponse.builder().token(jwt).build();
     }
 
-    public AuthResponse authenticate(RegisterRequest request) {
+    public AuthResponse authenticate(AuthRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),

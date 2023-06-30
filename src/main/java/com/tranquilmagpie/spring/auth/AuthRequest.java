@@ -13,6 +13,6 @@ public class AuthRequest {
 
     private String username;
     // TODO: review access modifier
-    String password;
+    String passwordHash;
 
 }

@@ -1,38 +1,49 @@
 package com.tranquilmagpie.spring.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.security.config.Customizer.withDefaults;
 
+// Spring Boot 3.0+: @Configuration and @EnableWebSecurity need to be together
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class WebSecurityConfig {
 
-//    TODO: review usage of this class compared with config via 'application.properties'
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-////      manager.createUser(User.withDefaultPasswordEncoder().username("").password("").roles("USER").build());
-//        return manager;
-//    }
+    // 'final' to ensure auto-injection by Spring
+    private final JwtAuthFilter jwtAuthFilter;
+    private final AuthenticationProvider authenticationProvider;
 
+    // On app startup, Spring will first look for a SecurityFilterChain bean
+    // SecurityFilterChain processes/applies security filters to incoming requests
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests(authorize -> authorize
-                        .anyRequest().authenticated()
-                )
-                .formLogin(withDefaults())
-                .httpBasic(withDefaults());
-//      TODO: re-enable/configure CSRF protection
-        http.csrf().disable();
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        // TODO: review CSRF protection
+        http.csrf().disable()
+                .authorizeRequests()
+                // Whitelist
+                .requestMatchers("")
+                .permitAll()
+                // Otherwise auth required
+                .anyRequest()
+                .authenticated()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                // State authentication provider to be used by Spring
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
+
 }

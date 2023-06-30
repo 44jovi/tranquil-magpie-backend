@@ -30,7 +30,7 @@ public class WebSecurityConfig {
         http.csrf().disable()
                 .authorizeRequests()
                 // Whitelist
-                .requestMatchers("")
+                .requestMatchers("/auth/**")
                 .permitAll()
                 // Otherwise auth required
                 .anyRequest()

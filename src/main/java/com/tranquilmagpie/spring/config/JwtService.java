@@ -32,7 +32,7 @@ public class JwtService {
     }
 
     // Generate token without extra claims
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }
 
@@ -50,12 +50,12 @@ public class JwtService {
                 .compact();
     }
 
-    private boolean isJWTValid(String jwt, UserDetails userDetails){
+    private boolean isJwtValid(String jwt, UserDetails userDetails) {
         final String username = extractUsername(jwt);
-        return username.equals(userDetails.getUsername()) && !isJWTExpired(jwt);
+        return username.equals(userDetails.getUsername()) && !isJwtExpired(jwt);
     }
 
-    private boolean isJWTExpired(String jwt){
+    private boolean isJwtExpired(String jwt) {
         return extractExpiration(jwt).before(new Date());
     }
 

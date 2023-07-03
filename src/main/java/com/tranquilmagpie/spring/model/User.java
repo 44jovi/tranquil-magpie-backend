@@ -51,19 +51,19 @@ public class User implements UserDetails {
     private LocalDate dob;
 
     // TODO: review field name
-    private String passwordHash;
+    private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
     // TODO: Update tests to use @Builder and review if this is still needed
-    public User(String email, String username, String firstName, String lastName, LocalDate dob, String passwordHash) {
+    public User(String email, String username, String firstName, String lastName, LocalDate dob, String password) {
         this.email = email;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
-        this.passwordHash = passwordHash;
+        this.password = password;
     }
 
     // Return list of roles
@@ -80,7 +80,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return passwordHash;
+        return password;
     }
 
     @Override

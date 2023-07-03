@@ -30,7 +30,7 @@ public class AuthService {
                 .lastName(request.getLastName())
                 .dob(request.getDob())
                 // BCryptPasswordEncoder (see AppConfig)
-                .passwordHash(passwordEncoder.encode(request.getPasswordHash()))
+                .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
 
@@ -46,7 +46,7 @@ public class AuthService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
-                        request.getPasswordHash()
+                        request.getPassword()
                 )
         );
         // TODO: handle exception if empty optional returned

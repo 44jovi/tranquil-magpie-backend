@@ -44,7 +44,7 @@ class UserTest {
     @Test
     void testToString() {
         assertEquals(
-                "User(uuid=446d5db4-70dc-433e-a4f8-c2bbec0d25ab, email=joey1@test.com, username=joey1, firstName=joey, lastName=tribbiani, dob=1968-01-09, passwordHash=null, role=null)"
+                "User(uuid=446d5db4-70dc-433e-a4f8-c2bbec0d25ab, email=joey1@test.com, username=joey1, firstName=joey, lastName=tribbiani, dob=1968-01-09, password=null, role=null)"
                 , user1.toString());
     }
 

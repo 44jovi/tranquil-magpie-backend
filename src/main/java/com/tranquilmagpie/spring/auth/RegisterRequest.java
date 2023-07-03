@@ -26,6 +26,6 @@ public class RegisterRequest {
     private LocalDate dob;
 
     // TODO: review field name
-    private String passwordHash;
+    private String password;
 
 }

@@ -42,9 +42,9 @@ public class UserServiceImpl implements UserService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
 
         // TODO: review User entity field name?
-        String passwordString = user.getPasswordHash();
+        String passwordString = user.getPassword();
         String passwordHashed = encoder.encode((passwordString));
-        user.setPasswordHash(passwordHashed);
+        user.setPassword(passwordHashed);
 
         return this.repo.save(user);
     }

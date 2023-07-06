@@ -31,7 +31,7 @@ public class WebSecurityConfig {
         http.csrf().disable()
                 .authorizeRequests()
                 // Whitelist
-                .requestMatchers("/auth/**")
+                .requestMatchers("/auth/**", "swagger-ui/**")
                 .permitAll()
                 // Otherwise auth required
                 .anyRequest()

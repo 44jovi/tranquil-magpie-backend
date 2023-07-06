@@ -19,18 +19,6 @@ public class JwtService {
 
     private static final String SECRET_KEY = System.getenv("TRANQUIL_MAGPIE_SK");
 
-    public String extractUsername(String jwt) {
-        // Username should be the JWT's subject
-        // TODO: review usage of method reference
-        return extractOneClaim(jwt, Claims::getSubject);
-    }
-
-    // TODO: review usage of functional interface
-    public <T> T extractOneClaim(String jwt, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(jwt);
-        return claimsResolver.apply(claims);
-    }
-
     // Generate token without extra claims
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
@@ -50,17 +38,31 @@ public class JwtService {
                 .compact();
     }
 
-    public boolean isJwtValid(String jwt, UserDetails userDetails) {
-        final String username = extractUsername(jwt);
-        return username.equals(userDetails.getUsername()) && !isJwtExpired(jwt);
+    public String revokeToken(UserDetails userDetails) {
+        // TODO: is this required
+        return "WIP - TBC";
     }
 
-    private boolean isJwtExpired(String jwt) {
-        return extractExpiration(jwt).before(new Date());
+    private Key getSigningKey() {
+        byte[] keyAsBytes = Decoders.BASE64.decode(SECRET_KEY);
+        // Generate a signing key (HMAC-SHA code) to authenticate data
+        return Keys.hmacShaKeyFor(keyAsBytes);
+    }
+
+    public String extractUsername(String jwt) {
+        // Username should be the JWT's subject
+        // TODO: review usage of method reference
+        return extractOneClaim(jwt, Claims::getSubject);
     }
 
     private Date extractExpiration(String jwt) {
         return extractOneClaim(jwt, Claims::getExpiration);
+    }
+    // TODO: review usage of functional interface
+
+    public <T> T extractOneClaim(String jwt, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(jwt);
+        return claimsResolver.apply(claims);
     }
 
     private Claims extractAllClaims(String jwt) {
@@ -72,9 +74,13 @@ public class JwtService {
                 .getBody();
     }
 
-    private Key getSigningKey() {
-        byte[] keyAsBytes = Decoders.BASE64.decode(SECRET_KEY);
-        // Generate a signing key (HMAC-SHA code) to authenticate data
-        return Keys.hmacShaKeyFor(keyAsBytes);
+    public boolean isJwtValid(String jwt, UserDetails userDetails) {
+        final String username = extractUsername(jwt);
+        return username.equals(userDetails.getUsername()) && !isJwtExpired(jwt);
     }
+
+    private boolean isJwtExpired(String jwt) {
+        return extractExpiration(jwt).before(new Date());
+    }
+
 }

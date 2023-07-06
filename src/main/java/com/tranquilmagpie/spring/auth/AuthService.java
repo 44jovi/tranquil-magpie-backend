@@ -56,4 +56,12 @@ public class AuthService {
         return AuthResponse.builder().token(jwt).build();
     }
 
+    public AuthResponse logout(LogoutRequest request) {
+        // TODO: redirect client if user is not logged in
+        User user = repo.findByUsername(request.getUsername()).orElseThrow();
+        String jwt = jwtService.revokeToken(user);
+
+        return AuthResponse.builder().token(jwt).build();
+    }
+
 }

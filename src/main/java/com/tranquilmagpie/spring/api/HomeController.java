@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-    @RequestMapping("/")
-    // Further redirects to "http://localhost:8080/swagger-ui/index.html"
+    @RequestMapping("/swagger")
     public String index() {
-        return "redirect:swagger-ui.html";
+        return "redirect:swagger-ui/index.html";
     }
 
 }

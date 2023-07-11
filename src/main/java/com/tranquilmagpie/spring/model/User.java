@@ -1,31 +1,39 @@
 package com.tranquilmagpie.spring.model;
 
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.validation.Valid;
-
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 /**
  * All users
  */
-
+// Bundle @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "users")
 // TODO: check schema name
 @Schema(name = "backend", description = "All users")
 @JsonTypeName("user")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(unique = true, updatable = false)
@@ -42,159 +50,56 @@ public class User {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dob;
 
-    //    TODO: review usage of no-parameter constructor
-    public User() {
-    }
+    // TODO: review field name
+    private String password;
 
-    // Current purpose of this constructor is for tests
-    public User(String email, String username, String firstName, String lastName, LocalDate dob) {
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    // TODO: Update tests to use @Builder and review if this is still needed
+    public User(String email, String username, String firstName, String lastName, LocalDate dob, String password) {
         this.email = email;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
+        this.password = password;
     }
 
-    /**
-     * Get uuid
-     *
-     * @return uuid
-     */
-
-    @Schema(name = "uuid", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-    @JsonProperty("uuid")
-    public UUID getUuid() {
-        return this.uuid;
+    // Return list of roles
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // String representation of an authority granted to an Authentication object (principal)
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
-
-    /**
-     * Get email
-     *
-     * @return email
-     */
-
-    @Schema(name = "email", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-    @JsonProperty("email")
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * Get username
-     *
-     * @return username
-     */
-
-    @Schema(name = "username", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-    @JsonProperty("username")
+    @Override
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    /**
-     * Get firstName
-     *
-     * @return firstName
-     */
-
-    @Schema(name = "firstName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-    @JsonProperty("firstName")
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /**
-     * Get lastName
-     *
-     * @return lastName
-     */
-
-    @Schema(name = "lastName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-    @JsonProperty("lastName")
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    /**
-     * Get dob
-     *
-     * @return dob
-     */
-    @Valid
-    @Schema(name = "dob", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-    @JsonProperty("dob")
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equals(this.uuid, user.uuid) &&
-                Objects.equals(this.email, user.email) &&
-                Objects.equals(this.username, user.username) &&
-                Objects.equals(this.firstName, user.firstName) &&
-                Objects.equals(this.lastName, user.lastName) &&
-                Objects.equals(this.dob, user.dob);
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(uuid, email, username, firstName, lastName, dob);
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class User {\n");
-        sb.append("    uuid: ").append(toIndentedString(uuid)).append("\n");
-        sb.append("    email: ").append(toIndentedString(email)).append("\n");
-        sb.append("    username: ").append(toIndentedString(username)).append("\n");
-        sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
-        sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
-        sb.append("    dob: ").append(toIndentedString(dob)).append("\n");
-        sb.append("}");
-        return sb.toString();
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

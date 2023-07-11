@@ -56,8 +56,9 @@ public class AuthService {
         return AuthResponse.builder().token(jwt).build();
     }
 
+    // TODO: review if making this work with JWT's is required, especially if implementing session-based auth in future
     public AuthResponse logout(LogoutRequest request) {
-        // TODO: redirect client if user is not logged in
+        // TODO: redirect client if user is not logged in?
         User user = repo.findByUsername(request.getUsername()).orElseThrow();
         String jwt = jwtService.revokeToken(user);
 

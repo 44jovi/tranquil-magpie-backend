@@ -25,8 +25,8 @@ class UserRepoSpringBootTest {
     void setUp(){
         user1.setEmail("ross1@test.com");
         user1.setUsername("ross1");
-        user1.setFirstName("ross");
-        user1.setLastName("geller");
+        user1.setGivenName("ross");
+        user1.setFamilyName("geller");
         user1.setDob(LocalDate.parse("1967-10-18"));
         user1.setPassword("pass123");
     }
@@ -40,8 +40,8 @@ class UserRepoSpringBootTest {
         assertEquals(savedUser.getUuid(), foundUser.getUuid());
         assertEquals("ross1@test.com", foundUser.getEmail());
         assertEquals("ross1", foundUser.getUsername());
-        assertEquals("ross", foundUser.getFirstName());
-        assertEquals("geller", foundUser.getLastName());
+        assertEquals("ross", foundUser.getGivenName());
+        assertEquals("geller", foundUser.getFamilyName());
         assertEquals(LocalDate.parse("1967-10-18"), foundUser.getDob());
 
         repo.deleteByUuid(savedUser.getUuid());

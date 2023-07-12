@@ -43,9 +43,9 @@ public class User implements UserDetails {
 
     private String username;
 
-    private String firstName;
+    private String givenName;
 
-    private String lastName;
+    private String familyName;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dob;
@@ -57,11 +57,11 @@ public class User implements UserDetails {
     private Role role;
 
     // TODO: Update tests to use @Builder and review if this is still needed
-    public User(String email, String username, String firstName, String lastName, LocalDate dob, String password) {
+    public User(String email, String username, String givenName, String familyName, LocalDate dob, String password) {
         this.email = email;
         this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.givenName = givenName;
+        this.familyName = familyName;
         this.dob = dob;
         this.password = password;
     }

@@ -19,15 +19,15 @@ class UserTest {
         user1.setUuid(UUID.fromString("446d5db4-70dc-433e-a4f8-c2bbec0d25ab"));
         user1.setEmail("joey1@test.com");
         user1.setUsername("joey1");
-        user1.setFirstName("joey");
-        user1.setLastName("tribbiani");
+        user1.setGivenName("joey");
+        user1.setFamilyName("tribbiani");
         user1.setDob(LocalDate.parse("1968-01-09"));
 
         user2.setUuid(UUID.fromString("9fd17a2f-8bb2-4289-906a-4b7ae16c080e"));
         user2.setEmail("chandler1@test.com");
         user2.setUsername("chandler1");
-        user2.setFirstName("chandler");
-        user2.setLastName("bing");
+        user2.setGivenName("chandler");
+        user2.setFamilyName("bing");
         user2.setDob(LocalDate.parse("1968-04-08"));
     }
 
@@ -36,15 +36,15 @@ class UserTest {
         assertEquals(UUID.fromString("446d5db4-70dc-433e-a4f8-c2bbec0d25ab"), user1.getUuid());
         assertEquals("joey1@test.com", user1.getEmail());
         assertEquals("joey1", user1.getUsername());
-        assertEquals("joey", user1.getFirstName());
-        assertEquals("tribbiani", user1.getLastName());
+        assertEquals("joey", user1.getGivenName());
+        assertEquals("tribbiani", user1.getFamilyName());
         assertEquals(LocalDate.parse("1968-01-09"), user1.getDob());
     }
 
     @Test
     void testToString() {
         assertEquals(
-                "User(uuid=446d5db4-70dc-433e-a4f8-c2bbec0d25ab, email=joey1@test.com, username=joey1, firstName=joey, lastName=tribbiani, dob=1968-01-09, password=null, role=null)"
+                "User(uuid=446d5db4-70dc-433e-a4f8-c2bbec0d25ab, email=joey1@test.com, username=joey1, givenName=joey, familyName=tribbiani, dob=1968-01-09, password=null, role=null)"
                 , user1.toString());
     }
 

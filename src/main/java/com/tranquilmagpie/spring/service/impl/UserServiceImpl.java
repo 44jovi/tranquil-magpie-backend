@@ -64,8 +64,8 @@ public class UserServiceImpl implements UserService {
 
         String email = user.getEmail();
         String username = user.getUsername();
-        String firstName = user.getFirstName();
-        String lastName = user.getLastName();
+        String firstName = user.getGivenName();
+        String lastName = user.getFamilyName();
         LocalDate dob = user.getDob();
 
         User selectedUser = this.getOneById(id);
@@ -76,9 +76,9 @@ public class UserServiceImpl implements UserService {
         if (username != null)
             selectedUser.setUsername(username);
         if (firstName != null)
-            selectedUser.setFirstName(firstName);
+            selectedUser.setGivenName(firstName);
         if (lastName != null)
-            selectedUser.setLastName(lastName);
+            selectedUser.setFamilyName(lastName);
         if (dob != null)
             selectedUser.setDob(dob);
 

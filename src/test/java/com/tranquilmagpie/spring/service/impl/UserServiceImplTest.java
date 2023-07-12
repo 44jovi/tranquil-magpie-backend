@@ -30,7 +30,7 @@ class UserServiceImplTest {
 
         UserRepoMock = mock(UserRepo.class);
         when(UserRepoMock.findAll()).thenReturn(usersList);
-        when(UserRepoMock.findByUuid(any(UUID.class))).thenReturn(Optional.ofNullable(user1));
+        when(UserRepoMock.findById(any(UUID.class))).thenReturn(Optional.ofNullable(user1));
         when(UserRepoMock.save(user1)).thenReturn(user1);
 
         userServiceImpl = new UserServiceImpl(UserRepoMock);
@@ -47,7 +47,7 @@ class UserServiceImplTest {
     void testGetOneById() {
         userServiceImpl.getOneById(UUID.randomUUID());
 
-        verify(UserRepoMock, times(1)).findByUuid(any(UUID.class));
+        verify(UserRepoMock, times(1)).findById(any(UUID.class));
     }
 
     @Test
@@ -61,8 +61,8 @@ class UserServiceImplTest {
     void testDeleteOneById() {
         userServiceImpl.deleteOneById(UUID.randomUUID());
 
-        verify(UserRepoMock, times(1)).findByUuid(any(UUID.class));
-        verify(UserRepoMock, times(1)).deleteByUuid(any(UUID.class));
+        verify(UserRepoMock, times(1)).findById(any(UUID.class));
+        verify(UserRepoMock, times(1)).deleteById(any(UUID.class));
     }
 
     @Test

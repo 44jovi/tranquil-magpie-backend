@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     public User getOneById(UUID id) {
         // TODO: review how to handle empty/null Optional
         // TODO: review usage of isPresent()
-        return this.repo.findByUuid(id).get();
+        return this.repo.findById(id).get();
     }
 
     @Override
@@ -54,8 +54,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User deleteOneById(UUID id) {
         // TODO: review usage of isPresent()
-        User selectedUser = this.repo.findByUuid(id).get();
-        this.repo.deleteByUuid(id);
+        User selectedUser = this.repo.findById(id).get();
+        this.repo.deleteById(id);
         return selectedUser;
     }
 

@@ -16,14 +16,14 @@ class UserTest {
     @BeforeEach
     void setUp() {
         // Alternative method: UUID.randomUUID()
-        user1.setUuid(UUID.fromString("446d5db4-70dc-433e-a4f8-c2bbec0d25ab"));
+        user1.setId(UUID.fromString("446d5db4-70dc-433e-a4f8-c2bbec0d25ab"));
         user1.setEmail("joey1@test.com");
         user1.setUsername("joey1");
         user1.setGivenName("joey");
         user1.setFamilyName("tribbiani");
         user1.setDob(LocalDate.parse("1968-01-09"));
 
-        user2.setUuid(UUID.fromString("9fd17a2f-8bb2-4289-906a-4b7ae16c080e"));
+        user2.setId(UUID.fromString("9fd17a2f-8bb2-4289-906a-4b7ae16c080e"));
         user2.setEmail("chandler1@test.com");
         user2.setUsername("chandler1");
         user2.setGivenName("chandler");
@@ -33,7 +33,7 @@ class UserTest {
 
     @Test
     void testGetters() {
-        assertEquals(UUID.fromString("446d5db4-70dc-433e-a4f8-c2bbec0d25ab"), user1.getUuid());
+        assertEquals(UUID.fromString("446d5db4-70dc-433e-a4f8-c2bbec0d25ab"), user1.getId());
         assertEquals("joey1@test.com", user1.getEmail());
         assertEquals("joey1", user1.getUsername());
         assertEquals("joey", user1.getGivenName());
@@ -44,7 +44,7 @@ class UserTest {
     @Test
     void testToString() {
         assertEquals(
-                "User(uuid=446d5db4-70dc-433e-a4f8-c2bbec0d25ab, email=joey1@test.com, username=joey1, givenName=joey, familyName=tribbiani, dob=1968-01-09, password=null, role=null)"
+                "User(id=446d5db4-70dc-433e-a4f8-c2bbec0d25ab, email=joey1@test.com, username=joey1, givenName=joey, familyName=tribbiani, dob=1968-01-09, password=null, role=null)"
                 , user1.toString());
     }
 

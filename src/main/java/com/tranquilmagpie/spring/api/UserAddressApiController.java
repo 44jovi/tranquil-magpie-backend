@@ -27,7 +27,7 @@ public class UserAddressApiController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserAddress> getOneById(@PathVariable int id) {
+    public ResponseEntity<UserAddress> getOneById(@PathVariable UUID id) {
         UserAddress userAddress = this.service.getOneById(id);
         return new ResponseEntity<>(userAddress, HttpStatus.OK);
     }
@@ -45,13 +45,13 @@ public class UserAddressApiController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<UserAddress> deleteOneById(@PathVariable int id) {
+    public ResponseEntity<UserAddress> deleteOneById(@PathVariable UUID id) {
         UserAddress deletedUserAddress = this.service.deleteOneById(id);
         return new ResponseEntity<>(deletedUserAddress, HttpStatus.OK);
     }
 
     @PatchMapping("/patch/{id}")
-    public ResponseEntity<UserAddress> patchOneById(@PathVariable int id, @RequestBody UserAddress userAddress) {
+    public ResponseEntity<UserAddress> patchOneById(@PathVariable UUID id, @RequestBody UserAddress userAddress) {
         UserAddress patchedUserAddress = this.service.patchOneById(id, userAddress);
         return new ResponseEntity<>(patchedUserAddress, HttpStatus.OK);
     }

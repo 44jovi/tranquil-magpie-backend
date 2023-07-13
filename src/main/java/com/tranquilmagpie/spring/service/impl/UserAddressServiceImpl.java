@@ -25,7 +25,7 @@ public class UserAddressServiceImpl implements UserAddressService {
     }
 
     @Override
-    public UserAddress getOneById(int id) {
+    public UserAddress getOneById(UUID id) {
         // TODO: handle empty Optional
         return this.repo.findById(id).get();
     }
@@ -43,7 +43,7 @@ public class UserAddressServiceImpl implements UserAddressService {
 
     @Override
     @Transactional
-    public UserAddress deleteOneById(int id) {
+    public UserAddress deleteOneById(UUID id) {
         // TODO: review usage of isPresent()
         UserAddress selectedUserAddress = this.repo.findById(id).get();
         this.repo.deleteById(id);
@@ -51,7 +51,7 @@ public class UserAddressServiceImpl implements UserAddressService {
     }
 
     @Override
-    public UserAddress patchOneById(int id, UserAddress user) {
+    public UserAddress patchOneById(UUID id, UserAddress user) {
 
         UUID userId = user.getUserId();
         String addressLine1 = user.getLine_1();

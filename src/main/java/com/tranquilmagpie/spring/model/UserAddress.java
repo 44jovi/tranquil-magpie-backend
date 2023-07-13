@@ -20,8 +20,8 @@ import java.util.UUID;
 public class UserAddress {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private UUID userId;
 

@@ -19,17 +19,20 @@ public class UserAddressServiceImpl implements UserAddressService {
         this.repo = repo;
     }
 
+    // TODO: for ADMIN role only
     @Override
     public List<UserAddress> getAll() {
         return this.repo.findAll();
     }
 
+    // TODO: restrict this to current authenticated/authorised user
     @Override
     public UserAddress getOneById(UUID id) {
         // TODO: handle empty Optional
         return this.repo.findById(id).get();
     }
 
+    // TODO: only allow access to current user's address
     @Override
     public UserAddress getOneByUserId(UUID id) {
         // TODO: handle empty Optional

@@ -23,11 +23,13 @@ public class UserServiceImpl implements UserService {
         this.repo = repo;
     }
 
+    // TODO: for ADMIN role only
     @Override
     public List<User> getAll() {
         return this.repo.findAll();
     }
 
+    // TODO: only allow access to current user's details
     @Override
     public User getOneById(UUID id) {
         // TODO: review how to handle empty/null Optional
@@ -49,6 +51,7 @@ public class UserServiceImpl implements UserService {
         return this.repo.save(user);
     }
 
+    // TODO: for ADMIN role only
     @Override
     // Manage multiple database calls
     @Transactional

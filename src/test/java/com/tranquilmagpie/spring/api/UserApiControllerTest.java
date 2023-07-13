@@ -27,7 +27,6 @@ class UserApiControllerTest {
     UserService UserServiceImplMock;
     UserApiController controller;
     UUID uuid;
-    private ResponseEntity<List> User;
 
     @BeforeEach
     void setUp() {

@@ -1,14 +1,16 @@
 package com.tranquilmagpie.spring.repo;
 
+import com.tranquilmagpie.spring.model.User;
 import com.tranquilmagpie.spring.model.UserAddress;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import java.time.LocalDate;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,42 +20,62 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class UserAddressRepoSpringBootTest {
 
     @Autowired
-    private UserAddressRepo repo;
+    private UserAddressRepo userAddressRepo;
+
+    @Autowired
+    private UserRepo userRepo;
 
     private UserAddress userAddress1 = new UserAddress();
-    private final UUID uuid1 = UUID.fromString("812de802-037f-4230-b2e3-f6b45a4c6882");
+
+    private User user1 = new User();
 
     @BeforeEach
     void setUp() {
 
+        user1 = User.builder()
+                .email("ross1@test.com")
+                .username("ross1")
+                .givenName("ross")
+                .familyName("geller")
+                .dob(LocalDate.parse("1967-10-18"))
+                .password("$2a$10$2malfc6GDzJiotrLd9QI5ea5oyulYbKaAie.Tg8fAgwmlVN4Rvoy6")
+                .build();
+
+        userRepo.save(user1);
+
         userAddress1 = UserAddress.builder()
-                .userId(uuid1)
+                .userId(user1.getId())
                 .line_1("1 ross street")
                 .city("rossville")
                 .postcode("ROS1S23")
                 .build();
     }
 
+    @AfterEach
+    void tearDown(){
+        userRepo.deleteById(user1.getId());
+    }
+
     @Test
     void testFindById() {
-        UserAddress savedUserAddress = repo.save(userAddress1);
+        UserAddress savedUserAddress = userAddressRepo.save(userAddress1);
         // TODO: review usage of .isPresent()
-        UserAddress foundUserAddress = repo.findById(savedUserAddress.getId()).get();
+        UserAddress foundUserAddress = userAddressRepo.findById(savedUserAddress.getId()).get();
 
         assertEquals(savedUserAddress.getId(), foundUserAddress.getId());
-        assertEquals(uuid1, foundUserAddress.getUserId());
+        assertEquals(user1.getId(), foundUserAddress.getUserId());
         assertEquals("1 ross street", foundUserAddress.getLine_1());
         assertEquals("rossville", foundUserAddress.getCity());
         assertEquals("ROS1S23", foundUserAddress.getPostcode());
 
-        repo.deleteById(savedUserAddress.getId());
+        userAddressRepo.deleteById(savedUserAddress.getId());
     }
 
     @Test
     void testDeleteById() {
-        UserAddress savedUserAddress = repo.save(userAddress1);
-        repo.deleteById(savedUserAddress.getId());
-        Optional<UserAddress> result = repo.findById(savedUserAddress.getId());
+        UserAddress savedUserAddress = userAddressRepo.save(userAddress1);
+        userAddressRepo.deleteById(savedUserAddress.getId());
+        Optional<UserAddress> result = userAddressRepo.findById(savedUserAddress.getId());
 
         assertEquals(Optional.empty(), result);
     }

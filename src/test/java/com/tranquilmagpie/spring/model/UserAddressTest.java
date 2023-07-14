@@ -54,7 +54,7 @@ class UserAddressTest {
 
     @Test
     void testEquals() {
-        assertFalse(userAddress1.equals(userAddress2));
+        assertNotEquals(userAddress1, userAddress2);
     }
 
     @Test

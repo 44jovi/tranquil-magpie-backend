@@ -43,7 +43,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
 
     @Override
     public ShopOrder createOne(ShopOrder shopOrder) {
-        // todo: add current time to order
+        shopOrder.setOrderDateTime(Instant.now());
         // todo: read user address and add to order
         return this.repo.save(shopOrder);
     }
@@ -58,11 +58,11 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         return selectedShopOrder;
     }
 
+//    TODO: for ADMIN role only?
     @Override
     public ShopOrder patchOneById(UUID id, ShopOrder shopOrder) {
 
         UUID userId = shopOrder.getUserId();
-        Instant orderDate = shopOrder.getOrderDateTime();
         BigDecimal orderTotal = shopOrder.getOrderTotal();
         ShopOrderStatus shopOrderStatus = shopOrder.getOrderStatus();
         String paymentMethod = shopOrder.getPaymentMethod();
@@ -72,8 +72,6 @@ public class ShopOrderServiceImpl implements ShopOrderService {
 
         if (userId != null)
             selectedShopOrder.setUserId(userId);
-        if (orderDate != null)
-            selectedShopOrder.setOrderDateTime(orderDate);
         if (orderTotal != null)
             selectedShopOrder.setOrderTotal(orderTotal);
         if (shopOrderStatus != null)
@@ -82,6 +80,8 @@ public class ShopOrderServiceImpl implements ShopOrderService {
             selectedShopOrder.setPaymentMethod(paymentMethod);
         if (shippingAddress != null)
             selectedShopOrder.setShippingAddress(shippingAddress);
+
+        shopOrder.setOrderDateTime(Instant.now());
 
         return this.repo.save(selectedShopOrder);
     }

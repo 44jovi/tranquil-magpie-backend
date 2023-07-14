@@ -2,7 +2,9 @@ package com.tranquilmagpie.spring.service.impl;
 
 import com.tranquilmagpie.spring.model.ShopOrder;
 import com.tranquilmagpie.spring.model.ShopOrderStatus;
+import com.tranquilmagpie.spring.model.UserAddress;
 import com.tranquilmagpie.spring.repo.ShopOrderRepo;
+import com.tranquilmagpie.spring.repo.UserAddressRepo;
 import com.tranquilmagpie.spring.service.ShopOrderService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,37 +17,44 @@ import java.util.UUID;
 @Service
 public class ShopOrderServiceImpl implements ShopOrderService {
 
-    private ShopOrderRepo repo;
+    private ShopOrderRepo shopOrderRepo;
+    private UserAddressRepo userAddressRepo;
 
-    public ShopOrderServiceImpl(ShopOrderRepo repo) {
+    public ShopOrderServiceImpl(ShopOrderRepo shopOrderRepo, UserAddressRepo userAddressRepo) {
         super();
-        this.repo = repo;
+        this.shopOrderRepo = shopOrderRepo;
+        this.userAddressRepo = userAddressRepo;
     }
 
     // TODO: for ADMIN role only
     @Override
     public List<ShopOrder> getAll() {
-        return this.repo.findAll();
+        return this.shopOrderRepo.findAll();
     }
 
     // TODO: only allow access to current user's orders
     @Override
     public ShopOrder getOneById(UUID id) {
         // TODO: handle empty Optional
-        return this.repo.findById(id).get();
+        return this.shopOrderRepo.findById(id).get();
     }
 
     @Override
     public ShopOrder getAllByUserId(UUID id) {
         // TODO: handle empty Optional
-        return this.repo.findAllByUserId(id).get();
+        return this.shopOrderRepo.findAllByUserId(id).get();
     }
 
     @Override
     public ShopOrder createOne(ShopOrder shopOrder) {
+
+        UUID userId = shopOrder.getUserId();
+        UserAddress userAddress = userAddressRepo.findByUserId(userId).get();
+
+        shopOrder.setShippingAddress(userAddress.toString());
         shopOrder.setOrderDateTime(Instant.now());
-        // todo: read user address and add to order
-        return this.repo.save(shopOrder);
+
+        return this.shopOrderRepo.save(shopOrder);
     }
 
     //  TODO: for ADMIN role only
@@ -53,12 +62,12 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     @Transactional
     public ShopOrder deleteOneById(UUID id) {
         // TODO: review usage of isPresent()
-        ShopOrder selectedShopOrder = this.repo.findById(id).get();
-        this.repo.deleteById(id);
+        ShopOrder selectedShopOrder = this.shopOrderRepo.findById(id).get();
+        this.shopOrderRepo.deleteById(id);
         return selectedShopOrder;
     }
 
-//    TODO: for ADMIN role only?
+    // TODO: for ADMIN role only?
     @Override
     public ShopOrder patchOneById(UUID id, ShopOrder shopOrder) {
 
@@ -83,7 +92,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
 
         shopOrder.setOrderDateTime(Instant.now());
 
-        return this.repo.save(selectedShopOrder);
+        return this.shopOrderRepo.save(selectedShopOrder);
     }
 
 }

@@ -2,7 +2,7 @@ package com.tranquilmagpie.spring.model;
 
 public enum ShopOrderStatus {
     PENDING,
-    AWAITING_PAYMENT,
+    CONFIRMED_AWAITING_PAYMENT,
     PAID_AWAITING_SHIPMENT,
     SHIPPED,
     CANCELLED

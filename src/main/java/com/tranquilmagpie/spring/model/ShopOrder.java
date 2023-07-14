@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.UUID;
 
 @Data
@@ -27,12 +27,13 @@ public class ShopOrder {
 
     private UUID userId;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate orderDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Instant orderDateTime;
 
     private BigDecimal orderTotal;
 
-    private ShopOrderStatus shopOrderStatus;
+    @Enumerated(EnumType.STRING)
+    private ShopOrderStatus orderStatus;
 
     // TODO: change to enum when payment methods decided
     private String paymentMethod;

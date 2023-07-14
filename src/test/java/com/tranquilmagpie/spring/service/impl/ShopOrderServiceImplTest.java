@@ -20,13 +20,10 @@ import static org.mockito.Mockito.*;
 class ShopOrderServiceImplTest {
     List<ShopOrder> shopOrdersList;
     ShopOrder shopOrder1;
-    ShopOrder shopOrder2;
     ShopOrderRepo ShopOrderRepoMock;
     UserAddressRepo UserAddressRepoMock;
     ShopOrderServiceImpl shopOrderServiceImpl;
-    private BigDecimal orderTotal1 = BigDecimal.valueOf(Double.parseDouble("12.34"));
-    private BigDecimal orderTotal2 = BigDecimal.valueOf(Double.parseDouble("56.78"));
-
+    private final BigDecimal orderTotal1 = BigDecimal.valueOf(Double.parseDouble("0.00"));
 
     @BeforeEach
     void setUp() {
@@ -37,28 +34,18 @@ class ShopOrderServiceImplTest {
                 .orderDateTime(Instant.now())
                 .orderTotal(orderTotal1)
                 .orderStatus(PENDING)
-                .paymentMethod("credit card")
-                .shippingAddress("example address 1")
-                .build();
-
-        shopOrder2 = ShopOrder.builder()
-                .userId(UUID.randomUUID())
-                .orderDateTime(Instant.now())
-                .orderTotal(orderTotal2)
-                .orderStatus(PENDING)
-                .paymentMethod("credit card")
-                .shippingAddress("example address 2")
+                .paymentMethod("")
+                .shippingAddress("")
                 .build();
 
         shopOrdersList.add(shopOrder1);
-        shopOrdersList.add(shopOrder2);
+        shopOrdersList.add(new ShopOrder());
 
         ShopOrderRepoMock = mock(ShopOrderRepo.class);
         UserAddressRepoMock = mock(UserAddressRepo.class);
 
-//        todo: check all methods are used
         when(ShopOrderRepoMock.findAll()).thenReturn(shopOrdersList);
-        when(ShopOrderRepoMock.findById(any(UUID.class))).thenReturn(Optional.ofNullable(shopOrder1));
+        when(ShopOrderRepoMock.findById(any(UUID.class))).thenReturn(Optional.ofNullable(new ShopOrder()));
         when(ShopOrderRepoMock.findAllByUserId(any(UUID.class))).thenReturn(Optional.ofNullable(shopOrdersList));
         when(ShopOrderRepoMock.save(shopOrder1)).thenReturn(shopOrder1);
         when(UserAddressRepoMock.findByUserId(any(UUID.class))).thenReturn(Optional.ofNullable(new UserAddress()));

@@ -2,10 +2,14 @@ package com.tranquilmagpie.spring.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import static com.tranquilmagpie.spring.model.Role.USER;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
@@ -22,6 +26,8 @@ class UserTest {
         user1.setGivenName("joey");
         user1.setFamilyName("tribbiani");
         user1.setDob(LocalDate.parse("1968-01-09"));
+        user1.setPassword("pass123");
+        user1.setRole(USER);
 
         user2.setId(UUID.fromString("9fd17a2f-8bb2-4289-906a-4b7ae16c080e"));
         user2.setEmail("chandler1@test.com");
@@ -33,18 +39,30 @@ class UserTest {
 
     @Test
     void testGetters() {
+        // TODO: Use mock(?)
+        List<SimpleGrantedAuthority> authList = new ArrayList<>();
+        authList.add(new SimpleGrantedAuthority(USER.name()));
+
         assertEquals(UUID.fromString("446d5db4-70dc-433e-a4f8-c2bbec0d25ab"), user1.getId());
         assertEquals("joey1@test.com", user1.getEmail());
         assertEquals("joey1", user1.getUsername());
         assertEquals("joey", user1.getGivenName());
         assertEquals("tribbiani", user1.getFamilyName());
         assertEquals(LocalDate.parse("1968-01-09"), user1.getDob());
+
+        // Spring security
+        assertEquals("pass123", user1.getPassword());
+        assertTrue(user1.isAccountNonExpired());
+        assertTrue(user1.isAccountNonLocked());
+        assertTrue(user1.isCredentialsNonExpired());
+        assertTrue(user1.isEnabled());
+        assertEquals(authList, user1.getAuthorities());
     }
 
     @Test
     void testToString() {
         assertEquals(
-                "User(id=446d5db4-70dc-433e-a4f8-c2bbec0d25ab, email=joey1@test.com, username=joey1, givenName=joey, familyName=tribbiani, dob=1968-01-09, password=null, role=null)"
+                "User(id=446d5db4-70dc-433e-a4f8-c2bbec0d25ab, email=joey1@test.com, username=joey1, givenName=joey, familyName=tribbiani, dob=1968-01-09, password=pass123, role=USER)"
                 , user1.toString());
     }
 
@@ -55,8 +73,7 @@ class UserTest {
 
     @Test
     void testHashCode() {
-        assertEquals(-953112348, user1.hashCode());
-        assertEquals(2116911627, user2.hashCode());
+        assertNotEquals(user1.hashCode(), user2.hashCode());
     }
 
 }

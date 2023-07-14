@@ -21,14 +21,7 @@ class UserAddressServiceImplTest {
     @BeforeEach
     void setUp() {
         userAddresssesList = new ArrayList<>();
-
-        userAddress1 = UserAddress.builder()
-                .userId(UUID.randomUUID())
-                .line_1("")
-                .city("")
-                .postcode("")
-                .build();
-
+        userAddress1 = new UserAddress();
         userAddresssesList.add(userAddress1);
         userAddresssesList.add(new UserAddress());
 

@@ -7,14 +7,11 @@ import com.tranquilmagpie.spring.repo.UserAddressRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.tranquilmagpie.spring.model.ShopOrderStatus.PENDING;
 import static org.mockito.Mockito.*;
 
 class ShopOrderServiceImplTest {
@@ -23,20 +20,12 @@ class ShopOrderServiceImplTest {
     ShopOrderRepo ShopOrderRepoMock;
     UserAddressRepo UserAddressRepoMock;
     ShopOrderServiceImpl shopOrderServiceImpl;
-    private final BigDecimal orderTotal1 = BigDecimal.valueOf(Double.parseDouble("0.00"));
 
     @BeforeEach
     void setUp() {
         shopOrdersList = new ArrayList<>();
 
-        shopOrder1 = ShopOrder.builder()
-                .userId(UUID.randomUUID())
-                .orderDateTime(Instant.now())
-                .orderTotal(orderTotal1)
-                .orderStatus(PENDING)
-                .paymentMethod("")
-                .shippingAddress("")
-                .build();
+        shopOrder1 = ShopOrder.builder().userId(UUID.randomUUID()).build();
 
         shopOrdersList.add(shopOrder1);
         shopOrdersList.add(new ShopOrder());

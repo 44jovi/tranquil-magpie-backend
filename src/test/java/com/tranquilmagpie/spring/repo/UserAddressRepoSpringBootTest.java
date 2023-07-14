@@ -21,13 +21,11 @@ class UserAddressRepoSpringBootTest {
 
     @Autowired
     private UserAddressRepo userAddressRepo;
-
     @Autowired
     private UserRepo userRepo;
-
     private UserAddress userAddress1 = new UserAddress();
-
     private User user1 = new User();
+    private UserAddress savedUserAddress;
 
     @BeforeEach
     void setUp() {
@@ -49,6 +47,8 @@ class UserAddressRepoSpringBootTest {
                 .city("rossville")
                 .postcode("ROS1S23")
                 .build();
+
+        savedUserAddress = userAddressRepo.save(userAddress1);
     }
 
     @AfterEach
@@ -58,8 +58,6 @@ class UserAddressRepoSpringBootTest {
 
     @Test
     void testFindById() {
-        UserAddress savedUserAddress = userAddressRepo.save(userAddress1);
-        // TODO: review usage of .isPresent()
         UserAddress foundUserAddress = userAddressRepo.findById(savedUserAddress.getId()).get();
 
         assertEquals(savedUserAddress.getId(), foundUserAddress.getId());
@@ -73,7 +71,6 @@ class UserAddressRepoSpringBootTest {
 
     @Test
     void testDeleteById() {
-        UserAddress savedUserAddress = userAddressRepo.save(userAddress1);
         userAddressRepo.deleteById(savedUserAddress.getId());
         Optional<UserAddress> result = userAddressRepo.findById(savedUserAddress.getId());
 

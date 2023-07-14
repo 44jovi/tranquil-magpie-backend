@@ -4,6 +4,7 @@ import com.tranquilmagpie.spring.model.ShopOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -13,6 +14,6 @@ public interface ShopOrderRepo extends JpaRepository<ShopOrder, UUID> {
     @Override
     Optional<ShopOrder> findById(UUID id);
 
-    Optional<ShopOrder> findAllByUserId(UUID id);
+    Optional<List<ShopOrder>> findAllByUserId(UUID id);
 
 }

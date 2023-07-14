@@ -33,8 +33,8 @@ public class ShopOrderApiController {
     }
 
     @GetMapping("/user-id/{id}")
-    public ResponseEntity<ShopOrder> getAllByUserId(@PathVariable UUID id) {
-        ShopOrder shopOrder = this.service.getAllByUserId(id);
+    public ResponseEntity<List<ShopOrder>> getAllByUserId(@PathVariable UUID id) {
+        List<ShopOrder> shopOrder = this.service.getAllByUserId(id);
         return new ResponseEntity<>(shopOrder, HttpStatus.OK);
     }
 

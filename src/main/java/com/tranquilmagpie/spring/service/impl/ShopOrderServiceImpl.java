@@ -40,14 +40,13 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     @Override
-    public ShopOrder getAllByUserId(UUID id) {
+    public List<ShopOrder> getAllByUserId(UUID id) {
         // TODO: handle empty Optional
         return this.shopOrderRepo.findAllByUserId(id).get();
     }
 
     @Override
     public ShopOrder createOne(ShopOrder shopOrder) {
-
         UUID userId = shopOrder.getUserId();
         UserAddress userAddress = userAddressRepo.findByUserId(userId).get();
 

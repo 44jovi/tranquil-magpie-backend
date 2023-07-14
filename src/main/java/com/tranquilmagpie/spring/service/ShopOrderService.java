@@ -10,7 +10,7 @@ public interface ShopOrderService {
 
     ShopOrder getOneById(UUID id);
 
-    ShopOrder getAllByUserId(UUID id);
+    List<ShopOrder> getAllByUserId(UUID id);
 
     ShopOrder createOne(ShopOrder shopOrder);
 

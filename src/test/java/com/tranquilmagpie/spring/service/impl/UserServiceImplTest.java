@@ -1,32 +1,29 @@
 package com.tranquilmagpie.spring.service.impl;
 
-import static org.mockito.Mockito.*;
-
 import com.tranquilmagpie.spring.model.User;
 import com.tranquilmagpie.spring.repo.UserRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.mockito.Mockito.*;
+
 class UserServiceImplTest {
     List<User> usersList;
     User user1;
-    User user2;
     UserRepo UserRepoMock;
     UserServiceImpl userServiceImpl;
 
     @BeforeEach
     void setUp() {
         usersList = new ArrayList<>();
-        user1 = new User("phoebe1@test.com", "phoebe1", "phoebe", "buffay", LocalDate.parse("1966-02-16"), "pass123");
-        user2 = new User("monica1@test.com", "monica1", "monica", "geller", LocalDate.parse("1969-01-01"), "pass123");
+        user1 = User.builder().password("").build();
         usersList.add(user1);
-        usersList.add(user2);
+        usersList.add(new User());
 
         UserRepoMock = mock(UserRepo.class);
         when(UserRepoMock.findAll()).thenReturn(usersList);

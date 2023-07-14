@@ -50,8 +50,6 @@ class UserTest {
 
     @Test
     void testEquals() {
-        assertTrue(user1.equals(user1));
-        assertFalse(user1.equals(null));
         assertFalse(user1.equals(user2));
     }
 

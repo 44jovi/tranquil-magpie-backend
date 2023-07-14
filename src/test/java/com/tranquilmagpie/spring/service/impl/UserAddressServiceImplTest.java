@@ -15,32 +15,22 @@ import static org.mockito.Mockito.*;
 class UserAddressServiceImplTest {
     List<UserAddress> userAddresssesList;
     UserAddress userAddress1;
-    UserAddress userAddress2;
     UserAddressRepo UserAddressRepoMock;
     UserAddressServiceImpl userAddressServiceImpl;
-    private final UUID uuid1 = UUID.fromString("9b21e657-7fd9-42ec-b0a9-16eeb4362d1d");
-    private final UUID uuid2 = UUID.fromString("3bda1a93-5336-45bd-82be-9ba967b1f3d4");
 
     @BeforeEach
     void setUp() {
         userAddresssesList = new ArrayList<>();
 
         userAddress1 = UserAddress.builder()
-                .userId(uuid1)
-                .line_1("1 phoebe street")
-                .city("phoebeville")
-                .postcode("PHO1E23")
-                .build();
-
-        userAddress2 = UserAddress.builder()
-                .userId(uuid2)
-                .line_1("1 monica street")
-                .city("monicaville")
-                .postcode("MON1C23")
+                .userId(UUID.randomUUID())
+                .line_1("")
+                .city("")
+                .postcode("")
                 .build();
 
         userAddresssesList.add(userAddress1);
-        userAddresssesList.add(userAddress2);
+        userAddresssesList.add(new UserAddress());
 
         UserAddressRepoMock = mock(UserAddressRepo.class);
         when(UserAddressRepoMock.findAll()).thenReturn(userAddresssesList);

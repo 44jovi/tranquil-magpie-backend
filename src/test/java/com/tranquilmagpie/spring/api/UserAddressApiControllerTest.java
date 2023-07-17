@@ -56,11 +56,11 @@ class UserAddressApiControllerTest {
 
         UserAddressServiceImplMock = mock(UserAddressServiceImpl.class);
         when(UserAddressServiceImplMock.getAll()).thenReturn(userAddressesList);
-        when(UserAddressServiceImplMock.getOneById(uuid)).thenReturn(userAddress1);
-        when(UserAddressServiceImplMock.getOneByUserId(uuid)).thenReturn(userAddress1);
-        when(UserAddressServiceImplMock.createOne(userAddress1)).thenReturn(userAddress1);
-        when(UserAddressServiceImplMock.deleteOneById(uuid)).thenReturn(userAddress1);
-        when(UserAddressServiceImplMock.patchOneById(uuid, userAddress1)).thenReturn(userAddress1);
+        when(UserAddressServiceImplMock.getById(uuid)).thenReturn(userAddress1);
+        when(UserAddressServiceImplMock.getByUserId(uuid)).thenReturn(userAddress1);
+        when(UserAddressServiceImplMock.create(userAddress1)).thenReturn(userAddress1);
+        when(UserAddressServiceImplMock.deleteById(uuid)).thenReturn(userAddress1);
+        when(UserAddressServiceImplMock.patchById(uuid, userAddress1)).thenReturn(userAddress1);
 
         controller = new UserAddressApiController(UserAddressServiceImplMock);
     }
@@ -75,41 +75,41 @@ class UserAddressApiControllerTest {
 
     @Test
     void testGetOneById() {
-        ResponseEntity<UserAddress> foundUserAddress = controller.getOneById(uuid);
+        ResponseEntity<UserAddress> foundUserAddress = controller.getById(uuid);
 
         assertEquals(userAddress1ResEntOK, foundUserAddress);
-        verify(UserAddressServiceImplMock, times(1)).getOneById(uuid);
+        verify(UserAddressServiceImplMock, times(1)).getById(uuid);
     }
 
     @Test
     void testGetOneByUserId() {
-        ResponseEntity<UserAddress> foundUserAddress = controller.getOneByUserId(uuid);
+        ResponseEntity<UserAddress> foundUserAddress = controller.getByUserId(uuid);
 
         assertEquals(userAddress1ResEntOK, foundUserAddress);
-        verify(UserAddressServiceImplMock, times(1)).getOneByUserId(uuid);
+        verify(UserAddressServiceImplMock, times(1)).getByUserId(uuid);
     }
 
     @Test
     void testCreateOne() {
-        ResponseEntity<UserAddress> createdUserAddress = controller.createOne(userAddress1);
+        ResponseEntity<UserAddress> createdUserAddress = controller.create(userAddress1);
 
         assertEquals(userAddress1ResEntCreated, createdUserAddress);
-        verify(UserAddressServiceImplMock, times(1)).createOne(userAddress1);
+        verify(UserAddressServiceImplMock, times(1)).create(userAddress1);
     }
 
     @Test
     void testDeleteOneById() {
-        ResponseEntity<UserAddress> deletedUserAddress = controller.deleteOneById(uuid);
+        ResponseEntity<UserAddress> deletedUserAddress = controller.deleteById(uuid);
 
         assertEquals(userAddress1ResEntOK, deletedUserAddress);
-        verify(UserAddressServiceImplMock, times(1)).deleteOneById(uuid);
+        verify(UserAddressServiceImplMock, times(1)).deleteById(uuid);
     }
 
     @Test
     void testPatchOneById() {
-        ResponseEntity<UserAddress> patchedUserAddress = controller.patchOneById(uuid, userAddress1);
+        ResponseEntity<UserAddress> patchedUserAddress = controller.patchById(uuid, userAddress1);
 
         assertEquals(userAddress1ResEntOK, patchedUserAddress);
-        verify(UserAddressServiceImplMock, times(1)).patchOneById(uuid, userAddress1);
+        verify(UserAddressServiceImplMock, times(1)).patchById(uuid, userAddress1);
     }
 }

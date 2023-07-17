@@ -8,13 +8,13 @@ import java.util.UUID;
 public interface ShopOrderService {
     List<ShopOrder> getAll();
 
-    ShopOrder getOneById(UUID id);
+    ShopOrder getById(UUID id);
 
     List<ShopOrder> getAllByUserId(UUID id);
 
-    ShopOrder createOne(ShopOrder shopOrder);
+    ShopOrder create(ShopOrder shopOrder);
 
-    ShopOrder deleteOneById(UUID id);
+    ShopOrder deleteById(UUID id);
 
-    ShopOrder patchOneById(UUID id, ShopOrder shopOrder);
+    ShopOrder patchById(UUID id, ShopOrder shopOrder);
 }

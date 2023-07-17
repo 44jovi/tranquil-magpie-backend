@@ -8,13 +8,13 @@ import java.util.UUID;
 public interface UserAddressService {
     List<UserAddress> getAll();
 
-    UserAddress getOneById(UUID id);
+    UserAddress getById(UUID id);
 
-    UserAddress getOneByUserId(UUID id);
+    UserAddress getByUserId(UUID id);
 
-    UserAddress createOne(UserAddress userAddress);
+    UserAddress create(UserAddress userAddress);
 
-    UserAddress deleteOneById(UUID id);
+    UserAddress deleteById(UUID id);
 
-    UserAddress patchOneById(UUID id, UserAddress userAddress);
+    UserAddress patchById(UUID id, UserAddress userAddress);
 }

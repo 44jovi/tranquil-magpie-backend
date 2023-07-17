@@ -51,7 +51,7 @@ class ShopOrderServiceImplTest {
 
     @Test
     void testGetOneById() {
-        shopOrderServiceImpl.getOneById(UUID.randomUUID());
+        shopOrderServiceImpl.getById(UUID.randomUUID());
 
         verify(ShopOrderRepoMock, times(1)).findById(any(UUID.class));
     }
@@ -65,14 +65,14 @@ class ShopOrderServiceImplTest {
 
     @Test
     void testCreateOne() {
-        shopOrderServiceImpl.createOne(shopOrder1);
+        shopOrderServiceImpl.create(shopOrder1);
 
         verify(ShopOrderRepoMock, times(1)).save(any(ShopOrder.class));
     }
 
     @Test
     void testDeleteOneById() {
-        shopOrderServiceImpl.deleteOneById(UUID.randomUUID());
+        shopOrderServiceImpl.deleteById(UUID.randomUUID());
 
         verify(ShopOrderRepoMock, times(1)).findById(any(UUID.class));
         verify(ShopOrderRepoMock, times(1)).deleteById(any(UUID.class));
@@ -81,7 +81,7 @@ class ShopOrderServiceImplTest {
     @Test
     void testPatchOneById() {
         // TODO: test the method's conditional logic
-        shopOrderServiceImpl.patchOneById(UUID.randomUUID(), shopOrder1);
+        shopOrderServiceImpl.patchById(UUID.randomUUID(), shopOrder1);
 
         verify(ShopOrderRepoMock, times(1)).save(any(ShopOrder.class));
     }

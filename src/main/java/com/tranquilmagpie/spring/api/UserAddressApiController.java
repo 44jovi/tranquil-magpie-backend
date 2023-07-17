@@ -27,32 +27,32 @@ public class UserAddressApiController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserAddress> getOneById(@PathVariable UUID id) {
-        UserAddress userAddress = this.service.getOneById(id);
+    public ResponseEntity<UserAddress> getById(@PathVariable UUID id) {
+        UserAddress userAddress = this.service.getById(id);
         return new ResponseEntity<>(userAddress, HttpStatus.OK);
     }
 
     @GetMapping("/user-id/{id}")
-    public ResponseEntity<UserAddress> getOneByUserId(@PathVariable UUID id) {
-        UserAddress userAddress = this.service.getOneByUserId(id);
+    public ResponseEntity<UserAddress> getByUserId(@PathVariable UUID id) {
+        UserAddress userAddress = this.service.getByUserId(id);
         return new ResponseEntity<>(userAddress, HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<UserAddress> createOne(@RequestBody UserAddress userAddress) {
-        UserAddress createdUserAddress = this.service.createOne(userAddress);
+    public ResponseEntity<UserAddress> create(@RequestBody UserAddress userAddress) {
+        UserAddress createdUserAddress = this.service.create(userAddress);
         return new ResponseEntity<>(createdUserAddress, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<UserAddress> deleteOneById(@PathVariable UUID id) {
-        UserAddress deletedUserAddress = this.service.deleteOneById(id);
+    public ResponseEntity<UserAddress> deleteById(@PathVariable UUID id) {
+        UserAddress deletedUserAddress = this.service.deleteById(id);
         return new ResponseEntity<>(deletedUserAddress, HttpStatus.OK);
     }
 
     @PatchMapping("/patch/{id}")
-    public ResponseEntity<UserAddress> patchOneById(@PathVariable UUID id, @RequestBody UserAddress userAddress) {
-        UserAddress patchedUserAddress = this.service.patchOneById(id, userAddress);
+    public ResponseEntity<UserAddress> patchById(@PathVariable UUID id, @RequestBody UserAddress userAddress) {
+        UserAddress patchedUserAddress = this.service.patchById(id, userAddress);
         return new ResponseEntity<>(patchedUserAddress, HttpStatus.OK);
     }
 }

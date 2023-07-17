@@ -42,11 +42,11 @@ class ShopOrderApiControllerTest {
 
         ShopOrderServiceImplMock = mock(ShopOrderServiceImpl.class);
         when(ShopOrderServiceImplMock.getAll()).thenReturn(shopOrdersList);
-        when(ShopOrderServiceImplMock.getOneById(uuid)).thenReturn(shopOrder1);
+        when(ShopOrderServiceImplMock.getById(uuid)).thenReturn(shopOrder1);
         when(ShopOrderServiceImplMock.getAllByUserId(uuid)).thenReturn(shopOrdersList);
-        when(ShopOrderServiceImplMock.createOne(shopOrder1)).thenReturn(shopOrder1);
-        when(ShopOrderServiceImplMock.deleteOneById(uuid)).thenReturn(shopOrder1);
-        when(ShopOrderServiceImplMock.patchOneById(uuid, shopOrder1)).thenReturn(shopOrder1);
+        when(ShopOrderServiceImplMock.create(shopOrder1)).thenReturn(shopOrder1);
+        when(ShopOrderServiceImplMock.deleteById(uuid)).thenReturn(shopOrder1);
+        when(ShopOrderServiceImplMock.patchById(uuid, shopOrder1)).thenReturn(shopOrder1);
 
         controller = new ShopOrderApiController(ShopOrderServiceImplMock);
     }
@@ -61,10 +61,10 @@ class ShopOrderApiControllerTest {
 
     @Test
     void testGetOneById() {
-        ResponseEntity<ShopOrder> foundShopOrder = controller.getOneById(uuid);
+        ResponseEntity<ShopOrder> foundShopOrder = controller.getById(uuid);
 
         assertEquals(shopOrder1ResEntOK, foundShopOrder);
-        verify(ShopOrderServiceImplMock, times(1)).getOneById(uuid);
+        verify(ShopOrderServiceImplMock, times(1)).getById(uuid);
     }
 
     @Test
@@ -77,25 +77,25 @@ class ShopOrderApiControllerTest {
 
     @Test
     void testCreateOne() {
-        ResponseEntity<ShopOrder> createdShopOrder = controller.createOne(shopOrder1);
+        ResponseEntity<ShopOrder> createdShopOrder = controller.create(shopOrder1);
 
         assertEquals(shopOrder1ResEntCreated, createdShopOrder);
-        verify(ShopOrderServiceImplMock, times(1)).createOne(shopOrder1);
+        verify(ShopOrderServiceImplMock, times(1)).create(shopOrder1);
     }
 
     @Test
     void testDeleteOneById() {
-        ResponseEntity<ShopOrder> deletedShopOrder = controller.deleteOneById(uuid);
+        ResponseEntity<ShopOrder> deletedShopOrder = controller.deleteById(uuid);
 
         assertEquals(shopOrder1ResEntOK, deletedShopOrder);
-        verify(ShopOrderServiceImplMock, times(1)).deleteOneById(uuid);
+        verify(ShopOrderServiceImplMock, times(1)).deleteById(uuid);
     }
 
     @Test
     void testPatchOneById() {
-        ResponseEntity<ShopOrder> patchedShopOrder = controller.patchOneById(uuid, shopOrder1);
+        ResponseEntity<ShopOrder> patchedShopOrder = controller.patchById(uuid, shopOrder1);
 
         assertEquals(shopOrder1ResEntOK, patchedShopOrder);
-        verify(ShopOrderServiceImplMock, times(1)).patchOneById(uuid, shopOrder1);
+        verify(ShopOrderServiceImplMock, times(1)).patchById(uuid, shopOrder1);
     }
 }

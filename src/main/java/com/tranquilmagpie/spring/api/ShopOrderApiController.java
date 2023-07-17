@@ -27,8 +27,8 @@ public class ShopOrderApiController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ShopOrder> getOneById(@PathVariable UUID id) {
-        ShopOrder shopOrder = this.service.getOneById(id);
+    public ResponseEntity<ShopOrder> getById(@PathVariable UUID id) {
+        ShopOrder shopOrder = this.service.getById(id);
         return new ResponseEntity<>(shopOrder, HttpStatus.OK);
     }
 
@@ -39,20 +39,20 @@ public class ShopOrderApiController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<ShopOrder> createOne(@RequestBody ShopOrder shopOrder) {
-        ShopOrder createdShopOrder = this.service.createOne(shopOrder);
+    public ResponseEntity<ShopOrder> create(@RequestBody ShopOrder shopOrder) {
+        ShopOrder createdShopOrder = this.service.create(shopOrder);
         return new ResponseEntity<>(createdShopOrder, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<ShopOrder> deleteOneById(@PathVariable UUID id) {
-        ShopOrder deletedShopOrder = this.service.deleteOneById(id);
+    public ResponseEntity<ShopOrder> deleteById(@PathVariable UUID id) {
+        ShopOrder deletedShopOrder = this.service.deleteById(id);
         return new ResponseEntity<>(deletedShopOrder, HttpStatus.OK);
     }
 
     @PatchMapping("/patch/{id}")
-    public ResponseEntity<ShopOrder> patchOneById(@PathVariable UUID id, @RequestBody ShopOrder shopOrder) {
-        ShopOrder patchedShopOrder = this.service.patchOneById(id, shopOrder);
+    public ResponseEntity<ShopOrder> patchById(@PathVariable UUID id, @RequestBody ShopOrder shopOrder) {
+        ShopOrder patchedShopOrder = this.service.patchById(id, shopOrder);
         return new ResponseEntity<>(patchedShopOrder, HttpStatus.OK);
     }
 }

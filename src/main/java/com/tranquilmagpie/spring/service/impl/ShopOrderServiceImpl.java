@@ -17,8 +17,8 @@ import java.util.UUID;
 @Service
 public class ShopOrderServiceImpl implements ShopOrderService {
 
-    private ShopOrderRepo shopOrderRepo;
-    private UserAddressRepo userAddressRepo;
+    private final ShopOrderRepo shopOrderRepo;
+    private final UserAddressRepo userAddressRepo;
 
     public ShopOrderServiceImpl(ShopOrderRepo shopOrderRepo, UserAddressRepo userAddressRepo) {
         super();
@@ -34,7 +34,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
 
     // TODO: only allow access to current user's orders
     @Override
-    public ShopOrder getOneById(UUID id) {
+    public ShopOrder getById(UUID id) {
         // TODO: handle empty Optional
         return this.shopOrderRepo.findById(id).get();
     }
@@ -46,7 +46,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     @Override
-    public ShopOrder createOne(ShopOrder shopOrder) {
+    public ShopOrder create(ShopOrder shopOrder) {
         UUID userId = shopOrder.getUserId();
         UserAddress userAddress = userAddressRepo.findByUserId(userId).get();
 
@@ -59,7 +59,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     //  TODO: for ADMIN role only
     @Override
     @Transactional
-    public ShopOrder deleteOneById(UUID id) {
+    public ShopOrder deleteById(UUID id) {
         // TODO: review usage of isPresent()
         ShopOrder selectedShopOrder = this.shopOrderRepo.findById(id).get();
         this.shopOrderRepo.deleteById(id);
@@ -68,7 +68,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
 
     // TODO: for ADMIN role only?
     @Override
-    public ShopOrder patchOneById(UUID id, ShopOrder shopOrder) {
+    public ShopOrder patchById(UUID id, ShopOrder shopOrder) {
 
         UUID userId = shopOrder.getUserId();
         BigDecimal orderTotal = shopOrder.getOrderTotal();
@@ -76,7 +76,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         String paymentMethod = shopOrder.getPaymentMethod();
         String shippingAddress = shopOrder.getShippingAddress();
 
-        ShopOrder selectedShopOrder = this.getOneById(id);
+        ShopOrder selectedShopOrder = this.getById(id);
 
         if (userId != null)
             selectedShopOrder.setUserId(userId);

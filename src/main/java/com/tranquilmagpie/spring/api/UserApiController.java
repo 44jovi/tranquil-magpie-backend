@@ -13,6 +13,8 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserApiController {
 
+    // TODO: remove "One" from all method names?
+
     private final UserService service;
 
     public UserApiController(UserService service) {

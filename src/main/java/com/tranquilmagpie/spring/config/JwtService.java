@@ -17,9 +17,11 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
+    // TODO: consider using Spring annotation(s) to access env vars
     private static final String SECRET_KEY = System.getenv("TRANQUIL_MAGPIE_SK");
 
     // Generate token without extra claims
+    // TODO: use Collections.emptyMap() instead of instantiating new object
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }

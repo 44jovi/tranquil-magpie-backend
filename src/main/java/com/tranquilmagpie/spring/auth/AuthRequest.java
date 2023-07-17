@@ -10,9 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthRequest {
-
     private String username;
-    // TODO: review access modifier
-    String password;
-
+    private String password;
 }

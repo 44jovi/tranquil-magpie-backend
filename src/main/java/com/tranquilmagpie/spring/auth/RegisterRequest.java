@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class RegisterRequest {
 
+    // TODO: review how to confirm user owns/controls email submitted
     private String email;
 
     private String username;

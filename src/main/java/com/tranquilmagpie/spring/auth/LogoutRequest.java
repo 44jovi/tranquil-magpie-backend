@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LogoutRequest {
 
+    // TODO: review if more required in a logout request
     private String username;
 
 }

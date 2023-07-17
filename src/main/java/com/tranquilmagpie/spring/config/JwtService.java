@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -21,9 +21,8 @@ public class JwtService {
     private static final String SECRET_KEY = System.getenv("TRANQUIL_MAGPIE_SK");
 
     // Generate token without extra claims
-    // TODO: use Collections.emptyMap() instead of instantiating new object
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        return generateToken(Collections.emptyMap(), userDetails);
     }
 
     public String generateToken(

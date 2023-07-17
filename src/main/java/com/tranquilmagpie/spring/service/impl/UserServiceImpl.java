@@ -16,7 +16,7 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepo repo;
+    private final UserRepo repo;
 
     public UserServiceImpl(UserRepo repo) {
         super();
@@ -31,19 +31,14 @@ public class UserServiceImpl implements UserService {
 
     // TODO: only allow access to current user's details
     @Override
-    public User getOneById(UUID id) {
-        // TODO: review how to handle empty/null Optional
+    public User getById(UUID id) {
         // TODO: review usage of isPresent()
         return this.repo.findById(id).get();
     }
 
     @Override
-    public User createOne(User user) {
-        // TODO: do not allow creation of user if UUID already exists
-        // TODO: review whether Optional should be returned for getOneById
+    public User create(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
-
-        // TODO: review User entity field name?
         String passwordString = user.getPassword();
         String passwordHashed = encoder.encode((passwordString));
         user.setPassword(passwordHashed);
@@ -55,7 +50,7 @@ public class UserServiceImpl implements UserService {
     @Override
     // Manage multiple database calls
     @Transactional
-    public User deleteOneById(UUID id) {
+    public User deleteById(UUID id) {
         // TODO: review usage of isPresent()
         User selectedUser = this.repo.findById(id).get();
         this.repo.deleteById(id);
@@ -63,7 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User patchOneById(UUID id, User user) {
+    public User patchById(UUID id, User user) {
 
         String email = user.getEmail();
         String username = user.getUsername();
@@ -71,7 +66,7 @@ public class UserServiceImpl implements UserService {
         String lastName = user.getFamilyName();
         LocalDate dob = user.getDob();
 
-        User selectedUser = this.getOneById(id);
+        User selectedUser = this.getById(id);
 
 //        TODO: use ternary statements?
         if (email != null)

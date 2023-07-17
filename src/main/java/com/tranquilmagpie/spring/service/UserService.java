@@ -8,11 +8,11 @@ import java.util.UUID;
 public interface UserService {
     List<User> getAll();
 
-    User getOneById(UUID id);
+    User getById(UUID id);
 
-    User createOne(User user);
+    User create(User user);
 
-    User deleteOneById(UUID id);
+    User deleteById(UUID id);
 
-    User patchOneById(UUID id, User user);
+    User patchById(UUID id, User user);
 }

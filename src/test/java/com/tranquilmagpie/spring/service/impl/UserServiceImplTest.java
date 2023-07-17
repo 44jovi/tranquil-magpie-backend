@@ -42,21 +42,21 @@ class UserServiceImplTest {
 
     @Test
     void testGetOneById() {
-        userServiceImpl.getOneById(UUID.randomUUID());
+        userServiceImpl.getById(UUID.randomUUID());
 
         verify(UserRepoMock, times(1)).findById(any(UUID.class));
     }
 
     @Test
     void testCreateOne() {
-        userServiceImpl.createOne(user1);
+        userServiceImpl.create(user1);
 
         verify(UserRepoMock, times(1)).save(any(User.class));
     }
 
     @Test
     void testDeleteOneById() {
-        userServiceImpl.deleteOneById(UUID.randomUUID());
+        userServiceImpl.deleteById(UUID.randomUUID());
 
         verify(UserRepoMock, times(1)).findById(any(UUID.class));
         verify(UserRepoMock, times(1)).deleteById(any(UUID.class));
@@ -65,7 +65,7 @@ class UserServiceImplTest {
     @Test
     void testPatchOneById() {
         // TODO: test the method's conditional logic
-        userServiceImpl.patchOneById(UUID.randomUUID(), user1);
+        userServiceImpl.patchById(UUID.randomUUID(), user1);
 
         verify(UserRepoMock, times(1)).save(any(User.class));
     }

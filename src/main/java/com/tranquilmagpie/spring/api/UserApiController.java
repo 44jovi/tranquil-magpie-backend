@@ -13,8 +13,6 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserApiController {
 
-    // TODO: remove "One" from all method names?
-
     private final UserService service;
 
     public UserApiController(UserService service) {
@@ -29,26 +27,26 @@ public class UserApiController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getOneById(@PathVariable UUID id) {
-        User user = this.service.getOneById(id);
+    public ResponseEntity<User> getById(@PathVariable UUID id) {
+        User user = this.service.getById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<User> createOne(@RequestBody User user) {
-        User createdUser = this.service.createOne(user);
+    public ResponseEntity<User> create(@RequestBody User user) {
+        User createdUser = this.service.create(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<User> deleteOneById(@PathVariable UUID id) {
-        User deletedUser = this.service.deleteOneById(id);
+    public ResponseEntity<User> deleteById(@PathVariable UUID id) {
+        User deletedUser = this.service.deleteById(id);
         return new ResponseEntity<>(deletedUser, HttpStatus.OK);
     }
 
     @PatchMapping("/patch/{id}")
-    public ResponseEntity<User> patchOneById(@PathVariable UUID id, @RequestBody User user) {
-        User patchedUser = this.service.patchOneById(id, user);
+    public ResponseEntity<User> patchById(@PathVariable UUID id, @RequestBody User user) {
+        User patchedUser = this.service.patchById(id, user);
         return new ResponseEntity<>(patchedUser, HttpStatus.OK);
     }
 }

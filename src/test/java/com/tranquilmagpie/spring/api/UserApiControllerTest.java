@@ -46,10 +46,10 @@ class UserApiControllerTest {
 
         UserServiceImplMock = mock(UserServiceImpl.class);
         when(UserServiceImplMock.getAll()).thenReturn(usersList);
-        when(UserServiceImplMock.getOneById(uuid)).thenReturn(user1);
-        when(UserServiceImplMock.createOne(user1)).thenReturn(user1);
-        when(UserServiceImplMock.deleteOneById(uuid)).thenReturn(user1);
-        when(UserServiceImplMock.patchOneById(uuid, user1)).thenReturn(user1);
+        when(UserServiceImplMock.getById(uuid)).thenReturn(user1);
+        when(UserServiceImplMock.create(user1)).thenReturn(user1);
+        when(UserServiceImplMock.deleteById(uuid)).thenReturn(user1);
+        when(UserServiceImplMock.patchById(uuid, user1)).thenReturn(user1);
 
         controller = new UserApiController(UserServiceImplMock);
     }
@@ -64,31 +64,31 @@ class UserApiControllerTest {
 
     @Test
     void testGetOneById(){
-        ResponseEntity<User> foundUser = controller.getOneById(uuid);
+        ResponseEntity<User> foundUser = controller.getById(uuid);
 
         assertEquals(user1ResEntOK, foundUser);
-        verify(UserServiceImplMock, times(1)).getOneById(uuid);
+        verify(UserServiceImplMock, times(1)).getById(uuid);
     }
     @Test
     void testCreateOne(){
-        ResponseEntity<User> createdUser = controller.createOne(user1);
+        ResponseEntity<User> createdUser = controller.create(user1);
 
         assertEquals(user1ResEntCreated, createdUser);
-        verify(UserServiceImplMock, times(1)).createOne(user1);
+        verify(UserServiceImplMock, times(1)).create(user1);
     }
     @Test
     void testDeleteOneById(){
-        ResponseEntity<User> deletedUser = controller.deleteOneById(uuid);
+        ResponseEntity<User> deletedUser = controller.deleteById(uuid);
 
         assertEquals(user1ResEntOK, deletedUser);
-        verify(UserServiceImplMock, times(1)).deleteOneById(uuid);
+        verify(UserServiceImplMock, times(1)).deleteById(uuid);
     }
 
     @Test
     void testPatchOneById() {
-        ResponseEntity<User> patchedUser = controller.patchOneById(uuid, user1);
+        ResponseEntity<User> patchedUser = controller.patchById(uuid, user1);
 
         assertEquals(user1ResEntOK, patchedUser);
-        verify(UserServiceImplMock, times(1)).patchOneById(uuid, user1);
+        verify(UserServiceImplMock, times(1)).patchById(uuid, user1);
     }
 }

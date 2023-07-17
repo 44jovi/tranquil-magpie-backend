@@ -30,18 +30,19 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
+
         final String authHeader = request.getHeader("Authorization");
+        final String AUTH_TYPE = "Bearer ";
         final String jwt;
         final String username;
 
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith(AUTH_TYPE)) {
             // Call next filter in chain, or resource if end of chain
             filterChain.doFilter(request, response);
             return;
         }
 
-        // TODO: make "Bearer " a constant and use its length
-        jwt = authHeader.substring(7);
+        jwt = authHeader.substring(AUTH_TYPE.length());
         username = jwtService.extractUsername(jwt);
 
         // Check user exists in token and not already authenticated

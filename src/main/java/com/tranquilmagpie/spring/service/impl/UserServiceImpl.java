@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
+        // TODO: do not allow username to be 'admin'
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
         String passwordString = user.getPassword();
         String passwordHashed = encoder.encode((passwordString));

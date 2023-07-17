@@ -50,6 +50,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         UUID userId = shopOrder.getUserId();
         UserAddress userAddress = userAddressRepo.findByUserId(userId).get();
 
+        // TODO: return shipping address as JSON
         shopOrder.setShippingAddress(userAddress.toString());
         shopOrder.setOrderDateTime(Instant.now());
 

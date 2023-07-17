@@ -22,7 +22,6 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest request) {
 
-        // TODO: review using 'var'?
         User user = User.builder()
                 .email(request.getEmail())
                 .username(request.getUsername())
@@ -49,7 +48,6 @@ public class AuthService {
                         request.getPassword()
                 )
         );
-        // TODO: handle exception if empty optional returned
         // TODO: refer to @sourcesmith comment re propagating exceptions to last resort handler
         User user = repo.findByUsername(request.getUsername()).orElseThrow();
         String jwt = jwtService.generateToken(user);

@@ -26,7 +26,6 @@ public class RegisterRequest {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dob;
 
-    // TODO: review field name
     private String password;
 
 }

@@ -24,12 +24,11 @@ public class WebSecurityConfig {
 
     // On app startup, Spring will first look for a SecurityFilterChain bean
     // SecurityFilterChain processes/applies security filters to incoming requests
-    // TODO: change 'http' to 'security'
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
 
         // TODO: review CSRF protection
-        http.csrf().disable()
+        security.csrf().disable()
                 .authorizeRequests()
                 // Whitelist
                 .requestMatchers(
@@ -55,7 +54,7 @@ public class WebSecurityConfig {
                         (request, response, authentication) -> SecurityContextHolder.clearContext()
                 );
 
-        return http.build();
+        return security.build();
     }
 
 }

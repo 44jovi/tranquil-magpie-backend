@@ -19,7 +19,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
 /**
  * All users
  */
@@ -50,21 +49,10 @@ public class User implements UserDetails {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dob;
 
-    // TODO: review field name
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    // TODO: Update tests to use @Builder and review if this is still needed
-    public User(String email, String username, String givenName, String familyName, LocalDate dob, String password) {
-        this.email = email;
-        this.username = username;
-        this.givenName = givenName;
-        this.familyName = familyName;
-        this.dob = dob;
-        this.password = password;
-    }
 
     // Return list of roles
     @Override

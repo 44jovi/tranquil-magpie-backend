@@ -18,12 +18,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
-    // 'final' to ensure auto-injection by Spring
+    // 'final' to ensure auto-injection by Spring(?)
     private final JwtAuthFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
     // On app startup, Spring will first look for a SecurityFilterChain bean
     // SecurityFilterChain processes/applies security filters to incoming requests
+    // TODO: change 'http' to 'security'
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 

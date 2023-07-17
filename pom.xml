@@ -61,6 +61,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <!-- TODO: review - see usage(s) of List.of(), .orElseThrow() -->
+                    <!-- TODO: target latest LTS version -->
                     <source>10</source>
                     <target>10</target>
                 </configuration>
@@ -150,7 +151,8 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
             <version>0.11.5</version>
-        </dependency>        <dependency>
+        </dependency>
+        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
             <version>0.11.5</version>

@@ -50,6 +50,7 @@ public class AuthService {
                 )
         );
         // TODO: handle exception if empty optional returned
+        // TODO: refer to @sourcesmith comment re propagating exceptions to last resort handler
         User user = repo.findByUsername(request.getUsername()).orElseThrow();
         String jwt = jwtService.generateToken(user);
 

@@ -40,6 +40,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             return;
         }
 
+        // TODO: make "Bearer " a constant and use its length
         jwt = authHeader.substring(7);
         username = jwtService.extractUsername(jwt);
 

@@ -18,8 +18,8 @@ public interface UserRepo extends JpaRepository<User, UUID> {
 
     Optional<User> findByUsername(String username);
 
-    // TODO: remove from Swagger UI render?
     // Current purpose of @Transactional in this interface is for tests only
+    // TODO: review how to test without using @Transactional
     @Transactional
     Long deleteByUuid(UUID id);
 }

@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static com.tranquilmagpie.spring.model.Role.ADMIN;
 
 // Spring Boot 3.0+: @Configuration and @EnableWebSecurity need to be together
 @Configuration
@@ -30,13 +31,20 @@ public class WebSecurityConfig {
         // TODO: review CSRF protection
         security.csrf().disable()
                 .authorizeRequests()
-                // Whitelist
+
+                // Public
                 .requestMatchers(
                         "/auth/**",
                         "/swagger",
                         "/swagger-ui/**",
                         "/v3/api-docs/**"
                 ).permitAll()
+
+                // Admin
+                .requestMatchers("/admin")
+                // TODO: review usage of roles instead of authority
+                .hasAuthority(ADMIN.name())
+
                 // Otherwise auth required
                 .anyRequest()
                 .authenticated()

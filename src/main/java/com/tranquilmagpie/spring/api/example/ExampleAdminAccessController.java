@@ -1,4 +1,4 @@
-package com.tranquilmagpie.spring.api;
+package com.tranquilmagpie.spring.api.example;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

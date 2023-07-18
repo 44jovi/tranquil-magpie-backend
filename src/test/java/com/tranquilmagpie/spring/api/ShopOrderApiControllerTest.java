@@ -1,5 +1,6 @@
 package com.tranquilmagpie.spring.api;
 
+import com.tranquilmagpie.spring.api.shoporder.ShopOrderApiController;
 import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 import com.tranquilmagpie.spring.service.shoporder.ShopOrderService;
 import com.tranquilmagpie.spring.service.impl.shoporder.ShopOrderServiceImpl;

@@ -1,4 +1,4 @@
-package com.tranquilmagpie.spring.api;
+package com.tranquilmagpie.spring.api.user;
 
 import com.tranquilmagpie.spring.model.user.UserAddress;
 import com.tranquilmagpie.spring.service.user.UserAddressService;

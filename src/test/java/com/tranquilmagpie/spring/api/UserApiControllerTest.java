@@ -1,5 +1,6 @@
 package com.tranquilmagpie.spring.api;
 
+import com.tranquilmagpie.spring.api.user.UserApiController;
 import com.tranquilmagpie.spring.model.user.User;
 import com.tranquilmagpie.spring.service.user.UserService;
 import com.tranquilmagpie.spring.service.impl.user.UserServiceImpl;

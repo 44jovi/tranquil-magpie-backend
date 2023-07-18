@@ -3,6 +3,7 @@ package com.tranquilmagpie.spring.api;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+import com.tranquilmagpie.spring.api.user.UserAddressApiController;
 import com.tranquilmagpie.spring.model.user.UserAddress;
 import com.tranquilmagpie.spring.service.user.UserAddressService;
 import com.tranquilmagpie.spring.service.impl.user.UserAddressServiceImpl;

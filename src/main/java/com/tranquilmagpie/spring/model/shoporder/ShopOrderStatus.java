@@ -1,4 +1,4 @@
-package com.tranquilmagpie.spring.model;
+package com.tranquilmagpie.spring.model.shoporder;
 
 public enum ShopOrderStatus {
     PENDING,

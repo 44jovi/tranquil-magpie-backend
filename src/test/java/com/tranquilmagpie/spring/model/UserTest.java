@@ -1,5 +1,6 @@
 package com.tranquilmagpie.spring.model;
 
+import com.tranquilmagpie.spring.model.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static com.tranquilmagpie.spring.model.Role.USER;
+import static com.tranquilmagpie.spring.model.user.Role.USER;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {

@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static com.tranquilmagpie.spring.model.Role.ADMIN;
+import static com.tranquilmagpie.spring.model.user.Role.ADMIN;
 
 // Spring Boot 3.0+: @Configuration and @EnableWebSecurity need to be together
 @Configuration

@@ -1,6 +1,6 @@
 package com.tranquilmagpie.spring.api;
 
-import com.tranquilmagpie.spring.model.User;
+import com.tranquilmagpie.spring.model.user.User;
 import com.tranquilmagpie.spring.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.tranquilmagpie.spring.service.impl;
 
-import com.tranquilmagpie.spring.model.User;
+import com.tranquilmagpie.spring.model.user.User;
 import com.tranquilmagpie.spring.repo.UserRepo;
 import com.tranquilmagpie.spring.service.UserService;
 import org.springframework.context.annotation.Primary;

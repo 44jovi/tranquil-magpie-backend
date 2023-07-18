@@ -1,6 +1,6 @@
 package com.tranquilmagpie.spring.api;
 
-import com.tranquilmagpie.spring.model.ShopOrder;
+import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 import com.tranquilmagpie.spring.service.ShopOrderService;
 import com.tranquilmagpie.spring.service.impl.ShopOrderServiceImpl;
 import org.junit.jupiter.api.BeforeEach;

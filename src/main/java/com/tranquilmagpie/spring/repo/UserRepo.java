@@ -1,6 +1,6 @@
 package com.tranquilmagpie.spring.repo;
 
-import com.tranquilmagpie.spring.model.User;
+import com.tranquilmagpie.spring.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

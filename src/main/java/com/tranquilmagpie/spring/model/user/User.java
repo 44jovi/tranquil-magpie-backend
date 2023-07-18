@@ -1,4 +1,4 @@
-package com.tranquilmagpie.spring.model;
+package com.tranquilmagpie.spring.model.user;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 

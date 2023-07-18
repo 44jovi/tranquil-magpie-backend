@@ -1,6 +1,6 @@
 package com.tranquilmagpie.spring.service;
 
-import com.tranquilmagpie.spring.model.ShopOrder;
+import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 
 import java.util.List;
 import java.util.UUID;

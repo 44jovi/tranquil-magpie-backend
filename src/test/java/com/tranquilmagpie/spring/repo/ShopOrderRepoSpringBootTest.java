@@ -1,7 +1,7 @@
 package com.tranquilmagpie.spring.repo;
 
-import com.tranquilmagpie.spring.model.ShopOrder;
-import com.tranquilmagpie.spring.model.User;
+import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
+import com.tranquilmagpie.spring.model.user.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static com.tranquilmagpie.spring.model.ShopOrderStatus.PENDING;
+import static com.tranquilmagpie.spring.model.shoporder.ShopOrderStatus.PENDING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // TODO: review converting this to a pure unit test using mocks

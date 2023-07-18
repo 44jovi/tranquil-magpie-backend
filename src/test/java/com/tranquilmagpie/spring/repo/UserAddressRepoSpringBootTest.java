@@ -1,7 +1,7 @@
 package com.tranquilmagpie.spring.repo;
 
-import com.tranquilmagpie.spring.model.User;
-import com.tranquilmagpie.spring.model.UserAddress;
+import com.tranquilmagpie.spring.model.user.User;
+import com.tranquilmagpie.spring.model.user.UserAddress;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

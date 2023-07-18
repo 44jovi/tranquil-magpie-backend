@@ -1,8 +1,8 @@
 package com.tranquilmagpie.spring.service.impl;
 
-import com.tranquilmagpie.spring.model.ShopOrder;
-import com.tranquilmagpie.spring.model.ShopOrderStatus;
-import com.tranquilmagpie.spring.model.UserAddress;
+import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
+import com.tranquilmagpie.spring.model.shoporder.ShopOrderStatus;
+import com.tranquilmagpie.spring.model.user.UserAddress;
 import com.tranquilmagpie.spring.repo.ShopOrderRepo;
 import com.tranquilmagpie.spring.repo.UserAddressRepo;
 import com.tranquilmagpie.spring.service.ShopOrderService;

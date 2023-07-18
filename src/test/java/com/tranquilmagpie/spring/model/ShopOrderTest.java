@@ -1,5 +1,6 @@
 package com.tranquilmagpie.spring.model;
 
+import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,8 +8,8 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
-import static com.tranquilmagpie.spring.model.ShopOrderStatus.PENDING;
-import static com.tranquilmagpie.spring.model.ShopOrderStatus.SHIPPED;
+import static com.tranquilmagpie.spring.model.shoporder.ShopOrderStatus.PENDING;
+import static com.tranquilmagpie.spring.model.shoporder.ShopOrderStatus.SHIPPED;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShopOrderTest {

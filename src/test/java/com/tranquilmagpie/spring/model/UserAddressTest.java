@@ -1,5 +1,6 @@
 package com.tranquilmagpie.spring.model;
 
+import com.tranquilmagpie.spring.model.user.UserAddress;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.tranquilmagpie.spring.model;
+package com.tranquilmagpie.spring.model.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;

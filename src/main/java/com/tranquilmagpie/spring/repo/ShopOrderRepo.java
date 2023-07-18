@@ -1,6 +1,6 @@
 package com.tranquilmagpie.spring.repo;
 
-import com.tranquilmagpie.spring.model.ShopOrder;
+import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

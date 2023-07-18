@@ -1,6 +1,6 @@
 package com.tranquilmagpie.spring.service;
 
-import com.tranquilmagpie.spring.model.UserAddress;
+import com.tranquilmagpie.spring.model.user.UserAddress;
 
 import java.util.List;
 import java.util.UUID;

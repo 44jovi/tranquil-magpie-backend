@@ -1,8 +1,8 @@
 package com.tranquilmagpie.spring.auth;
 
 import com.tranquilmagpie.spring.config.JwtService;
-import com.tranquilmagpie.spring.model.Role;
-import com.tranquilmagpie.spring.model.User;
+import com.tranquilmagpie.spring.model.user.Role;
+import com.tranquilmagpie.spring.model.user.User;
 import com.tranquilmagpie.spring.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

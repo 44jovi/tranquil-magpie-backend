@@ -41,6 +41,7 @@ public class WebSecurityConfig {
                 ).permitAll()
 
                 // Admin
+                // TODO: add admin-only endpoints
                 .requestMatchers("/admin")
                 // TODO: review usage of roles instead of authority
                 .hasAuthority(ADMIN.name())

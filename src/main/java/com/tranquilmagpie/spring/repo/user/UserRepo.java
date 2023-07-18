@@ -1,4 +1,4 @@
-package com.tranquilmagpie.spring.repo;
+package com.tranquilmagpie.spring.repo.user;
 
 import com.tranquilmagpie.spring.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

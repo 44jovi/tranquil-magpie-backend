@@ -1,6 +1,6 @@
 package com.tranquilmagpie.spring.config;
 
-import com.tranquilmagpie.spring.repo.UserRepo;
+import com.tranquilmagpie.spring.repo.user.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

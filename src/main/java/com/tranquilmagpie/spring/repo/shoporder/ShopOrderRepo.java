@@ -1,4 +1,4 @@
-package com.tranquilmagpie.spring.repo;
+package com.tranquilmagpie.spring.repo.shoporder;
 
 import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 import org.springframework.data.jpa.repository.JpaRepository;

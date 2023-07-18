@@ -1,7 +1,7 @@
 package com.tranquilmagpie.spring.service.impl;
 
 import com.tranquilmagpie.spring.model.user.UserAddress;
-import com.tranquilmagpie.spring.repo.UserAddressRepo;
+import com.tranquilmagpie.spring.repo.user.UserAddressRepo;
 import com.tranquilmagpie.spring.service.UserAddressService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

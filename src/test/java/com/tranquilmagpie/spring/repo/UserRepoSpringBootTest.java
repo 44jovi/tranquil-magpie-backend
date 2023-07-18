@@ -1,6 +1,7 @@
 package com.tranquilmagpie.spring.repo;
 
 import com.tranquilmagpie.spring.model.user.User;
+import com.tranquilmagpie.spring.repo.user.UserRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

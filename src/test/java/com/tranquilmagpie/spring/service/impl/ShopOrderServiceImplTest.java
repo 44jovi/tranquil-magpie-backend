@@ -3,6 +3,7 @@ package com.tranquilmagpie.spring.service.impl;
 import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 import com.tranquilmagpie.spring.model.user.UserAddress;
 import com.tranquilmagpie.spring.repo.shoporder.ShopOrderRepo;
+import com.tranquilmagpie.spring.service.impl.shoporder.ShopOrderServiceImpl;
 import com.tranquilmagpie.spring.repo.user.UserAddressRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import com.tranquilmagpie.spring.model.user.UserAddress;
-import com.tranquilmagpie.spring.service.UserAddressService;
-import com.tranquilmagpie.spring.service.impl.UserAddressServiceImpl;
+import com.tranquilmagpie.spring.service.user.UserAddressService;
+import com.tranquilmagpie.spring.service.impl.user.UserAddressServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;

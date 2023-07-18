@@ -1,8 +1,8 @@
-package com.tranquilmagpie.spring.service.impl;
+package com.tranquilmagpie.spring.service.impl.user;
 
 import com.tranquilmagpie.spring.model.user.UserAddress;
 import com.tranquilmagpie.spring.repo.user.UserAddressRepo;
-import com.tranquilmagpie.spring.service.UserAddressService;
+import com.tranquilmagpie.spring.service.user.UserAddressService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

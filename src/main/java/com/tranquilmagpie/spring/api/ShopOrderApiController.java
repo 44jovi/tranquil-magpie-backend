@@ -1,7 +1,7 @@
 package com.tranquilmagpie.spring.api;
 
 import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
-import com.tranquilmagpie.spring.service.ShopOrderService;
+import com.tranquilmagpie.spring.service.shoporder.ShopOrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

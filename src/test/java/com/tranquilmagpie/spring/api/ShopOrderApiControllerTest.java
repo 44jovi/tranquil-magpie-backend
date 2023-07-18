@@ -1,8 +1,8 @@
 package com.tranquilmagpie.spring.api;
 
 import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
-import com.tranquilmagpie.spring.service.ShopOrderService;
-import com.tranquilmagpie.spring.service.impl.ShopOrderServiceImpl;
+import com.tranquilmagpie.spring.service.shoporder.ShopOrderService;
+import com.tranquilmagpie.spring.service.impl.shoporder.ShopOrderServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;

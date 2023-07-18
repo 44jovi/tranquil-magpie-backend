@@ -2,6 +2,7 @@ package com.tranquilmagpie.spring.service.impl;
 
 import com.tranquilmagpie.spring.model.user.User;
 import com.tranquilmagpie.spring.repo.user.UserRepo;
+import com.tranquilmagpie.spring.service.impl.user.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

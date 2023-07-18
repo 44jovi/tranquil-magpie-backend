@@ -1,11 +1,11 @@
-package com.tranquilmagpie.spring.service.impl;
+package com.tranquilmagpie.spring.service.impl.shoporder;
 
 import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 import com.tranquilmagpie.spring.model.shoporder.ShopOrderStatus;
 import com.tranquilmagpie.spring.model.user.UserAddress;
 import com.tranquilmagpie.spring.repo.shoporder.ShopOrderRepo;
 import com.tranquilmagpie.spring.repo.user.UserAddressRepo;
-import com.tranquilmagpie.spring.service.ShopOrderService;
+import com.tranquilmagpie.spring.service.shoporder.ShopOrderService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

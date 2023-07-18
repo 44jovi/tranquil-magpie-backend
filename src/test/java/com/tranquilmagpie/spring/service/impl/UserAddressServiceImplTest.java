@@ -2,6 +2,7 @@ package com.tranquilmagpie.spring.service.impl;
 
 import com.tranquilmagpie.spring.model.user.UserAddress;
 import com.tranquilmagpie.spring.repo.user.UserAddressRepo;
+import com.tranquilmagpie.spring.service.impl.user.UserAddressServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

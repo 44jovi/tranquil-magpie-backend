@@ -1,4 +1,4 @@
-package com.tranquilmagpie.spring.service;
+package com.tranquilmagpie.spring.service.shoporder;
 
 import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 

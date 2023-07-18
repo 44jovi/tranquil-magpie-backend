@@ -1,8 +1,8 @@
-package com.tranquilmagpie.spring.service.impl;
+package com.tranquilmagpie.spring.service.impl.user;
 
 import com.tranquilmagpie.spring.model.user.User;
 import com.tranquilmagpie.spring.repo.user.UserRepo;
-import com.tranquilmagpie.spring.service.UserService;
+import com.tranquilmagpie.spring.service.user.UserService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

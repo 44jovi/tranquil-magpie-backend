@@ -1,7 +1,7 @@
 package com.tranquilmagpie.spring.api;
 
 import com.tranquilmagpie.spring.model.user.User;
-import com.tranquilmagpie.spring.service.UserService;
+import com.tranquilmagpie.spring.service.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -47,6 +47,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         // Check user exists in token and not already authenticated
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            // Retrieve user information from database
+            // Create and return a UserDetails object with the user information
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
             if (jwtService.isJwtValid(jwt, userDetails)) {
                 // Token required by SecurityContextHolder to update the security context

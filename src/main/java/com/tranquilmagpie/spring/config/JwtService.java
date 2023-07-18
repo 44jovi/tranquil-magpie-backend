@@ -77,6 +77,8 @@ public class JwtService {
 
     public boolean isJwtValid(String jwt, UserDetails userDetails) {
         final String username = extractUsername(jwt);
+        // Check username in JWT matches username held in UserDetails
+        // Check JWT has not expired
         return username.equals(userDetails.getUsername()) && !isJwtExpired(jwt);
     }
 

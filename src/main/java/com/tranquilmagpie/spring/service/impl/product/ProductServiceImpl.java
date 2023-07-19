@@ -42,7 +42,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public Product deleteById(UUID id) {
-        // TODO: review usage of isPresent()
         Product selectedProduct = this.repo.findById(id).get();
         this.repo.deleteById(id);
         return selectedProduct;

@@ -61,7 +61,6 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     @Override
     @Transactional
     public ShopOrder deleteById(UUID id) {
-        // TODO: review usage of isPresent()
         ShopOrder selectedShopOrder = this.shopOrderRepo.findById(id).get();
         this.shopOrderRepo.deleteById(id);
         return selectedShopOrder;

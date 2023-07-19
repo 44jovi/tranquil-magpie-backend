@@ -47,7 +47,6 @@ public class UserAddressServiceImpl implements UserAddressService {
     @Override
     @Transactional
     public UserAddress deleteById(UUID id) {
-        // TODO: review usage of isPresent()
         UserAddress selectedUserAddress = this.repo.findById(id).get();
         this.repo.deleteById(id);
         return selectedUserAddress;

@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService {
     // TODO: only allow access to current user's details
     @Override
     public User getById(UUID id) {
-        // TODO: review usage of isPresent()
         return this.repo.findById(id).get();
     }
 
@@ -50,7 +49,7 @@ public class UserServiceImpl implements UserService {
     // Manage multiple database calls
     @Transactional
     public User deleteById(UUID id) {
-        // TODO: review usage of isPresent()
+
         User selectedUser = this.repo.findById(id).get();
         this.repo.deleteById(id);
         return selectedUser;

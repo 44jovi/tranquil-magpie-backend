@@ -3,7 +3,6 @@ package com.tranquilmagpie.spring.service.impl.user;
 import com.tranquilmagpie.spring.model.user.User;
 import com.tranquilmagpie.spring.repo.user.UserRepo;
 import com.tranquilmagpie.spring.service.user.UserService;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +11,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Primary
 @Service
 public class UserServiceImpl implements UserService {
 

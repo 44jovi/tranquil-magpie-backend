@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class ShopOrderItem {
 
     @EmbeddedId
-    private ShopOrderItemKey id;
+    private ShopOrderItemId id;
     private Integer qty;
 
 }

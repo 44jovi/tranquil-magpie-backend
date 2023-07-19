@@ -11,7 +11,7 @@ import java.util.UUID;
 // TODO: check which constructors may be required
 @Data
 @Embeddable
-public class ShopOrderItemKey implements Serializable {
+public class ShopOrderItemId implements Serializable {
 
     @Column(name = "shop_order_id")
     private UUID shopOrderId;

@@ -18,9 +18,15 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
         this.shopOrderItemRepo = shopOrderItemRepo;
     }
 
+    // TODO: is this method needed
+    @Override
+    public List<ShopOrderItem> getAll() {
+        return this.shopOrderItemRepo.findAll();
+    }
+
     @Override
     public List<ShopOrderItem> getAllByShopOrderId(UUID id) {
-        return this.shopOrderItemRepo.findAllByShopOrderId(id).get();
+        return this.shopOrderItemRepo.findByIdShopOrderId(id);
     }
 
 }

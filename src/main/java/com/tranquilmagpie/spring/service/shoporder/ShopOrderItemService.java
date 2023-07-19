@@ -7,7 +7,10 @@ import java.util.UUID;
 
 public interface ShopOrderItemService {
 
-    // TODO: add more methods once this works correctly
+    // TODO: is this method needed
+    List<ShopOrderItem> getAll();
+
+    // TODO: add other methods
     List<ShopOrderItem> getAllByShopOrderId(UUID id);
 
 }

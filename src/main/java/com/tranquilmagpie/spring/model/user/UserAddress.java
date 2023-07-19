@@ -15,8 +15,7 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "user_address")
-// TODO: check against Swagger UI page
-@Schema(name = "backend", description = "TBC")
+@Schema(name = "user_address", description = "user's postal address")
 public class UserAddress {
 
     @Id

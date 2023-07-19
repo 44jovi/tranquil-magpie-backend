@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "product")
-@Schema(name = "backend", description = "TBC")
+@Schema(name = "product", description = "shop product")
 public class Product {
 
     @Id

@@ -30,7 +30,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "users")
 // TODO: check schema name
-@Schema(name = "backend", description = "All users")
+@Schema(name = "users", description = "site user - customer or admin")
 @JsonTypeName("user")
 public class User implements UserDetails {
     @Id

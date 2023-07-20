@@ -17,6 +17,11 @@ import java.util.UUID;
 @Service
 public class ShopOrderServiceImpl implements ShopOrderService {
 
+    // TODO: add logic to dynamically update database on order
+    //  - creation
+    //  - amendment
+    //  - deletion / cancellation
+
     private final ShopOrderRepo shopOrderRepo;
     private final UserAddressRepo userAddressRepo;
 

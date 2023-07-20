@@ -29,7 +29,9 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
 
         // TODO: review CSRF protection
-        security.csrf().disable()
+        security.cors()
+                .and()
+                .csrf().disable()
                 .authorizeRequests()
 
                 // Public

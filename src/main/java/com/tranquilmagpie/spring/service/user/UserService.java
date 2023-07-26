@@ -10,6 +10,8 @@ public interface UserService {
 
     User getById(UUID id);
 
+    User getByUsername(String username);
+
     User create(User user);
 
     User deleteById(UUID id);

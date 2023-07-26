@@ -34,6 +34,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getByUsername(String username) {return this.repo.findByUsername(username).get();};
+
+    @Override
     public User create(User user) {
         // TODO: do not allow username to be 'admin'
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);

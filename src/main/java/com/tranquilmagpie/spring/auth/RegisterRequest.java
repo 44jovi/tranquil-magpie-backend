@@ -19,9 +19,9 @@ public class RegisterRequest {
 
     private String username;
 
-    private String firstName;
+    private String givenName;
 
-    private String lastName;
+    private String familyName;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dob;

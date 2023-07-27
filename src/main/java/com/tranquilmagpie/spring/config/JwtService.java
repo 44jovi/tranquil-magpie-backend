@@ -9,19 +9,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
 @Service
 public class JwtService {
 
+    // TODO: consider using Spring annotation(s) to access env vars
     private static final String SECRET_KEY = System.getenv("TRANQUIL_MAGPIE_SK");
 
     // Generate token without extra claims
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        return generateToken(Collections.emptyMap(), userDetails);
     }
 
     public String generateToken(
@@ -76,6 +77,8 @@ public class JwtService {
 
     public boolean isJwtValid(String jwt, UserDetails userDetails) {
         final String username = extractUsername(jwt);
+        // Check username in JWT matches username held in UserDetails
+        // Check JWT has not expired
         return username.equals(userDetails.getUsername()) && !isJwtExpired(jwt);
     }
 

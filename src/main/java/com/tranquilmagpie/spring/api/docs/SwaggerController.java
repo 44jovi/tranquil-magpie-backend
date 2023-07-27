@@ -1,4 +1,4 @@
-package com.tranquilmagpie.spring.api;
+package com.tranquilmagpie.spring.api.docs;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Home redirection to OpenAPI api documentation
  */
 @Controller
-public class HomeController {
+public class SwaggerController {
 
     @RequestMapping("/swagger")
     public String index() {

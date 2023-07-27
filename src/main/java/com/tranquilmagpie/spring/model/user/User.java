@@ -1,4 +1,4 @@
-package com.tranquilmagpie.spring.model;
+package com.tranquilmagpie.spring.model.user;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -19,11 +19,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
 /**
  * All users
  */
 // Bundle @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor
+// TODO: review/add constraints on generated constructors and setters
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,40 +31,29 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "users")
 // TODO: check schema name
-@Schema(name = "backend", description = "All users")
+@Schema(name = "users", description = "site user - customer or admin")
 @JsonTypeName("user")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(unique = true, updatable = false)
-    private UUID uuid;
+    private UUID id;
 
     private String email;
 
     private String username;
 
-    private String firstName;
+    private String givenName;
 
-    private String lastName;
+    private String familyName;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dob;
 
-    // TODO: review field name
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    // TODO: Update tests to use @Builder and review if this is still needed
-    public User(String email, String username, String firstName, String lastName, LocalDate dob, String password) {
-        this.email = email;
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.password = password;
-    }
 
     // Return list of roles
     @Override

@@ -1,9 +1,9 @@
 package com.tranquilmagpie.spring.auth;
 
 import com.tranquilmagpie.spring.config.JwtService;
-import com.tranquilmagpie.spring.model.Role;
-import com.tranquilmagpie.spring.model.User;
-import com.tranquilmagpie.spring.repo.UserRepo;
+import com.tranquilmagpie.spring.model.user.Role;
+import com.tranquilmagpie.spring.model.user.User;
+import com.tranquilmagpie.spring.repo.user.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,12 +22,11 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest request) {
 
-        // TODO: review using 'var'?
         User user = User.builder()
                 .email(request.getEmail())
                 .username(request.getUsername())
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
+                .givenName(request.getFirstName())
+                .familyName(request.getLastName())
                 .dob(request.getDob())
                 // BCryptPasswordEncoder (see AppConfig)
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -49,7 +48,7 @@ public class AuthService {
                         request.getPassword()
                 )
         );
-        // TODO: handle exception if empty optional returned
+        // TODO: refer to @sourcesmith comment re propagating exceptions to last resort handler
         User user = repo.findByUsername(request.getUsername()).orElseThrow();
         String jwt = jwtService.generateToken(user);
 

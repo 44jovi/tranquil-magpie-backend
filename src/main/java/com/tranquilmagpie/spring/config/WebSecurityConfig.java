@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static com.tranquilmagpie.spring.model.user.Role.ADMIN;
 
 // Spring Boot 3.0+: @Configuration and @EnableWebSecurity need to be together
 @Configuration
@@ -18,25 +19,33 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
-    // 'final' to ensure auto-injection by Spring
+    // 'final' to ensure auto-injection by Spring(?)
     private final JwtAuthFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
     // On app startup, Spring will first look for a SecurityFilterChain bean
     // SecurityFilterChain processes/applies security filters to incoming requests
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
 
         // TODO: review CSRF protection
-        http.csrf().disable()
+        security.csrf().disable()
                 .authorizeRequests()
-                // Whitelist
+
+                // Public
                 .requestMatchers(
                         "/auth/**",
                         "/swagger",
                         "/swagger-ui/**",
                         "/v3/api-docs/**"
                 ).permitAll()
+
+                // Admin
+                // TODO: add admin-only endpoints
+                .requestMatchers("/admin")
+                // TODO: review usage of roles instead of authority
+                .hasAuthority(ADMIN.name())
+
                 // Otherwise auth required
                 .anyRequest()
                 .authenticated()
@@ -54,7 +63,7 @@ public class WebSecurityConfig {
                         (request, response, authentication) -> SecurityContextHolder.clearContext()
                 );
 
-        return http.build();
+        return security.build();
     }
 
 }

@@ -1,0 +1,102 @@
+package com.tranquilmagpie.spring.service.impl.shoporder;
+
+import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
+import com.tranquilmagpie.spring.model.shoporder.ShopOrderStatus;
+import com.tranquilmagpie.spring.model.user.UserAddress;
+import com.tranquilmagpie.spring.repo.shoporder.ShopOrderRepo;
+import com.tranquilmagpie.spring.repo.user.UserAddressRepo;
+import com.tranquilmagpie.spring.service.shoporder.ShopOrderService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.List;
+import java.util.UUID;
+
+@Service
+public class ShopOrderServiceImpl implements ShopOrderService {
+
+    // TODO: add logic to dynamically update database on order
+    //  - creation
+    //  - amendment
+    //  - deletion / cancellation
+
+    private final ShopOrderRepo shopOrderRepo;
+    private final UserAddressRepo userAddressRepo;
+
+    public ShopOrderServiceImpl(ShopOrderRepo shopOrderRepo, UserAddressRepo userAddressRepo) {
+        super();
+        this.shopOrderRepo = shopOrderRepo;
+        this.userAddressRepo = userAddressRepo;
+    }
+
+    // TODO: for ADMIN role only
+    @Override
+    public List<ShopOrder> getAll() {
+        return this.shopOrderRepo.findAll();
+    }
+
+    // TODO: only allow access to current user's orders
+    @Override
+    public ShopOrder getById(UUID id) {
+        // TODO: handle empty Optional
+        return this.shopOrderRepo.findById(id).get();
+    }
+
+    @Override
+    public List<ShopOrder> getAllByUserId(UUID id) {
+        // TODO: handle empty Optional
+        return this.shopOrderRepo.findAllByUserId(id).get();
+    }
+
+    @Override
+    public ShopOrder create(ShopOrder shopOrder) {
+        UUID userId = shopOrder.getUserId();
+        UserAddress userAddress = userAddressRepo.findByUserId(userId).get();
+
+        // TODO: return shipping address as JSON
+        shopOrder.setShippingAddress(userAddress.toString());
+        shopOrder.setOrderDateTime(Instant.now());
+
+        return this.shopOrderRepo.save(shopOrder);
+    }
+
+    //  TODO: for ADMIN role only
+    @Override
+    @Transactional
+    public ShopOrder deleteById(UUID id) {
+        ShopOrder selectedShopOrder = this.shopOrderRepo.findById(id).get();
+        this.shopOrderRepo.deleteById(id);
+        return selectedShopOrder;
+    }
+
+    // TODO: for ADMIN role only?
+    @Override
+    public ShopOrder patchById(UUID id, ShopOrder shopOrder) {
+
+        UUID userId = shopOrder.getUserId();
+        BigDecimal orderTotal = shopOrder.getOrderTotal();
+        ShopOrderStatus shopOrderStatus = shopOrder.getOrderStatus();
+        String paymentMethod = shopOrder.getPaymentMethod();
+        String shippingAddress = shopOrder.getShippingAddress();
+
+        ShopOrder selectedShopOrder = this.getById(id);
+
+        if (userId != null)
+            selectedShopOrder.setUserId(userId);
+        if (orderTotal != null)
+            selectedShopOrder.setOrderTotal(orderTotal);
+        if (shopOrderStatus != null)
+            selectedShopOrder.setOrderStatus(shopOrderStatus);
+        if (paymentMethod != null)
+            selectedShopOrder.setPaymentMethod(paymentMethod);
+        if (shippingAddress != null)
+            selectedShopOrder.setShippingAddress(shippingAddress);
+
+        shopOrder.setOrderDateTime(Instant.now());
+
+        return this.shopOrderRepo.save(selectedShopOrder);
+    }
+
+}

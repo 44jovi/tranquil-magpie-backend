@@ -1,9 +1,8 @@
-package com.tranquilmagpie.spring.service.impl;
+package com.tranquilmagpie.spring.service.impl.user;
 
-import com.tranquilmagpie.spring.model.User;
-import com.tranquilmagpie.spring.repo.UserRepo;
-import com.tranquilmagpie.spring.service.UserService;
-import org.springframework.context.annotation.Primary;
+import com.tranquilmagpie.spring.model.user.User;
+import com.tranquilmagpie.spring.repo.user.UserRepo;
+import com.tranquilmagpie.spring.service.user.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,36 +11,32 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Primary
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepo repo;
+    private final UserRepo repo;
 
     public UserServiceImpl(UserRepo repo) {
         super();
         this.repo = repo;
     }
 
+    // TODO: for ADMIN role only
     @Override
     public List<User> getAll() {
         return this.repo.findAll();
     }
 
+    // TODO: only allow access to current user's details
     @Override
-    public User getOneById(UUID id) {
-        // TODO: review how to handle empty/null Optional
-        // TODO: review usage of isPresent()
-        return this.repo.findByUuid(id).get();
+    public User getById(UUID id) {
+        return this.repo.findById(id).get();
     }
 
     @Override
-    public User createOne(User user) {
-        // TODO: do not allow creation of user if UUID already exists
-        // TODO: review whether Optional should be returned for getOneById
+    public User create(User user) {
+        // TODO: do not allow username to be 'admin'
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
-
-        // TODO: review User entity field name?
         String passwordString = user.getPassword();
         String passwordHashed = encoder.encode((passwordString));
         user.setPassword(passwordHashed);
@@ -49,26 +44,27 @@ public class UserServiceImpl implements UserService {
         return this.repo.save(user);
     }
 
+    // TODO: for ADMIN role only
     @Override
     // Manage multiple database calls
     @Transactional
-    public User deleteOneById(UUID id) {
-        // TODO: review usage of isPresent()
-        User selectedUser = this.repo.findByUuid(id).get();
-        this.repo.deleteByUuid(id);
+    public User deleteById(UUID id) {
+
+        User selectedUser = this.repo.findById(id).get();
+        this.repo.deleteById(id);
         return selectedUser;
     }
 
     @Override
-    public User patchOneById(UUID id, User user) {
+    public User patchById(UUID id, User user) {
 
         String email = user.getEmail();
         String username = user.getUsername();
-        String firstName = user.getFirstName();
-        String lastName = user.getLastName();
+        String firstName = user.getGivenName();
+        String lastName = user.getFamilyName();
         LocalDate dob = user.getDob();
 
-        User selectedUser = this.getOneById(id);
+        User selectedUser = this.getById(id);
 
 //        TODO: use ternary statements?
         if (email != null)
@@ -76,9 +72,9 @@ public class UserServiceImpl implements UserService {
         if (username != null)
             selectedUser.setUsername(username);
         if (firstName != null)
-            selectedUser.setFirstName(firstName);
+            selectedUser.setGivenName(firstName);
         if (lastName != null)
-            selectedUser.setLastName(lastName);
+            selectedUser.setFamilyName(lastName);
         if (dob != null)
             selectedUser.setDob(dob);
 

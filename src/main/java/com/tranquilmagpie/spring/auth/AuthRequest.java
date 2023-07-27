@@ -5,14 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// TODO: review/add constraints on generated constructors and setters
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthRequest {
-
     private String username;
-    // TODO: review access modifier
-    String password;
-
+    private String password;
 }

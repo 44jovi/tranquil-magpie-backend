@@ -1,6 +1,6 @@
 package com.tranquilmagpie.spring.config;
 
-import com.tranquilmagpie.spring.repo.UserRepo;
+import com.tranquilmagpie.spring.repo.user.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +26,7 @@ public class AppConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         // TODO: review replacing this with a lambda
+        // TODO: separate class/interface?
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -41,6 +42,7 @@ public class AppConfig {
         // Retrieve user details from UserDetailsService and authenticate credentials
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService());
+        // @sourcesmith: "These can be constructor injected and so immutable."
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;

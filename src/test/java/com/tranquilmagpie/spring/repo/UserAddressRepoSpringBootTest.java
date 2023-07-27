@@ -16,7 +16,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// TODO: review converting this to a pure unit test using mocks
 @SpringBootTest
 @TestPropertySource("classpath:application-test.properties")
 class UserAddressRepoSpringBootTest {

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/users/orders")
+@RequestMapping("/shop-order")
 public class ShopOrderApiController {
 
     private final ShopOrderService service;
@@ -44,13 +44,13 @@ public class ShopOrderApiController {
         return new ResponseEntity<>(createdShopOrder, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ShopOrder> deleteById(@PathVariable UUID id) {
         ShopOrder deletedShopOrder = this.service.deleteById(id);
         return new ResponseEntity<>(deletedShopOrder, HttpStatus.OK);
     }
 
-    @PatchMapping("/patch/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<ShopOrder> patchById(@PathVariable UUID id, @RequestBody ShopOrder shopOrder) {
         ShopOrder patchedShopOrder = this.service.patchById(id, shopOrder);
         return new ResponseEntity<>(patchedShopOrder, HttpStatus.OK);

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/product")
 public class ProductApiController {
 
     private final ProductService service;
@@ -38,13 +38,13 @@ public class ProductApiController {
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteById(@PathVariable UUID id) {
         Product deletedProduct = this.service.deleteById(id);
         return new ResponseEntity<>(deletedProduct, HttpStatus.OK);
     }
 
-    @PatchMapping("/patch/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<Product> patchById(@PathVariable UUID id, @RequestBody Product product) {
         Product patchedProduct = this.service.patchById(id, product);
         return new ResponseEntity<>(patchedProduct, HttpStatus.OK);

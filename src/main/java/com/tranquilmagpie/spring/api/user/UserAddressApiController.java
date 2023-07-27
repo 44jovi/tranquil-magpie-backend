@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/users/postal-address")
+@RequestMapping("/user/postal-address")
 public class UserAddressApiController {
 
     private final UserAddressService service;
@@ -44,13 +44,13 @@ public class UserAddressApiController {
         return new ResponseEntity<>(createdUserAddress, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<UserAddress> deleteById(@PathVariable UUID id) {
         UserAddress deletedUserAddress = this.service.deleteById(id);
         return new ResponseEntity<>(deletedUserAddress, HttpStatus.OK);
     }
 
-    @PatchMapping("/patch/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<UserAddress> patchById(@PathVariable UUID id, @RequestBody UserAddress userAddress) {
         UserAddress patchedUserAddress = this.service.patchById(id, userAddress);
         return new ResponseEntity<>(patchedUserAddress, HttpStatus.OK);

@@ -23,6 +23,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * All users
  */
 // Bundle @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor
+// TODO: review/add constraints on generated constructors and setters
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

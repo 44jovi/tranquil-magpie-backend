@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
+// TODO: review/add constraints on generated constructors and setters
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

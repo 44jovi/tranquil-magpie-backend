@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
+// TODO: review/add constraints on generated constructors and setters
 @Data
 @Builder
 @AllArgsConstructor

@@ -10,6 +10,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 
 @Service
 @RequiredArgsConstructor
@@ -34,11 +36,13 @@ public class AuthService {
                 .build();
 
         repo.save(user);
+
+        UUID userId = user.getId();
         String jwt = jwtService.generateToken(user);
 
         /* Lombok generates a builder class for AuthResponse (AuthResponseBuilder)
         that creates (builds) a new instance of AuthResponse */
-        return AuthResponse.builder().token(jwt).build();
+        return AuthResponse.builder().userId(userId).token(jwt).build();
     }
 
     public AuthResponse authenticate(AuthRequest request) {

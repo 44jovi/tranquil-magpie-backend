@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// TODO: review/add constraints on generated constructors and setters
 @Data
 @Builder
 @AllArgsConstructor

@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// TODO: review/add constraints on generated constructors and setters
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +21,6 @@ public class ShopOrderItem {
 
     @EmbeddedId
     private ShopOrderItemId id;
-    private Integer qty;
+    private int qty;
 
 }

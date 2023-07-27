@@ -19,7 +19,6 @@ import java.util.Optional;
 import static com.tranquilmagpie.spring.model.shoporder.ShopOrderStatus.PENDING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// TODO: review converting this to a pure unit test using mocks
 @SpringBootTest
 @TestPropertySource("classpath:application-test.properties")
 class ShopOrderRepoSpringBootTest {
@@ -30,7 +29,7 @@ class ShopOrderRepoSpringBootTest {
     private UserRepo userRepo;
     private ShopOrder shopOrder1 = new ShopOrder();
     private User user1 = new User();
-    private BigDecimal orderTotal1 = BigDecimal.valueOf(Double.parseDouble("12.34"));
+    private BigDecimal orderTotal1 = new BigDecimal("12.34");
     private ShopOrder savedShopOrder;
     private User savedUser1;
 

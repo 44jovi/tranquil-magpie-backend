@@ -22,8 +22,8 @@ class ShopOrderTest {
     UUID uuid4 = UUID.fromString("9dbbc414-b1c5-4df2-8014-1e90489f0bf7");
     Instant dateTime1 = Instant.parse("1901-01-01T01:01:01.000001Z");
     Instant dateTime2 = Instant.parse("1902-02-02T02:02:02.000002Z");
-    BigDecimal orderTotal1 = BigDecimal.valueOf(Double.parseDouble("12.34"));
-    BigDecimal orderTotal2 = BigDecimal.valueOf(Double.parseDouble("56.78"));
+    BigDecimal orderTotal1 = new BigDecimal("12.34");
+    BigDecimal orderTotal2 = new BigDecimal("56.78");
 
 
     @BeforeEach

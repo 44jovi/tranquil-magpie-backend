@@ -30,7 +30,7 @@ class ShopOrderRepoSpringBootTest {
     private UserRepo userRepo;
     private ShopOrder shopOrder1 = new ShopOrder();
     private User user1 = new User();
-    private BigDecimal orderTotal1 = BigDecimal.valueOf(Double.parseDouble("12.34"));
+    private BigDecimal orderTotal1 = new BigDecimal("12.34");
     private ShopOrder savedShopOrder;
     private User savedUser1;
 

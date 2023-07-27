@@ -32,7 +32,7 @@ public class UserApiController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @GetMapping("/user/{username}")
+    @GetMapping("/username/{username}")
     public ResponseEntity<User> getByUsername(@PathVariable String username) {
         User user = this.service.getByUsername(username);
         return new ResponseEntity<>(user, HttpStatus.OK);

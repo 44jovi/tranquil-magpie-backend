@@ -20,6 +20,6 @@ public class ShopOrderItem {
 
     @EmbeddedId
     private ShopOrderItemId id;
-    private Integer qty;
+    private int qty;
 
 }

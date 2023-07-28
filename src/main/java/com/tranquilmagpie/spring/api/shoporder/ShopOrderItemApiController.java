@@ -32,4 +32,10 @@ public class ShopOrderItemApiController {
         return new ResponseEntity<>(shopOrderItem, HttpStatus.OK);
     }
 
+    @PostMapping("/")
+    public ResponseEntity<ShopOrderItem> create(@RequestBody ShopOrderItem shopOrderItem) {
+        ShopOrderItem createdShopOrderItem = this.service.create(shopOrderItem);
+        return new ResponseEntity<>(createdShopOrderItem, HttpStatus.CREATED);
+    }
+
 }

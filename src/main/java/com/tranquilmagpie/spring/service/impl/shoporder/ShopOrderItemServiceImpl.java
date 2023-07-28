@@ -29,4 +29,9 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
         return this.shopOrderItemRepo.findByIdShopOrderId(id);
     }
 
+    @Override
+    public ShopOrderItem create(ShopOrderItem shopOrderItem) {
+        return this.shopOrderItemRepo.save(shopOrderItem);
+    }
+
 }

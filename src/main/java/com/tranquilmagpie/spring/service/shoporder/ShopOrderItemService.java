@@ -13,4 +13,6 @@ public interface ShopOrderItemService {
     // TODO: add other methods
     List<ShopOrderItem> getAllByShopOrderId(UUID id);
 
+    ShopOrderItem create(ShopOrderItem shopOrderItem);
+
 }

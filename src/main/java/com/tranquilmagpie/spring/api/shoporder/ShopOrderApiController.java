@@ -1,5 +1,6 @@
 package com.tranquilmagpie.spring.api.shoporder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 import com.tranquilmagpie.spring.service.shoporder.ShopOrderService;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,7 @@ public class ShopOrderApiController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<ShopOrder> create(@RequestBody ShopOrder shopOrder) {
+    public ResponseEntity<ShopOrder> create(@RequestBody ShopOrder shopOrder) throws JsonProcessingException {
         ShopOrder createdShopOrder = this.service.create(shopOrder);
         return new ResponseEntity<>(createdShopOrder, HttpStatus.CREATED);
     }

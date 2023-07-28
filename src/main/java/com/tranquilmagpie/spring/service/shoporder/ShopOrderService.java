@@ -1,5 +1,6 @@
 package com.tranquilmagpie.spring.service.shoporder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface ShopOrderService {
 
     List<ShopOrder> getAllByUserId(UUID id);
 
-    ShopOrder create(ShopOrder shopOrder);
+    ShopOrder create(ShopOrder shopOrder) throws JsonProcessingException;
 
     ShopOrder deleteById(UUID id);
 

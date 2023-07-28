@@ -1,5 +1,7 @@
 package com.tranquilmagpie.spring.service.impl.shoporder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 import com.tranquilmagpie.spring.model.shoporder.ShopOrderStatus;
 import com.tranquilmagpie.spring.model.user.UserAddress;
@@ -51,12 +53,14 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     @Override
-    public ShopOrder create(ShopOrder shopOrder) {
+    public ShopOrder create(ShopOrder shopOrder) throws JsonProcessingException {
         UUID userId = shopOrder.getUserId();
         UserAddress userAddress = userAddressRepo.findByUserId(userId).get();
 
-        // TODO: return shipping address as JSON
-        shopOrder.setShippingAddress(userAddress.toString());
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = mapper.writeValueAsString(userAddress);
+
+        shopOrder.setShippingAddress(jsonString);
         shopOrder.setOrderDateTime(Instant.now());
 
         return this.shopOrderRepo.save(shopOrder);

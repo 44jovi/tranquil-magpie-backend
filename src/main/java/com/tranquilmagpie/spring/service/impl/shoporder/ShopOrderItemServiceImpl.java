@@ -1,7 +1,10 @@
 package com.tranquilmagpie.spring.service.impl.shoporder;
 
+import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 import com.tranquilmagpie.spring.model.shoporder.ShopOrderItem;
+import com.tranquilmagpie.spring.model.shoporder.ShopOrderStatus;
 import com.tranquilmagpie.spring.repo.shoporder.ShopOrderItemRepo;
+import com.tranquilmagpie.spring.repo.shoporder.ShopOrderRepo;
 import com.tranquilmagpie.spring.service.shoporder.ShopOrderItemService;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +15,12 @@ import java.util.UUID;
 public class ShopOrderItemServiceImpl implements ShopOrderItemService {
 
     private final ShopOrderItemRepo shopOrderItemRepo;
+    private final ShopOrderRepo shopOrderRepo;
 
-    public ShopOrderItemServiceImpl(ShopOrderItemRepo shopOrderItemRepo) {
+    public ShopOrderItemServiceImpl(ShopOrderItemRepo shopOrderItemRepo, ShopOrderRepo shopOrderRepo) {
         super();
         this.shopOrderItemRepo = shopOrderItemRepo;
+        this.shopOrderRepo = shopOrderRepo;
     }
 
     // TODO: is this method needed
@@ -31,7 +36,16 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
 
     @Override
     public ShopOrderItem create(ShopOrderItem shopOrderItem) {
-        return this.shopOrderItemRepo.save(shopOrderItem);
+        UUID shopOrderId = shopOrderItem.getId().getShopOrderId();
+        ShopOrder shopOrder = shopOrderRepo.findById(shopOrderId).get();
+        ShopOrderStatus shopOrderStatus = shopOrder.getOrderStatus();
+
+        if (shopOrderStatus == ShopOrderStatus.PENDING ) {
+            return this.shopOrderItemRepo.save(shopOrderItem);
+        } else {
+            // TODO: review how/where to provide response/feedback to client that the shop order item was not created
+            return shopOrderItem;
+        }
     }
 
 }

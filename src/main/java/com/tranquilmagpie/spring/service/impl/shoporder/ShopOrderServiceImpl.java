@@ -103,4 +103,17 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         return this.shopOrderRepo.save(selectedShopOrder);
     }
 
+    @Override
+    public ShopOrder confirm(UUID id) {
+        ShopOrder shopOrder = this.shopOrderRepo.findById(id).get();
+        shopOrder.setOrderStatus(ShopOrderStatus.CONFIRMED_AWAITING_PAYMENT);
+        return this.shopOrderRepo.save(shopOrder);
+    }
+    @Override
+    public ShopOrder cancel(UUID id) {
+        ShopOrder shopOrder = this.shopOrderRepo.findById(id).get();
+        shopOrder.setOrderStatus(ShopOrderStatus.CANCELLED);
+        return this.shopOrderRepo.save(shopOrder);
+    }
+
 }

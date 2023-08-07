@@ -56,4 +56,16 @@ public class ShopOrderApiController {
         ShopOrder patchedShopOrder = this.service.patchById(id, shopOrder);
         return new ResponseEntity<>(patchedShopOrder, HttpStatus.OK);
     }
+
+    @PatchMapping("/confirm/{id}")
+    public ResponseEntity<ShopOrder> confirm(@PathVariable UUID id) {
+        ShopOrder patchedShopOrder = this.service.confirm(id);
+        return new ResponseEntity<>(patchedShopOrder, HttpStatus.OK);
+    }
+    @PatchMapping("/cancel/{id}")
+    public ResponseEntity<ShopOrder> cancel(@PathVariable UUID id) {
+        ShopOrder patchedShopOrder = this.service.cancel(id);
+        return new ResponseEntity<>(patchedShopOrder, HttpStatus.OK);
+    }
+
 }

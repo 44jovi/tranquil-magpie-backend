@@ -18,4 +18,8 @@ public interface ShopOrderService {
     ShopOrder deleteById(UUID id);
 
     ShopOrder patchById(UUID id, ShopOrder shopOrder);
+
+    ShopOrder confirm(UUID id);
+
+    ShopOrder cancel(UUID id);
 }

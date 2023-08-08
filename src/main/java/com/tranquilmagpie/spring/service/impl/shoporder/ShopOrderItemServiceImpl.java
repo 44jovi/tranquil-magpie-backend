@@ -10,6 +10,7 @@ import com.tranquilmagpie.spring.repo.shoporder.ShopOrderRepo;
 import com.tranquilmagpie.spring.service.shoporder.ShopOrderItemService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,6 +55,10 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
 
             shopOrderItem.setProductName(product.getName());
             shopOrderItem.setProductPrice(product.getPrice());
+            shopOrderItem.setPriceTotal(
+                    shopOrderItem
+                            .getProductPrice().multiply(new BigDecimal(shopOrderItem.getQty()))
+            );
 
             return this.shopOrderItemRepo.save(shopOrderItem);
         } else {

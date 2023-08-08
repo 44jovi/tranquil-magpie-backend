@@ -26,5 +26,6 @@ public class ShopOrderItem {
     private String productName;
     private BigDecimal productPrice;
     private int qty;
+    private BigDecimal priceTotal;
 
 }

@@ -40,6 +40,7 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
         ShopOrder shopOrder = shopOrderRepo.findById(shopOrderId).get();
         ShopOrderStatus shopOrderStatus = shopOrder.getOrderStatus();
 
+    // TODO: move this to patch request
         if (shopOrderStatus == ShopOrderStatus.PENDING ) {
             return this.shopOrderItemRepo.save(shopOrderItem);
         } else {
@@ -47,5 +48,9 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
             return shopOrderItem;
         }
     }
+
+    // TODO: patch request solely for updating order items while order status is PENDING
+    //  read product name from DB and insert before save
+
 
 }

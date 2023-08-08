@@ -21,6 +21,7 @@ public class ShopOrderItem {
 
     @EmbeddedId
     private ShopOrderItemId id;
+    private String productName;
     private int qty;
 
 }

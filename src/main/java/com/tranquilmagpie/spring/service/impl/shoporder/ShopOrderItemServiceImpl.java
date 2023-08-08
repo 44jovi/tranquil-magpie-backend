@@ -51,7 +51,9 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
 
         if (shopOrderStatus == ShopOrderStatus.PENDING) {
             Product product = productRepo.findById(shopOrderItem.getId().getProductId()).get();
+
             shopOrderItem.setProductName(product.getName());
+            shopOrderItem.setProductPrice(product.getPrice());
 
             return this.shopOrderItemRepo.save(shopOrderItem);
         } else {

@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 // TODO: review/add constraints on generated constructors and setters
 @Data
 @AllArgsConstructor
@@ -22,6 +24,7 @@ public class ShopOrderItem {
     @EmbeddedId
     private ShopOrderItemId id;
     private String productName;
+    private BigDecimal productPrice;
     private int qty;
 
 }

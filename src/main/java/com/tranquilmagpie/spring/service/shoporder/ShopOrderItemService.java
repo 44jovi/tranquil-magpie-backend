@@ -15,4 +15,6 @@ public interface ShopOrderItemService {
 
     ShopOrderItem create(ShopOrderItem shopOrderItem);
 
+    ShopOrderItem updateOrderItems(ShopOrderItem shopOrderItem);
+
 }

@@ -37,11 +37,12 @@ public class WebSecurityConfig {
                 // Public
                 .requestMatchers(
                         // TODO: review why this doesn't work for "/auth/register"
-                        "/auth/**",
-                        "/auth/register",
                         "/swagger",
                         "/swagger-ui/**",
-                        "/v3/api-docs/**"
+                        "/v3/api-docs/**",
+                        "/auth/**",
+                        "/auth/register",
+                        "/product/"
                 ).permitAll()
 
                 // Admin

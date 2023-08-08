@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,6 +43,12 @@ public class ShopOrderItemApiController {
     public ResponseEntity<ShopOrderItem> updateOrderItems(@RequestBody ShopOrderItem shopOrderItem) {
         ShopOrderItem createdShopOrderItem = this.service.updateOrderItems(shopOrderItem);
         return new ResponseEntity<>(createdShopOrderItem, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/price-total/order-id/{id}")
+    public ResponseEntity<BigDecimal> getPriceTotalByShopOrderId(@PathVariable UUID id) {
+        BigDecimal priceTotal = this.service.getPriceTotalByShopOrderId(id);
+        return new ResponseEntity<>(priceTotal, HttpStatus.OK);
     }
 
 }

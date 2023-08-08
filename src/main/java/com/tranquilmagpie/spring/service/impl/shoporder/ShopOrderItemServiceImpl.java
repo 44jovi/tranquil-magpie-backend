@@ -67,5 +67,10 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
         }
     }
 
+    @Override
+    public BigDecimal getPriceTotalByShopOrderId(UUID id) {
+        return shopOrderItemRepo.getPriceTotalByShopOrderId(id);
+    }
+
 
 }

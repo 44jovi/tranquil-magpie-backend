@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -46,12 +47,27 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
 
     @Override
     public ShopOrderItem updateOrderItem(ShopOrderItem shopOrderItem) {
+        // Shop order details
         UUID shopOrderId = shopOrderItem.getId().getShopOrderId();
         ShopOrder shopOrder = shopOrderRepo.findById(shopOrderId).get();
         ShopOrderStatus shopOrderStatus = shopOrder.getOrderStatus();
 
+        // Update shop order item
         if (shopOrderStatus == ShopOrderStatus.PENDING) {
+            // TODO: product ID var?
             Product product = productRepo.findById(shopOrderItem.getId().getProductId()).get();
+
+            // TODO: WIP! - revisit this once frontend creates shop order items before they are updated
+            //  to avoid the need for existence check
+            Optional<ShopOrderItem> existingShopOrderItem = shopOrderItemRepo.findById(shopOrderItem.getId());
+
+            if (existingShopOrderItem.isEmpty() ) {
+                productRepo.subtractStockQty(product.getId(), shopOrderItem.getQty());
+            } else {
+                int currentShopOrderItemQty = existingShopOrderItem.get().getQty();
+                productRepo.addStockQty(product.getId(), currentShopOrderItemQty);
+                productRepo.subtractStockQty(product.getId(), shopOrderItem.getQty());
+            }
 
             shopOrderItem.setProductName(product.getName());
             shopOrderItem.setProductPrice(product.getPrice());
@@ -60,8 +76,10 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
                             .multiply(new BigDecimal(shopOrderItem.getQty()))
             );
 
+            // Update DB - shop order item
             ShopOrderItem savedShopOrderItem = this.shopOrderItemRepo.save(shopOrderItem);
 
+            // Update DB - shop order total
             BigDecimal currentOrderTotal = shopOrderItemRepo.getPriceTotalByShopOrderId(shopOrderId);
             shopOrderRepo.updateOrderTotal(shopOrderId, currentOrderTotal);
 
@@ -76,6 +94,5 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
     public BigDecimal getPriceTotalByShopOrderId(UUID id) {
         return shopOrderItemRepo.getPriceTotalByShopOrderId(id);
     }
-
 
 }

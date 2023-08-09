@@ -45,7 +45,7 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
     }
 
     @Override
-    public ShopOrderItem updateOrderItems(ShopOrderItem shopOrderItem) {
+    public ShopOrderItem updateOrderItem(ShopOrderItem shopOrderItem) {
         UUID shopOrderId = shopOrderItem.getId().getShopOrderId();
         ShopOrder shopOrder = shopOrderRepo.findById(shopOrderId).get();
         ShopOrderStatus shopOrderStatus = shopOrder.getOrderStatus();
@@ -56,11 +56,16 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
             shopOrderItem.setProductName(product.getName());
             shopOrderItem.setProductPrice(product.getPrice());
             shopOrderItem.setPriceTotal(
-                    shopOrderItem
-                            .getProductPrice().multiply(new BigDecimal(shopOrderItem.getQty()))
+                    shopOrderItem.getProductPrice()
+                            .multiply(new BigDecimal(shopOrderItem.getQty()))
             );
 
-            return this.shopOrderItemRepo.save(shopOrderItem);
+            ShopOrderItem savedShopOrderItem = this.shopOrderItemRepo.save(shopOrderItem);
+
+            BigDecimal currentOrderTotal = shopOrderItemRepo.getPriceTotalByShopOrderId(shopOrderId);
+            shopOrderRepo.updateOrderTotal(shopOrderId, currentOrderTotal);
+
+            return savedShopOrderItem;
         } else {
             // TODO: review how/where to provide response/feedback to client that the shop order item was not updated
             return shopOrderItem;

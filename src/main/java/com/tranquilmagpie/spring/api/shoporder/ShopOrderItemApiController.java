@@ -40,8 +40,8 @@ public class ShopOrderItemApiController {
     }
 
     @PatchMapping("/update-items")
-    public ResponseEntity<ShopOrderItem> updateOrderItems(@RequestBody ShopOrderItem shopOrderItem) {
-        ShopOrderItem createdShopOrderItem = this.service.updateOrderItems(shopOrderItem);
+    public ResponseEntity<ShopOrderItem> updateOrderItem(@RequestBody ShopOrderItem shopOrderItem) {
+        ShopOrderItem createdShopOrderItem = this.service.updateOrderItem(shopOrderItem);
         return new ResponseEntity<>(createdShopOrderItem, HttpStatus.CREATED);
     }
 

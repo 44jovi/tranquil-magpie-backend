@@ -19,15 +19,13 @@ import java.util.UUID;
 @Service
 public class ShopOrderServiceImpl implements ShopOrderService {
 
-    // TODO: add logic to dynamically update database on order
-    //  - creation
-    //  - amendment
-    //  - deletion / cancellation
-
     private final ShopOrderRepo shopOrderRepo;
     private final UserAddressRepo userAddressRepo;
 
-    public ShopOrderServiceImpl(ShopOrderRepo shopOrderRepo, UserAddressRepo userAddressRepo) {
+    public ShopOrderServiceImpl(
+            ShopOrderRepo shopOrderRepo,
+            UserAddressRepo userAddressRepo
+    ) {
         super();
         this.shopOrderRepo = shopOrderRepo;
         this.userAddressRepo = userAddressRepo;
@@ -42,13 +40,11 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     // TODO: only allow access to current user's orders
     @Override
     public ShopOrder getById(UUID id) {
-        // TODO: handle empty Optional
         return this.shopOrderRepo.findById(id).get();
     }
 
     @Override
     public List<ShopOrder> getAllByUserId(UUID id) {
-        // TODO: handle empty Optional
         return this.shopOrderRepo.findAllByUserId(id).get();
     }
 
@@ -75,7 +71,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         return selectedShopOrder;
     }
 
-    // TODO: for ADMIN role only?
+    // TODO: for ADMIN role only
     @Override
     public ShopOrder patchById(UUID id, ShopOrder shopOrder) {
 

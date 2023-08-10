@@ -54,11 +54,8 @@ public class ShopOrderItemServiceImpl implements ShopOrderItemService {
 
         // Update shop order item
         if (shopOrderStatus == ShopOrderStatus.PENDING) {
-            // TODO: product ID var?
             Product product = productRepo.findById(shopOrderItem.getId().getProductId()).get();
 
-            // TODO: WIP! - revisit this once frontend creates shop order items before they are updated
-            //  to avoid the need for existence check
             Optional<ShopOrderItem> existingShopOrderItem = shopOrderItemRepo.findById(shopOrderItem.getId());
 
             if (existingShopOrderItem.isEmpty() ) {

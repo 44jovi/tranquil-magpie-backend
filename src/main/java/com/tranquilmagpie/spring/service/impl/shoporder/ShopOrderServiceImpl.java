@@ -77,6 +77,9 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     @Transactional
     public ShopOrder deleteById(UUID id) {
         ShopOrder selectedShopOrder = this.shopOrderRepo.findById(id).get();
+        // TODO: for this order:
+        //      - add all shop order item qty's back to product stock qty
+        //      - delete all shop order items
         this.shopOrderRepo.deleteById(id);
         return selectedShopOrder;
     }

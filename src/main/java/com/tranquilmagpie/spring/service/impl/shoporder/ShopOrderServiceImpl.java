@@ -3,8 +3,11 @@ package com.tranquilmagpie.spring.service.impl.shoporder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
+import com.tranquilmagpie.spring.model.shoporder.ShopOrderItem;
 import com.tranquilmagpie.spring.model.shoporder.ShopOrderStatus;
 import com.tranquilmagpie.spring.model.user.UserAddress;
+import com.tranquilmagpie.spring.repo.product.ProductRepo;
+import com.tranquilmagpie.spring.repo.shoporder.ShopOrderItemRepo;
 import com.tranquilmagpie.spring.repo.shoporder.ShopOrderRepo;
 import com.tranquilmagpie.spring.repo.user.UserAddressRepo;
 import com.tranquilmagpie.spring.service.shoporder.ShopOrderService;
@@ -20,14 +23,21 @@ import java.util.UUID;
 public class ShopOrderServiceImpl implements ShopOrderService {
 
     private final ShopOrderRepo shopOrderRepo;
+    private final ShopOrderItemRepo shopOrderItemRepo;
+    private final ProductRepo productRepo;
     private final UserAddressRepo userAddressRepo;
+
 
     public ShopOrderServiceImpl(
             ShopOrderRepo shopOrderRepo,
+            ShopOrderItemRepo shopOrderItemRepo,
+            ProductRepo productRepo,
             UserAddressRepo userAddressRepo
     ) {
         super();
         this.shopOrderRepo = shopOrderRepo;
+        this.shopOrderItemRepo = shopOrderItemRepo;
+        this.productRepo = productRepo;
         this.userAddressRepo = userAddressRepo;
     }
 
@@ -108,7 +118,15 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     @Override
     public ShopOrder cancel(UUID id) {
         ShopOrder shopOrder = this.shopOrderRepo.findById(id).get();
+
         shopOrder.setOrderStatus(ShopOrderStatus.CANCELLED);
+
+        List<ShopOrderItem> shopOrderItems = shopOrderItemRepo.findByIdShopOrderId(id);
+
+       for (ShopOrderItem item : shopOrderItems) {
+           productRepo.addStockQty(item.getId().getProductId(), item.getQty());
+       }
+
         return this.shopOrderRepo.save(shopOrder);
     }
 

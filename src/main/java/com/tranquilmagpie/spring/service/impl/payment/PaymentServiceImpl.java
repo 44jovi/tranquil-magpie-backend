@@ -4,6 +4,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
+import com.tranquilmagpie.spring.api.payment.CheckoutSessionResponse;
 import com.tranquilmagpie.spring.model.shoporder.ShopOrderItem;
 import com.tranquilmagpie.spring.repo.shoporder.ShopOrderItemRepo;
 import com.tranquilmagpie.spring.service.payment.PaymentService;
@@ -31,8 +32,10 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public String createCheckoutSessionByShopOrderId(UUID shopOrderID) throws StripeException{
+    public CheckoutSessionResponse createCheckoutSessionByShopOrderId(UUID shopOrderID) throws StripeException {
         Stripe.apiKey = apiKey;
+
+        // TODO: add check for shop order status is 'CONFIRMED_AWAITING_PAYMENT'
 
         List<ShopOrderItem> shopOrderItems = this.shopOrderItemRepo.findByIdShopOrderId(shopOrderID);
 
@@ -40,33 +43,33 @@ public class PaymentServiceImpl implements PaymentService {
 
         for (ShopOrderItem item : shopOrderItems) {
 
-        lineItems.add(
-                SessionCreateParams.LineItem.builder()
-                        .setPriceData(
-                                SessionCreateParams.LineItem.PriceData.builder()
-                                        .setCurrency("gbp")
-                                        .setProductData(
-                                                SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                                                        .setName(item.getProductName())
-                                                        .build()
-                                        )
-                                        .setUnitAmount(item.getProductPrice()
-                                                .multiply(BigDecimal.valueOf(100))
-                                                .longValue())
-                                        // TODO: review .setTaxBehavior
-                                        .build()
-                        )
-                        // For reference only. Do not allow customer to amend shop order items at checkout page
-                        // .setAdjustableQuantity(
-                        //     SessionCreateParams.LineItem.AdjustableQuantity.builder()
-                        //     .setEnabled(true)
-                        //     .setMinimum(1L)
-                        //     .setMaximum(10L)
-                        // .build()
-                        //                      )
-                        .setQuantity((long) item.getQty())
-                        .build()
-        );
+            lineItems.add(
+                    SessionCreateParams.LineItem.builder()
+                            .setPriceData(
+                                    SessionCreateParams.LineItem.PriceData.builder()
+                                            .setCurrency("gbp")
+                                            .setProductData(
+                                                    SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                                                            .setName(item.getProductName())
+                                                            .build()
+                                            )
+                                            .setUnitAmount(item.getProductPrice()
+                                                    .multiply(BigDecimal.valueOf(100))
+                                                    .longValue())
+                                            // TODO: review .setTaxBehavior
+                                            .build()
+                            )
+                            // For reference only. Do not allow customer to amend shop order items at checkout page
+                            // .setAdjustableQuantity(
+                            //     SessionCreateParams.LineItem.AdjustableQuantity.builder()
+                            //     .setEnabled(true)
+                            //     .setMinimum(1L)
+                            //     .setMaximum(10L)
+                            // .build()
+                            //                      )
+                            .setQuantity((long) item.getQty())
+                            .build()
+            );
         }
 
         SessionCreateParams params = SessionCreateParams.builder()
@@ -80,7 +83,12 @@ public class PaymentServiceImpl implements PaymentService {
 
         Session session = Session.create(params);
         System.out.println(session.getUrl());
-        // TODO: return more useful object for frontend to consume
-        return session.getUrl();
+
+        return CheckoutSessionResponse.builder()
+                .shopOrderId(shopOrderID)
+                .checkoutSessionId(session.getId())
+                .checkoutUrl(session.getUrl())
+                .build();
     }
+
 }

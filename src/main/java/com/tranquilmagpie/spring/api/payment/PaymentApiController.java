@@ -24,9 +24,9 @@ public class PaymentApiController {
     }
 
     @PostMapping("/create-checkout-session/shop-order-id/{id}")
-    public ResponseEntity<String>  createCheckoutSessionByShopOrderId(@PathVariable UUID id) throws StripeException {
-        String checkoutUrl = this.service.createCheckoutSessionByShopOrderId(id);
-        return new ResponseEntity<>(checkoutUrl, HttpStatus.OK);
+    public ResponseEntity<CheckoutSessionResponse>  createCheckoutSessionByShopOrderId(@PathVariable UUID id) throws StripeException {
+        CheckoutSessionResponse checkoutSessionResponse = this.service.createCheckoutSessionByShopOrderId(id);
+        return new ResponseEntity<>(checkoutSessionResponse, HttpStatus.OK);
     }
 
 }

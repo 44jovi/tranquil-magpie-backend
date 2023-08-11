@@ -4,12 +4,14 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
+import com.tranquilmagpie.spring.model.shoporder.ShopOrderItem;
 import com.tranquilmagpie.spring.repo.shoporder.ShopOrderItemRepo;
 import com.tranquilmagpie.spring.service.payment.PaymentService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -21,20 +23,23 @@ public class PaymentServiceImpl implements PaymentService {
     @Value("${stripe.api.key}")
     private String apiKey;
 
-    private final ShopOrderItemRepo repo;
+    private final ShopOrderItemRepo shopOrderItemRepo;
 
-    public PaymentServiceImpl(ShopOrderItemRepo repo) {
+    public PaymentServiceImpl(ShopOrderItemRepo shopOrderItemRepo) {
         super();
-        this.repo = repo;
+        this.shopOrderItemRepo = shopOrderItemRepo;
     }
 
     @Override
-    public String createCheckoutSession(UUID shopOrderID) throws StripeException{
+    public String createCheckoutSessionByShopOrderId(UUID shopOrderID) throws StripeException{
         Stripe.apiKey = apiKey;
+
+        List<ShopOrderItem> shopOrderItems = this.shopOrderItemRepo.findByIdShopOrderId(shopOrderID);
 
         List<SessionCreateParams.LineItem> lineItems = new ArrayList<>();
 
-        // TODO: loop through list of s-o-i and add them to lineItems
+        for (ShopOrderItem item : shopOrderItems) {
+
         lineItems.add(
                 SessionCreateParams.LineItem.builder()
                         .setPriceData(
@@ -42,12 +47,12 @@ public class PaymentServiceImpl implements PaymentService {
                                         .setCurrency("gbp")
                                         .setProductData(
                                                 SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                                                        // TODO: insert product name from s-o-i
-                                                        .setName("blah")
+                                                        .setName(item.getProductName())
                                                         .build()
                                         )
-                                        // TODO: insert price from s-o-i
-                                        .setUnitAmount(2000L)
+                                        .setUnitAmount(item.getProductPrice()
+                                                .multiply(BigDecimal.valueOf(100))
+                                                .longValue())
                                         // TODO: review .setTaxBehavior
                                         .build()
                         )
@@ -59,10 +64,10 @@ public class PaymentServiceImpl implements PaymentService {
                         //     .setMaximum(10L)
                         // .build()
                         //                      )
-                        // TODO: insert qty from s-o-i
-                        .setQuantity(3L)
+                        .setQuantity((long) item.getQty())
                         .build()
         );
+        }
 
         SessionCreateParams params = SessionCreateParams.builder()
                 // previously .setLineItems()
@@ -75,6 +80,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         Session session = Session.create(params);
         System.out.println(session.getUrl());
+        // TODO: return more useful object for frontend to consume
         return session.getUrl();
     }
 }

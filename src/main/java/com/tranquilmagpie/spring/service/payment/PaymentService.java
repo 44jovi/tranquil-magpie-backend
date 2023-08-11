@@ -6,6 +6,6 @@ import java.util.UUID;
 
 public interface PaymentService {
 
-    String createCheckoutSession(UUID shopOrderID) throws StripeException;
+    String createCheckoutSessionByShopOrderId(UUID shopOrderID) throws StripeException;
 
 }

@@ -23,5 +23,10 @@ public interface ShopOrderService {
 
     ShopOrder cancel(UUID id);
 
+    ShopOrder updateStripeCheckoutSessionId(UUID id, String stripeCheckoutSessionId);
+
+    ShopOrder updateStripePaymentIntentId(UUID id, String stripePaymentIntentId);
+
     ShopOrder confirmPayment(UUID id, String paymentMethod);
+
 }

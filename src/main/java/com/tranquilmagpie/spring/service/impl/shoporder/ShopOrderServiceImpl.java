@@ -135,6 +135,36 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     @Override
+    public ShopOrder updateStripeCheckoutSessionId(UUID id, String stripeCheckoutSessionId) {
+        ShopOrder shopOrder = this.shopOrderRepo.findById(id).get();
+
+        if (shopOrder.getOrderStatus() == ShopOrderStatus.CONFIRMED_AWAITING_PAYMENT) {
+
+            shopOrder.setStripeCheckoutSessionId(stripeCheckoutSessionId);
+
+            return this.shopOrderRepo.save(shopOrder);
+        } else {
+            // TODO: review
+            return null;
+        }
+    }
+
+    @Override
+    public ShopOrder updateStripePaymentIntentId(UUID id, String stripePaymentIntentId) {
+        ShopOrder shopOrder = this.shopOrderRepo.findById(id).get();
+
+        if (shopOrder.getOrderStatus() == ShopOrderStatus.CONFIRMED_AWAITING_PAYMENT) {
+
+            shopOrder.setStripePaymentIntentId(stripePaymentIntentId);
+
+            return this.shopOrderRepo.save(shopOrder);
+        } else {
+            // TODO: review
+            return null;
+        }
+    }
+
+    @Override
     public ShopOrder confirmPayment(UUID id, String paymentMethod) {
         ShopOrder shopOrder = this.shopOrderRepo.findById(id).get();
 
@@ -149,5 +179,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
             return null;
         }
     }
+
+
 
 }

@@ -10,6 +10,6 @@ public interface PaymentService {
 
     CheckoutSessionResponse createCheckoutSessionByShopOrderId(UUID shopOrderID) throws StripeException;
 
-    ShopOrder updatePaymentStatus (CheckoutSessionResponse response) throws StripeException;
+    ShopOrder updatePaymentStatus (UUID shopOrderId) throws StripeException;
 
 }

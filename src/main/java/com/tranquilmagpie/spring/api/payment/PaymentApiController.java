@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-
 @RestController
 @RequestMapping("/payment")
 public class PaymentApiController {
@@ -27,9 +26,9 @@ public class PaymentApiController {
         return new ResponseEntity<>(checkoutSessionResponse, HttpStatus.CREATED);
     }
 
-    @PatchMapping("/update-status")
-    public ResponseEntity<ShopOrder> updatePaymentStatus(@RequestBody CheckoutSessionResponse response) throws StripeException {
-        ShopOrder shopOrder= this.service.updatePaymentStatus(response);
+    @PatchMapping("/update-status/shop-order-id/{id}")
+    public ResponseEntity<ShopOrder> updatePaymentStatus(@PathVariable UUID id) throws StripeException {
+        ShopOrder shopOrder = this.service.updatePaymentStatus(id);
         return new ResponseEntity<>(shopOrder, HttpStatus.OK);
     }
 

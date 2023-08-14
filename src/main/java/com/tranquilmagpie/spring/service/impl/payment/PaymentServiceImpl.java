@@ -95,10 +95,8 @@ public class PaymentServiceImpl implements PaymentService {
                         .build();
 
                 Session session = Session.create(params);
+                shopOrderService.updateStripeCheckoutSessionId(shopOrderID, session.getId());
                 System.out.println(session.getUrl());
-
-                // TODO: add field to ShopOrder for checkoutSessionId ?
-                //   then update it here
 
                 return CheckoutSessionResponse.builder()
                         .shopOrderId(shopOrderID)
@@ -116,14 +114,10 @@ public class PaymentServiceImpl implements PaymentService {
         return null;
     }
 
-    // TODO: switch param to shop order ID
-    public ShopOrder updatePaymentStatus(CheckoutSessionResponse response) throws StripeException {
+    public ShopOrder updatePaymentStatus(UUID shopOrderId) throws StripeException {
         Stripe.apiKey = apiKey;
 
-        UUID shopOrderId = response.getShopOrderId();
-
-        // TODO: switch to using checkout ID from DB
-        String checkoutSessionId = response.getCheckoutSessionId();
+        String checkoutSessionId = shopOrderService.getById(shopOrderId).getStripeCheckoutSessionId();
 
         Session session = Session.retrieve(checkoutSessionId);
 
@@ -132,11 +126,10 @@ public class PaymentServiceImpl implements PaymentService {
             return this.shopOrderService.getById(shopOrderId);
         } else {
             paymentIntentId = session.getPaymentIntent();
+            shopOrderService.updateStripePaymentIntentId(shopOrderId, paymentIntentId);
         }
 
         PaymentIntent intent = PaymentIntent.retrieve(paymentIntentId);
-
-        // TODO: write payment intent ID to shop order in DB
 
         if (intent.getStatus().equals("succeeded")) {
             // TODO: review usage of Stripe's .getPaymentMethodTypes()

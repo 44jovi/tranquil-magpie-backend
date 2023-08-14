@@ -22,4 +22,6 @@ public interface ShopOrderService {
     ShopOrder confirm(UUID id);
 
     ShopOrder cancel(UUID id);
+
+    ShopOrder confirmPayment(UUID id, String paymentMethod);
 }

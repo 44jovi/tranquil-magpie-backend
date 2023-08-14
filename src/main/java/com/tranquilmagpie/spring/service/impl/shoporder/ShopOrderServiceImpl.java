@@ -118,6 +118,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         shopOrder.setOrderStatus(ShopOrderStatus.CONFIRMED_AWAITING_PAYMENT);
         return this.shopOrderRepo.save(shopOrder);
     }
+
     @Override
     public ShopOrder cancel(UUID id) {
         ShopOrder shopOrder = this.shopOrderRepo.findById(id).get();
@@ -126,11 +127,27 @@ public class ShopOrderServiceImpl implements ShopOrderService {
 
         List<ShopOrderItem> shopOrderItems = shopOrderItemRepo.findByIdShopOrderId(id);
 
-       for (ShopOrderItem item : shopOrderItems) {
-           productRepo.addStockQty(item.getId().getProductId(), item.getQty());
-       }
+        for (ShopOrderItem item : shopOrderItems) {
+            productRepo.addStockQty(item.getId().getProductId(), item.getQty());
+        }
 
         return this.shopOrderRepo.save(shopOrder);
+    }
+
+    @Override
+    public ShopOrder confirmPayment(UUID id, String paymentMethod) {
+        ShopOrder shopOrder = this.shopOrderRepo.findById(id).get();
+
+        if (shopOrder.getOrderStatus() == ShopOrderStatus.CONFIRMED_AWAITING_PAYMENT) {
+
+            shopOrder.setOrderStatus(ShopOrderStatus.PAID_AWAITING_SHIPMENT);
+            shopOrder.setPaymentMethod(paymentMethod);
+
+            return this.shopOrderRepo.save(shopOrder);
+        } else {
+            // TODO: review
+            return null;
+        }
     }
 
 }

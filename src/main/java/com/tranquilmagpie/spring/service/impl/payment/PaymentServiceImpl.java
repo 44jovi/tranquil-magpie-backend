@@ -28,6 +28,9 @@ public class PaymentServiceImpl implements PaymentService {
     @Value("${stripe.api.key}")
     private String apiKey;
 
+    @Value("${frontend.base.url}")
+    private String frontendBaseUrl;
+
     private final ShopOrderService shopOrderService;
     private final ShopOrderItemRepo shopOrderItemRepo;
 
@@ -83,14 +86,12 @@ public class PaymentServiceImpl implements PaymentService {
                 }
 
                 SessionCreateParams params = SessionCreateParams.builder()
-                        // previously .setLineItems()
                         .addAllLineItem(lineItems)
                         .setMode(SessionCreateParams.Mode.PAYMENT)
-                        // TODO: frontend - create success/cancellation pages
-                        .setSuccessUrl("https://example.com/success" + "?shopOrderId=" + shopOrderID)
-                        .setCancelUrl("https://example.com/cancel")
+                            .setSuccessUrl(frontendBaseUrl + "/checkout-success" + "?orderId=" + shopOrderID)
+                        .setCancelUrl(frontendBaseUrl + "/checkout-cancel" + "?orderId=" + shopOrderID)
                         .setPaymentIntentData(new SessionCreateParams.PaymentIntentData.Builder()
-                                .setDescription("Shop Order ID: " + shopOrderID) // Set the order ID here
+                                .setDescription("Shop Order ID: " + shopOrderID)
                                 .build())
                         .build();
 

@@ -27,5 +27,6 @@ public class Product {
     private String description;
     private BigDecimal price;
     private int stockQty;
+    private String imageFilename;
 
 }

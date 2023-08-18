@@ -45,8 +45,12 @@ public class ProductApiController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteById(@PathVariable UUID id) {
-        Product deletedProduct = this.service.deleteById(id);
-        return new ResponseEntity<>(deletedProduct, HttpStatus.OK);
+        try {
+            Product deletedProduct = this.service.deleteById(id);
+            return new ResponseEntity<>(deletedProduct, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ApiRequestNotFoundException(e.getMessage());
+        }
     }
 
     @PatchMapping("/{id}")

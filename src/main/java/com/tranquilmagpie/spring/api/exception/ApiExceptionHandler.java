@@ -19,7 +19,7 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(value = {ApiRequestNotFoundException.class})
-    public ResponseEntity<Object> handleApiRequestNotFoundException(ApiRequestNotFoundException e) {
+    public ResponseEntity<ApiExceptionResponse> handleApiRequestNotFoundException(ApiRequestNotFoundException e) {
 
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
 
@@ -31,4 +31,11 @@ public class ApiExceptionHandler {
 
         return new ResponseEntity<>(apiExceptionResponse, httpStatus);
     }
+
+    // TODO: check if this handler is overridden by other exceptions/handlers
+    @ExceptionHandler(value = {RuntimeException.class})
+    public ResponseEntity<String> handleRuntimeException(RuntimeException e){
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
 }

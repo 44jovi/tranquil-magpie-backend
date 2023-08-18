@@ -55,7 +55,11 @@ public class ProductApiController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Product> patchById(@PathVariable UUID id, @RequestBody Product product) {
-        Product patchedProduct = this.service.patchById(id, product);
-        return new ResponseEntity<>(patchedProduct, HttpStatus.OK);
+        try {
+            Product patchedProduct = this.service.patchById(id, product);
+            return new ResponseEntity<>(patchedProduct, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ApiRequestNotFoundException(e.getMessage());
+        }
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Primary
@@ -29,7 +30,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getById(UUID id) {
-        return this.repo.findById(id).get();
+        Optional<Product> product = this.repo.findById(id);
+
+        if (product.isPresent()) {
+            return product.get();
+        } else {
+            throw new RuntimeException("No product found by given ID.");
+        }
     }
 
     // TODO: for ADMIN role only

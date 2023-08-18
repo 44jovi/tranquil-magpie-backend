@@ -1,5 +1,6 @@
 package com.tranquilmagpie.spring.api.product;
 
+import com.tranquilmagpie.spring.api.exception.ApiRequestNotFoundException;
 import com.tranquilmagpie.spring.model.product.Product;
 import com.tranquilmagpie.spring.service.product.ProductService;
 import org.springframework.http.HttpStatus;
@@ -28,8 +29,12 @@ public class ProductApiController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Product> getById(@PathVariable UUID id) {
-        Product product = this.service.getById(id);
-        return new ResponseEntity<>(product, HttpStatus.OK);
+        try {
+            Product product = this.service.getById(id);
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ApiRequestNotFoundException(e.getMessage());
+        }
     }
 
     @PostMapping("/")

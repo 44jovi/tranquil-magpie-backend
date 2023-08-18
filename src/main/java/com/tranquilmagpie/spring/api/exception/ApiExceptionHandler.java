@@ -4,13 +4,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.Instant;
 
-// Handle multiple exceptions
-@ControllerAdvice
+@ControllerAdvice // to handle multiple exceptions
 public class ApiExceptionHandler {
-    // TODO: handle different exceptions
+
+    @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<String>  handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
+        String message = e.getMessage();
+
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(value = {ApiRequestNotFoundException.class})
     public ResponseEntity<Object> handleApiRequestNotFoundException(ApiRequestNotFoundException e) {
 

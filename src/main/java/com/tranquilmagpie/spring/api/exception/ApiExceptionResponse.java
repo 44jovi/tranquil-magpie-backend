@@ -22,4 +22,17 @@ public class ApiExceptionResponse {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private final Instant timestamp;
 
+    // Getters required by exception handler(s)
+    public String getMessage() {
+        return message;
+    }
+
+    public HttpStatus getHttpStatus() {
+        return httpStatus;
+    }
+
+    public Instant getTimestamp() {
+        return timestamp;
+    }
+
 }

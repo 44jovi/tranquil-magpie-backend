@@ -49,9 +49,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public Product deleteById(UUID id) {
-        Product selectedProduct = this.repo.findById(id).get();
-        this.repo.deleteById(id);
-        return selectedProduct;
+
+        Optional<Product> product = this.repo.findById(id);
+
+        if (product.isPresent()) {
+            this.repo.deleteById(id);
+            return product.get();
+        } else {
+            throw new RuntimeException("No product found by given ID.");
+        }
     }
 
     // TODO: for ADMIN role only

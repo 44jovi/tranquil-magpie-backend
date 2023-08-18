@@ -2,6 +2,7 @@ package com.tranquilmagpie.spring.api.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -11,11 +12,30 @@ import java.time.Instant;
 @ControllerAdvice // to handle multiple exceptions
 public class ApiExceptionHandler {
 
-    @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<String>  handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
-        String message = e.getMessage();
+    @ExceptionHandler(value = HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiExceptionResponse>  handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
 
-        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        ApiExceptionResponse apiExceptionResponse = new ApiExceptionResponse(
+                e.getMessage(),
+                httpStatus,
+                Instant.now()
+        );
+
+        return new ResponseEntity<>(apiExceptionResponse, httpStatus);
+    }
+
+    @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ApiExceptionResponse>  handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+
+        ApiExceptionResponse apiExceptionResponse = new ApiExceptionResponse(
+                e.getMessage(),
+                httpStatus,
+                Instant.now()
+        );
+
+        return new ResponseEntity<>(apiExceptionResponse, httpStatus);
     }
 
     @ExceptionHandler(value = {ApiRequestNotFoundException.class})

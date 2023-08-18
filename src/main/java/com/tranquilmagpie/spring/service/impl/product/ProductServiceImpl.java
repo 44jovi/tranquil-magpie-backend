@@ -62,25 +62,30 @@ public class ProductServiceImpl implements ProductService {
 
     // TODO: for ADMIN role only
     @Override
-    public Product patchById(UUID id, Product product) {
+    public Product patchById(UUID id, Product proposedProduct) {
+        Optional<Product> existingProduct = this.repo.findById(id);
 
-        String name = product.getName();
-        String description = product.getDescription();
-        BigDecimal price = product.getPrice();
-        Integer stockQty = product.getStockQty();
+        if (existingProduct.isPresent()) {
+            Product updatedProduct = existingProduct.get();
 
-        Product selectedProduct = this.getById(id);
+            String name = proposedProduct.getName();
+            String description = proposedProduct.getDescription();
+            BigDecimal price = proposedProduct.getPrice();
+            Integer stockQty = proposedProduct.getStockQty();
 
-        if (name != null)
-            selectedProduct.setName(name);
-        if (description != null)
-            selectedProduct.setDescription(description);
-        if (price != null)
-            selectedProduct.setPrice(price);
-        if (stockQty != null)
-            selectedProduct.setStockQty(stockQty);
+            if (name != null)
+                updatedProduct.setName(name);
+            if (description != null)
+                updatedProduct.setDescription(description);
+            if (price != null)
+                updatedProduct.setPrice(price);
+            if (stockQty != null)
+                updatedProduct.setStockQty(stockQty);
 
-        return this.repo.save(selectedProduct);
+            return this.repo.save(updatedProduct);
+        } else {
+            throw new RuntimeException("No product found by given ID.");
+        }
     }
 
 }

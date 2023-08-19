@@ -73,7 +73,7 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> existingProduct = this.repo.findById(id);
 
         if (existingProduct.isPresent()) {
-            Product updatedProduct = existingProduct.get();
+            Product patchedProduct = existingProduct.get();
 
             String name = proposedProduct.getName();
             String description = proposedProduct.getDescription();
@@ -81,15 +81,15 @@ public class ProductServiceImpl implements ProductService {
             Integer stockQty = proposedProduct.getStockQty();
 
             if (name != null)
-                updatedProduct.setName(name);
+                patchedProduct.setName(name);
             if (description != null)
-                updatedProduct.setDescription(description);
+                patchedProduct.setDescription(description);
             if (price != null)
-                updatedProduct.setPrice(price);
+                patchedProduct.setPrice(price);
             if (stockQty != null)
-                updatedProduct.setStockQty(stockQty);
+                patchedProduct.setStockQty(stockQty);
 
-            return this.repo.save(updatedProduct);
+            return this.repo.save(patchedProduct);
         } else {
             throw new RuntimeException("No product found by given ID.");
         }

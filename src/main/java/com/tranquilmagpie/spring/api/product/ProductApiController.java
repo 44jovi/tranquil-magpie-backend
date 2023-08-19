@@ -23,8 +23,12 @@ public class ProductApiController {
 
     @GetMapping("/")
     public ResponseEntity<List<Product>> getAll() {
-        List<Product> products = this.service.getAll();
-        return new ResponseEntity<>(products, HttpStatus.OK);
+        try {
+            List<Product> products = this.service.getAll();
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ApiRequestNotFoundException(e.getMessage());
+        }
     }
 
     @GetMapping("/{id}")

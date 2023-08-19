@@ -25,7 +25,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAll() {
-        return this.repo.findAll();
+
+        List<Product> products = this.repo.findAll();
+
+        if (products.size() > 0) {
+            return products;
+        } else {
+            throw new RuntimeException("No products found.");
+        }
     }
 
     @Override

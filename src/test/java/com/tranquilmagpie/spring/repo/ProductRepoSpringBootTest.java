@@ -62,7 +62,19 @@ class ProductRepoSpringBootTest {
         assertEquals(Optional.empty(), result);
     }
 
-    // TODO: addStockQty
+    // TODO: review how to test this method while the custom query in the repo points to dev (not test) database
+//    @Test
+//    void testAddStockQty() {
+//        Product product = repo.save(product1);
+//
+//        repo.addStockQty(product.getId(), 1);
+//
+//        Product patchedProduct = repo.findById(product.getId()).get();
+//
+//        assertEquals(2, patchedProduct.getStockQty());
+//
+//        repo.deleteById(product.getId());
+//    }
     // TODO: subtractStockQty
 
 }

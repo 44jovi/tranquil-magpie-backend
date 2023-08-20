@@ -7,8 +7,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -35,14 +39,32 @@ class ProductServiceImplTest {
 
         when(ProductRepoMock.findAll()).thenReturn(productsEmpty);
         RuntimeException e = assertThrows(
-                RuntimeException.class, () -> productServiceImpl.getAll()
+                RuntimeException.class,
+                () -> productServiceImpl.getAll()
         );
         assertEquals("No products found.", e.getMessage());
     }
 
-//    @Test
-//    void getById() {
-//    }
+    @Test
+    void getById() {
+        when(ProductRepoMock.findById(any(UUID.class)))
+                .thenReturn(Optional.of(new Product()));
+        assertEquals(
+                Product.class,
+                productServiceImpl.getById(UUID.randomUUID()).getClass()
+        );
+
+        when(ProductRepoMock.findById(any(UUID.class)))
+                .thenReturn(Optional.empty());
+        RuntimeException e = assertThrows(
+                RuntimeException.class,
+                () -> productServiceImpl.getById(UUID.randomUUID())
+        );
+        assertEquals(
+                "No product found by given ID.", e.getMessage()
+        );
+    }
+
 //
 //    @Test
 //    void create() {

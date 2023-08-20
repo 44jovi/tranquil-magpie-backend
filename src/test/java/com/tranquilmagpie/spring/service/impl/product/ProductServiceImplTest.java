@@ -5,6 +5,7 @@ import com.tranquilmagpie.spring.repo.product.ProductRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,10 +22,24 @@ class ProductServiceImplTest {
     ProductServiceImpl productServiceImpl;
     ProductRepo ProductRepoMock;
 
+    Product product1;
+    UUID product1Id;
+
     @BeforeEach
     void setUp() {
         ProductRepoMock = mock(ProductRepo.class);
         productServiceImpl = new ProductServiceImpl(ProductRepoMock);
+
+        product1 = new Product(
+                UUID.randomUUID(),
+                "test product 1",
+                "test product 1",
+                new BigDecimal("12.34"),
+                1,
+                "test-product-1-filename"
+        );
+
+        product1Id = product1.getId();
     }
 
     @Test
@@ -47,12 +62,12 @@ class ProductServiceImplTest {
 
     @Test
     void getById() {
-        when(ProductRepoMock.findById(any(UUID.class)))
-                .thenReturn(Optional.of(new Product()));
+        when(ProductRepoMock.findById(product1Id))
+                .thenReturn(Optional.of(product1));
         assertEquals(
-                Product.class,
-                productServiceImpl.getById(UUID.randomUUID()).getClass()
-        );
+                product1,
+                productServiceImpl.getById(product1Id
+        ));
 
         when(ProductRepoMock.findById(any(UUID.class)))
                 .thenReturn(Optional.empty());

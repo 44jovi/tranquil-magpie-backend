@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,12 +26,20 @@ class ProductRepoSpringBootTest {
 
     @BeforeEach
     void setUp() {
+        List<Product> products = repo.findAll();
+
+        if (products.size() > 0) {
+            if (products.get(0).getName().equals("test product 1")) {
+                repo.deleteById(products.get(0).getId());
+            }
+        }
+
         product1.setId(UUID.randomUUID());
-        product1.setName("product 1");
-        product1.setDescription("product 1 description");
+        product1.setName("test product 1");
+        product1.setDescription("test product 1 description");
         product1.setPrice(new BigDecimal("12.34"));
         product1.setStockQty(1);
-        product1.setImageFilename("product-1-filename");
+        product1.setImageFilename("test-product-1-filename");
     }
 
     @Test
@@ -43,13 +52,12 @@ class ProductRepoSpringBootTest {
             Product foundProduct = foundProductOptional.get();
 
             assertEquals(savedProduct.getId(), foundProduct.getId());
-            assertEquals("product 1", foundProduct.getName());
-            assertEquals("product 1 description", foundProduct.getDescription());
+            assertEquals("test product 1", foundProduct.getName());
+            assertEquals("test product 1 description", foundProduct.getDescription());
             assertEquals(new BigDecimal("12.34"), foundProduct.getPrice());
             assertEquals(1, foundProduct.getStockQty());
-            assertEquals("product-1-filename", foundProduct.getImageFilename());
+            assertEquals("test-product-1-filename", foundProduct.getImageFilename());
         }
-        repo.deleteById(savedProduct.getId());
     }
 
     @Test
@@ -62,19 +70,30 @@ class ProductRepoSpringBootTest {
         assertEquals(Optional.empty(), result);
     }
 
-    // TODO: review how to test this method while the custom query in the repo points to dev (not test) database
-//    @Test
-//    void testAddStockQty() {
-//        Product product = repo.save(product1);
-//
-//        repo.addStockQty(product.getId(), 1);
-//
-//        Product patchedProduct = repo.findById(product.getId()).get();
-//
-//        assertEquals(2, patchedProduct.getStockQty());
-//
-//        repo.deleteById(product.getId());
-//    }
-    // TODO: subtractStockQty
+    @Test
+    void testAddStockQty() {
+        Product product = repo.save(product1);
+
+        repo.addStockQty(product.getId(), 1);
+
+        Optional<Product> patchedProduct = repo.findById(product.getId());
+
+        patchedProduct.ifPresent(
+                p -> assertEquals(2, p.getStockQty())
+        );
+    }
+
+    @Test
+    void subtractStockQty() {
+        Product product = repo.save(product1);
+
+        repo.subtractStockQty(product.getId(), 1);
+
+        Optional<Product> patchedProduct = repo.findById(product.getId());
+
+        patchedProduct.ifPresent(
+                p -> assertEquals(0, p.getStockQty())
+        );
+    }
 
 }

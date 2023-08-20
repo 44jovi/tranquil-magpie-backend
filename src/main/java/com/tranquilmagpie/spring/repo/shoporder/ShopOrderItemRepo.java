@@ -18,7 +18,7 @@ public interface ShopOrderItemRepo extends JpaRepository<ShopOrderItem, ShopOrde
     List<ShopOrderItem> findByIdShopOrderId(UUID id);
 
     // TODO: review SQL dialect configuration
-    @Query(value = "SELECT SUM(price_total) FROM backend.shop_order_item WHERE shop_order_id = :id", nativeQuery = true)
+    @Query(value = "SELECT SUM(price_total) FROM {h-schema}shop_order_item WHERE shop_order_id = :id", nativeQuery = true)
     BigDecimal getPriceTotalByShopOrderId(@Param("id") UUID id);
 
 }

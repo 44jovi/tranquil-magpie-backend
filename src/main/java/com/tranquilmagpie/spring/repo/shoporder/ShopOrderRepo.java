@@ -24,7 +24,7 @@ public interface ShopOrderRepo extends JpaRepository<ShopOrder, UUID> {
     // TODO: use service class instead to avoid using @Transactional in repo
     @Transactional
     @Modifying
-    @Query(value = "UPDATE backend.shop_order SET order_total = :orderTotal WHERE id = :id", nativeQuery = true)
+    @Query(value = "UPDATE {h-schema}shop_order SET order_total = :orderTotal WHERE id = :id", nativeQuery = true)
     void updateOrderTotal(@Param("id") UUID id, @Param("orderTotal") BigDecimal orderTotal);
 
 }

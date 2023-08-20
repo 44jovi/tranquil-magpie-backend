@@ -21,14 +21,14 @@ public interface ProductRepo extends JpaRepository<Product, UUID> {
     // TODO: review SQL dialect configuration
     @Transactional
     @Modifying
-    @Query(value = "UPDATE backend.product SET stock_qty = stock_qty + :amount WHERE id = :id", nativeQuery = true)
+    @Query(value = "UPDATE {h-schema}product SET stock_qty = stock_qty + :amount WHERE id = :id", nativeQuery = true)
     int addStockQty(@Param("id") UUID id, @Param("amount") int amount);
 
     // TODO: use service class instead to avoid using @Transactional in repo
     // TODO: review SQL dialect configuration
     @Transactional
     @Modifying
-    @Query(value = "UPDATE backend.product SET stock_qty = stock_qty - :amount WHERE id = :id", nativeQuery = true)
+    @Query(value = "UPDATE {h-schema}product SET stock_qty = stock_qty - :amount WHERE id = :id", nativeQuery = true)
     int subtractStockQty(@Param("id") UUID id, @Param("amount") int amount);
 
 }

@@ -25,7 +25,7 @@ class ProductServiceImplTest {
     Product product1;
     Product product2;
 
-    UUID product1Id;
+    UUID product2Id;
 
     @BeforeEach
     void setUp() {
@@ -49,7 +49,7 @@ class ProductServiceImplTest {
                 ""
         );
 
-        product1Id = product1.getId();
+        product2Id = product2.getId();
     }
 
     @Test
@@ -78,12 +78,12 @@ class ProductServiceImplTest {
 
     @Test
     void getById() {
-        when(ProductRepoMock.findById(product1Id))
+        when(ProductRepoMock.findById(product2Id))
                 .thenReturn(Optional.of(product1));
 
         assertEquals(
                 product1,
-                productServiceImpl.getById(product1Id
+                productServiceImpl.getById(product2Id
                 ));
     }
 
@@ -129,13 +129,10 @@ class ProductServiceImplTest {
 
     @Test
     void deleteById() {
-        when(ProductRepoMock.findById(product1Id))
+        when(ProductRepoMock.findById(product2Id))
                 .thenReturn(Optional.of(product1));
 
-        assertEquals(
-                product1,
-                productServiceImpl.deleteById(product1Id
-                ));
+        assertEquals(product1, productServiceImpl.deleteById(product2Id));
     }
 
     @Test
@@ -152,7 +149,25 @@ class ProductServiceImplTest {
         );
     }
 
-//    @Test
-//    void patchById() {
-//    }
+    @Test
+    void patchById() {
+        when(ProductRepoMock.findById(product2Id)).thenReturn(Optional.of(product2));
+        when(ProductRepoMock.save(product2)).thenReturn(product2);
+
+        assertEquals(product2, productServiceImpl.patchById(product2Id, product2));
+    }
+
+    @Test
+    void patchByIdNotFound() {
+        when(ProductRepoMock.findById(any(UUID.class)))
+                .thenReturn(Optional.empty());
+
+        RuntimeException e = assertThrows(
+                RuntimeException.class,
+                () -> productServiceImpl.patchById(UUID.randomUUID(), product2)
+        );
+        assertEquals(
+                "No product found by given ID.", e.getMessage()
+        );
+    }
 }

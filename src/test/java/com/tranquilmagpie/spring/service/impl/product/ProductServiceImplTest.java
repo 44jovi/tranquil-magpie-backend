@@ -127,10 +127,31 @@ class ProductServiceImplTest {
         );
     }
 
-//    @Test
-//    void deleteById() {
-//    }
-//
+    @Test
+    void deleteById() {
+        when(ProductRepoMock.findById(product1Id))
+                .thenReturn(Optional.of(product1));
+
+        assertEquals(
+                product1,
+                productServiceImpl.deleteById(product1Id
+                ));
+    }
+
+    @Test
+    void deleteByIdNotFound() {
+        when(ProductRepoMock.findById(any(UUID.class)))
+                .thenReturn(Optional.empty());
+
+        RuntimeException e = assertThrows(
+                RuntimeException.class,
+                () -> productServiceImpl.deleteById(UUID.randomUUID())
+        );
+        assertEquals(
+                "No product found by given ID.", e.getMessage()
+        );
+    }
+
 //    @Test
 //    void patchById() {
 //    }

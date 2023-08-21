@@ -13,7 +13,7 @@ import java.time.Instant;
 public class ApiExceptionHandler {
 
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
-    public ResponseEntity<ApiExceptionResponse>  handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+    public ResponseEntity<ApiExceptionResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
 
         ApiExceptionResponse apiExceptionResponse = new ApiExceptionResponse(
@@ -26,7 +26,7 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<ApiExceptionResponse>  handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
+    public ResponseEntity<ApiExceptionResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
 
         ApiExceptionResponse apiExceptionResponse = new ApiExceptionResponse(
@@ -40,7 +40,6 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(value = {ApiRequestNotFoundException.class})
     public ResponseEntity<ApiExceptionResponse> handleApiRequestNotFoundException(ApiRequestNotFoundException e) {
-
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
 
         ApiExceptionResponse apiExceptionResponse = new ApiExceptionResponse(
@@ -54,8 +53,16 @@ public class ApiExceptionHandler {
 
     // TODO: check if this handler is overridden by other exceptions/handlers
     @ExceptionHandler(value = {RuntimeException.class})
-    public ResponseEntity<String> handleRuntimeException(RuntimeException e){
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ApiExceptionResponse> handleRuntimeException(RuntimeException e) {
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+
+        ApiExceptionResponse apiExceptionResponse = new ApiExceptionResponse(
+                e.getMessage(),
+                httpStatus,
+                Instant.now()
+        );
+
+        return new ResponseEntity<>(apiExceptionResponse, httpStatus);
     }
 
 }

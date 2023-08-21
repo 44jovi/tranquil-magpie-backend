@@ -23,6 +23,8 @@ class ProductServiceImplTest {
     ProductRepo ProductRepoMock;
 
     Product product1;
+    Product product2;
+
     UUID product1Id;
 
     @BeforeEach
@@ -31,12 +33,20 @@ class ProductServiceImplTest {
         productServiceImpl = new ProductServiceImpl(ProductRepoMock);
 
         product1 = new Product(
-                UUID.randomUUID(),
                 "test product 1",
                 "test product 1",
                 new BigDecimal("12.34"),
                 1,
                 "test-product-1-filename"
+        );
+
+        product2 = new Product(
+                UUID.randomUUID(),
+                "test product 2",
+                "test product 2",
+                new BigDecimal("12.34"),
+                1,
+                "test-product-2-filename"
         );
 
         product1Id = product1.getId();
@@ -47,12 +57,18 @@ class ProductServiceImplTest {
         List<Product> products = new ArrayList<>();
         products.add(new Product());
         products.add(new Product());
-        List<Product> productsEmpty = new ArrayList<>();
 
         when(ProductRepoMock.findAll()).thenReturn(products);
+
         assertEquals(2, productServiceImpl.getAll().size());
+    }
+
+    @Test
+    void getAllNoneFound() {
+        List<Product> productsEmpty = new ArrayList<>();
 
         when(ProductRepoMock.findAll()).thenReturn(productsEmpty);
+
         RuntimeException e = assertThrows(
                 RuntimeException.class,
                 () -> productServiceImpl.getAll()
@@ -64,13 +80,18 @@ class ProductServiceImplTest {
     void getById() {
         when(ProductRepoMock.findById(product1Id))
                 .thenReturn(Optional.of(product1));
+
         assertEquals(
                 product1,
                 productServiceImpl.getById(product1Id
-        ));
+                ));
+    }
 
+    @Test
+    void getByIdNotFound() {
         when(ProductRepoMock.findById(any(UUID.class)))
                 .thenReturn(Optional.empty());
+
         RuntimeException e = assertThrows(
                 RuntimeException.class,
                 () -> productServiceImpl.getById(UUID.randomUUID())
@@ -80,11 +101,24 @@ class ProductServiceImplTest {
         );
     }
 
-//
-//    @Test
-//    void create() {
-//    }
-//
+    @Test
+    void createSuccessful() {
+        when(ProductRepoMock.save(product1)).thenReturn(product1);
+        assertEquals(product1, productServiceImpl.create(product1));
+    }
+
+    @Test
+    void createWithId() {
+        when(ProductRepoMock.save(product2)).thenReturn(product2);
+        RuntimeException e = assertThrows(RuntimeException.class, () -> productServiceImpl.create(product2));
+
+        assertEquals(
+                "Specifying an ID is not permitted on product creation.", e.getMessage()
+        );
+    }
+
+    // TODO: test creation of product with name that already exists
+
 //    @Test
 //    void deleteById() {
 //    }

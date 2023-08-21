@@ -33,20 +33,20 @@ class ProductServiceImplTest {
         productServiceImpl = new ProductServiceImpl(ProductRepoMock);
 
         product1 = new Product(
-                "test product 1",
-                "test product 1",
-                new BigDecimal("12.34"),
+                "",
+                "",
+                new BigDecimal("1"),
                 1,
-                "test-product-1-filename"
+                ""
         );
 
         product2 = new Product(
                 UUID.randomUUID(),
-                "test product 2",
-                "test product 2",
-                new BigDecimal("12.34"),
+                "",
+                "",
+                new BigDecimal("1"),
                 1,
-                "test-product-2-filename"
+                ""
         );
 
         product1Id = product1.getId();
@@ -117,7 +117,15 @@ class ProductServiceImplTest {
         );
     }
 
-    // TODO: test creation of product with name that already exists
+    @Test
+    void createNameAlreadyExists() {
+        when(ProductRepoMock.findByName(product1.getName())).thenReturn(Optional.of(product1));
+        RuntimeException e = assertThrows(RuntimeException.class, () -> productServiceImpl.create(product1));
+
+        assertEquals(
+                "Product name already exists on an existing product.", e.getMessage()
+        );
+    }
 
 //    @Test
 //    void deleteById() {

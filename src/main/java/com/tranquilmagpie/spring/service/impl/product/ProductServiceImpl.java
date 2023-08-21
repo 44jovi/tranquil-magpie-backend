@@ -49,7 +49,13 @@ public class ProductServiceImpl implements ProductService {
     // TODO: for ADMIN role only
     @Override
     public Product create(Product product) {
-        return this.repo.save(product);
+        Optional<Product> existingProduct = this.repo.findByName(product.getName());
+
+        if (existingProduct.isPresent()) {
+            throw new RuntimeException("Product name already exists on an existing product.");
+        } else {
+            return this.repo.save(product);
+        }
     }
 
     // TODO: for ADMIN role only

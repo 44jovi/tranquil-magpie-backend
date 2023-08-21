@@ -17,6 +17,8 @@ public interface ProductRepo extends JpaRepository<Product, UUID> {
     @Override
     Optional<Product> findById(UUID id);
 
+    Optional<Product> findByName(String name);
+
     // TODO: use service class instead to avoid using @Transactional in repo
     // TODO: review SQL dialect configuration
     @Transactional

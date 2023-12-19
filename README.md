@@ -14,21 +14,23 @@ An E-Commerce Backend API
     - Database design
     - Data integrity
 
-## Languages and tools
-- Java
+## Main languages and tools
+- **Java**
   - Spring Boot
   - Spring Security
   - JUnit / Mockito (Unit Tests)
   - Stripe API for Java
-- PostgreSQL
-- BCrypt
+  - BCrypt
+- **PostgreSQL**
 
 ## Key features
 - User / admin accounts
   - Creation
   - Access
+    - Public and secured endpoints
   - Management
 - Products
+  - Creation (admin)
   - Browse
   - Order
   - Pay

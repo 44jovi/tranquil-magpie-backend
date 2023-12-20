@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS product
     image_filename character varying(300) COLLATE pg_catalog."default",
     CONSTRAINT product_pkey PRIMARY KEY (id),
     CONSTRAINT name_unique UNIQUE (name)
-)
+);
 
 CREATE TABLE IF NOT EXISTS shop_order
 (

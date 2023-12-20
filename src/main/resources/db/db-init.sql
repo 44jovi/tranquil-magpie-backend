@@ -39,9 +39,26 @@ CREATE TABLE IF NOT EXISTS user_address
     postcode character varying(7) COLLATE pg_catalog."default",
     CONSTRAINT user_address_pkey PRIMARY KEY (id),
     CONSTRAINT users_id_fkey FOREIGN KEY (user_id)
-        REFERENCES backend.users (id) MATCH SIMPLE
+        REFERENCES users (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID
 );
 
+CREATE TABLE IF NOT EXISTS shop_order
+(
+    id uuid NOT NULL,
+    user_id uuid,
+    order_date_time timestamp with time zone,
+    order_total numeric,
+    order_status character varying(100) COLLATE pg_catalog."default",
+    payment_method character varying(50) COLLATE pg_catalog."default",
+    shipping_address character varying(300) COLLATE pg_catalog."default",
+    stripe_checkout_session_id character varying(200) COLLATE pg_catalog."default",
+    stripe_payment_intent_id character varying(200) COLLATE pg_catalog."default",
+    CONSTRAINT shop_order_pkey PRIMARY KEY (id),
+    CONSTRAINT users_id_fkey FOREIGN KEY (user_id)
+        REFERENCES users (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);

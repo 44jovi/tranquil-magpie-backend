@@ -29,6 +29,7 @@ An E-Commerce Backend API
   - Access
     - Public and secured endpoints
   - Management
+    - UUID's
 - Products
   - Creation (admin)
   - Browse
@@ -39,5 +40,5 @@ An E-Commerce Backend API
 - Integration testing
 - OAuth / social authentication
 - Order returns
-- Enhanced IAM (identy / access management)
+- Enhanced IAM (identity / access management)
 - Compatibility with cloud deployments / CI/CD

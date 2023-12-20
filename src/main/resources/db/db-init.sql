@@ -45,6 +45,18 @@ CREATE TABLE IF NOT EXISTS user_address
         NOT VALID
 );
 
+CREATE TABLE IF NOT EXISTS product
+(
+    id uuid NOT NULL,
+    name character varying(50) COLLATE pg_catalog."default",
+    description character varying(200) COLLATE pg_catalog."default",
+    price numeric,
+    stock_qty integer,
+    image_filename character varying(300) COLLATE pg_catalog."default",
+    CONSTRAINT product_pkey PRIMARY KEY (id),
+    CONSTRAINT name_unique UNIQUE (name)
+)
+
 CREATE TABLE IF NOT EXISTS shop_order
 (
     id uuid NOT NULL,
@@ -59,6 +71,25 @@ CREATE TABLE IF NOT EXISTS shop_order
     CONSTRAINT shop_order_pkey PRIMARY KEY (id),
     CONSTRAINT users_id_fkey FOREIGN KEY (user_id)
         REFERENCES users (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS shop_order_item
+(
+    shop_order_id uuid NOT NULL,
+    product_id uuid NOT NULL,
+    product_name character varying(50) COLLATE pg_catalog."default",
+    product_price numeric,
+    qty integer,
+	price_total numeric,
+    CONSTRAINT shop_order_item_pkey PRIMARY KEY (shop_order_id, product_id),
+    CONSTRAINT shop_order_item_product_id_fkey FOREIGN KEY (product_id)
+        REFERENCES product (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT shop_order_item_shop_order_id_fkey FOREIGN KEY (shop_order_id)
+        REFERENCES shop_order (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 );

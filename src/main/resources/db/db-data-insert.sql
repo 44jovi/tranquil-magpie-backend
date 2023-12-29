@@ -19,7 +19,7 @@ values (
 	'barry',
 	'castle',
 	'1903-02-01',
-	'not-yet-hashed-password',
+	'$2a$10$6gUOXDNJq17yTAyHEwRp/uYO6201uAUChmw6k5F83XEdUzU5cTBC6',
 	'USER')
 ;
 
@@ -86,3 +86,9 @@ values (
     9.99,
     100)
 ;
+
+-- TODO:
+-- 'shop_order' (TBC/WIP)
+
+-- TODO:
+-- shop_order_item (TBC/WIP)

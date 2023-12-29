@@ -47,7 +47,7 @@ insert into product (
     price,
     stock_qty)
 values (
-    'e7cb0665-e3b8-4e8f-a57e-22bc55c04196',
+    '634a1a41-d1a6-403f-9080-ff6ae8b7754a',
     'A most useful descriptive description.',
     'example-product-1.jpg',
     'Example Product 1',
@@ -63,7 +63,7 @@ insert into product (
     price,
     stock_qty)
 values (
-    'f6455eab-3f06-433d-838e-e563b357f9ed',
+    '8a489f1c-d79b-4ae2-ac6c-5d3e8d47bb7e',
     'A most useful descriptive description.',
     'example-product-2.jpg',
     'Example Product 2',
@@ -79,7 +79,7 @@ insert into product (
     price,
     stock_qty)
 values (
-    'fd819047-c637-4538-b65a-9fc02eb758e4',
+    '08ad597a-29a0-4c37-a47f-8db7201a6493',
     'A most useful descriptive description.',
     'example-product-3.jpg',
     'Example Product 3',
@@ -87,8 +87,28 @@ values (
     100)
 ;
 
--- TODO:
--- 'shop_order' (TBC/WIP)
+-- 'shop_order'
+insert into shop_order (
+    "id",
+    order_date_time,
+    order_status,
+    order_total,
+    payment_method,
+    shipping_address,
+    stripe_checkout_session_id,
+    stripe_payment_intent_id,
+    user_id)
+values (
+    '1a0e6074-d0b9-44b6-9a2d-3bbd1101fe9b',
+    '2023-12-29T21:52:58.811545Z',
+    'PAID_AWAITING_SHIPMENT',
+    40.94,
+    '[card]',
+    '{"id":"28836c68-d464-4c11-ae35-32da5127ccff","userId":"2e53a105-09a4-4e9a-8862-f16558547cc7","line_1":"1 Barry Street","city":"Tranquilton","postcode":"ABC1D23"}',
+    'cs_test_b1jeTA3LtKa9F3edAntGeWFMZoNM1dABMYOB2CJb0eYJPijHgHSUJk3LUs',
+    'pi_3OSo0XBJVuTI1Txi1qQHQV7e',
+    '2e53a105-09a4-4e9a-8862-f16558547cc7')
+;
 
 -- TODO:
 -- shop_order_item (TBC/WIP)

@@ -110,5 +110,51 @@ values (
     '2e53a105-09a4-4e9a-8862-f16558547cc7')
 ;
 
--- TODO:
--- shop_order_item (TBC/WIP)
+-- shop_order_item
+insert into shop_order_item (
+    product_id,
+    shop_order_id,
+    price_total,
+    product_name,
+    product_price,
+    qty)
+values (
+    '634a1a41-d1a6-403f-9080-ff6ae8b7754a',
+    '1a0e6074-d0b9-44b6-9a2d-3bbd1101fe9b',
+    0.99,
+    'Example Product 1',
+    0.99,
+    1)
+;
+
+insert into shop_order_item (
+    product_id,
+    shop_order_id,
+    price_total,
+    product_name,
+    product_price,
+    qty)
+values (
+    '8a489f1c-d79b-4ae2-ac6c-5d3e8d47bb7e',
+    '1a0e6074-d0b9-44b6-9a2d-3bbd1101fe9b',
+    9.98,
+    'Example Product 2',
+    4.99,
+    2)
+;
+
+insert into shop_order_item (
+    product_id,
+    shop_order_id,
+    price_total,
+    product_name,
+    product_price,
+    qty)
+values (
+    '08ad597a-29a0-4c37-a47f-8db7201a6493',
+    '1a0e6074-d0b9-44b6-9a2d-3bbd1101fe9b',
+    29.97,
+    'Example Product 3',
+    9.99,
+    3)
+;

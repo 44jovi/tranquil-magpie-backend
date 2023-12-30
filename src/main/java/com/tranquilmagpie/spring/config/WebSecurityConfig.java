@@ -29,15 +29,20 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
 
         // TODO: review CSRF protection
-        security.csrf().disable()
+        security.cors()
+                .and()
+                .csrf().disable()
                 .authorizeRequests()
 
                 // Public
                 .requestMatchers(
-                        "/auth/**",
+                        // TODO: review why this doesn't work for "/auth/register"
                         "/swagger",
                         "/swagger-ui/**",
-                        "/v3/api-docs/**"
+                        "/v3/api-docs/**",
+                        "/auth/**",
+                        "/auth/register",
+                        "/product/"
                 ).permitAll()
 
                 // Admin

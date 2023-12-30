@@ -41,4 +41,8 @@ public class ShopOrder {
 
     private String shippingAddress;
 
+    private String stripeCheckoutSessionId;
+
+    private String stripePaymentIntentId;
+
 }

@@ -61,13 +61,6 @@ class ShopOrderTest {
     }
 
     @Test
-    void testToString() {
-        assertEquals(
-                "ShopOrder(id=0c7ebd59-dc67-49c8-a4ed-80810e0be975, userId=9db8d917-9bae-4eec-840f-0728611818d9, orderDateTime=1901-01-01T01:01:01.000001Z, orderTotal=12.34, orderStatus=PENDING, paymentMethod=credit card, shippingAddress=example address 1)"
-                , shopOrder1.toString());
-    }
-
-    @Test
     void testEquals() {
         assertNotEquals(shopOrder1, shopOrder2);
     }

@@ -27,5 +27,14 @@ public class Product {
     private String description;
     private BigDecimal price;
     private int stockQty;
+    private String imageFilename;
 
+    // No ID parameter
+    public Product(String name, String description, BigDecimal price, int stockQty, String imageFilename) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stockQty = stockQty;
+        this.imageFilename = imageFilename;
+    }
 }

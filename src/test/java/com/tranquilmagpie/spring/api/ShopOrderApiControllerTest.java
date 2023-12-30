@@ -1,5 +1,6 @@
 package com.tranquilmagpie.spring.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tranquilmagpie.spring.api.shoporder.ShopOrderApiController;
 import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 import com.tranquilmagpie.spring.service.shoporder.ShopOrderService;
@@ -27,7 +28,7 @@ class ShopOrderApiControllerTest {
     UUID uuid;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws JsonProcessingException {
         shopOrdersList = new ArrayList<>();
         shopOrdersListResEnt = new ResponseEntity<>(shopOrdersList, HttpStatus.OK);
 
@@ -77,7 +78,7 @@ class ShopOrderApiControllerTest {
     }
 
     @Test
-    void testCreateOne() {
+    void testCreateOne() throws JsonProcessingException {
         ResponseEntity<ShopOrder> createdShopOrder = controller.create(shopOrder1);
 
         assertEquals(shopOrder1ResEntCreated, createdShopOrder);

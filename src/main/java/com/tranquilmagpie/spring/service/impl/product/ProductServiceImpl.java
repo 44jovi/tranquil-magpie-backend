@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Primary
@@ -24,50 +25,84 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAll() {
-        return this.repo.findAll();
+
+        List<Product> products = this.repo.findAll();
+
+        if (products.size() > 0) {
+            return products;
+        } else {
+            throw new RuntimeException("No products found.");
+        }
     }
 
     @Override
     public Product getById(UUID id) {
-        return this.repo.findById(id).get();
+        Optional<Product> product = this.repo.findById(id);
+
+        if (product.isPresent()) {
+            return product.get();
+        } else {
+            throw new RuntimeException("No product found by given ID.");
+        }
     }
 
     // TODO: for ADMIN role only
     @Override
     public Product create(Product product) {
-        return this.repo.save(product);
+        if (product.getId() == null) {
+            Optional<Product> existingProduct = this.repo.findByName(product.getName());
+            if (existingProduct.isPresent()) {
+                throw new RuntimeException("Product name already exists on an existing product.");
+            } else {
+                return this.repo.save(product);
+            }
+        } else {
+            throw new RuntimeException("Specifying an ID is not permitted on product creation.");
+        }
+
     }
 
     // TODO: for ADMIN role only
     @Override
     @Transactional
     public Product deleteById(UUID id) {
-        Product selectedProduct = this.repo.findById(id).get();
-        this.repo.deleteById(id);
-        return selectedProduct;
+
+        Optional<Product> product = this.repo.findById(id);
+
+        if (product.isPresent()) {
+            this.repo.deleteById(id);
+            return product.get();
+        } else {
+            throw new RuntimeException("No product found by given ID.");
+        }
     }
 
     // TODO: for ADMIN role only
     @Override
-    public Product patchById(UUID id, Product product) {
+    public Product patchById(UUID id, Product proposedProduct) {
+        Optional<Product> existingProduct = this.repo.findById(id);
 
-        String name = product.getName();
-        String description = product.getDescription();
-        BigDecimal price = product.getPrice();
-        Integer stockQty = product.getStockQty();
+        if (existingProduct.isPresent()) {
+            Product patchedProduct = existingProduct.get();
 
-        Product selectedProduct = this.getById(id);
+            String name = proposedProduct.getName();
+            String description = proposedProduct.getDescription();
+            BigDecimal price = proposedProduct.getPrice();
+            Integer stockQty = proposedProduct.getStockQty();
 
-        if (name != null)
-            selectedProduct.setName(name);
-        if (description != null)
-            selectedProduct.setDescription(description);
-        if (price != null)
-            selectedProduct.setPrice(price);
-        if (stockQty != null)
-            selectedProduct.setStockQty(stockQty);
+            if (name != null)
+                patchedProduct.setName(name);
+            if (description != null)
+                patchedProduct.setDescription(description);
+            if (price != null)
+                patchedProduct.setPrice(price);
+            if (stockQty != null)
+                patchedProduct.setStockQty(stockQty);
 
-        return this.repo.save(selectedProduct);
+            return this.repo.save(patchedProduct);
+        } else {
+            throw new RuntimeException("No product found by given ID.");
+        }
     }
 
 }

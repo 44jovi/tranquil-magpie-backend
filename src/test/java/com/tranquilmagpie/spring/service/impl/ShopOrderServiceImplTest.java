@@ -1,7 +1,10 @@
 package com.tranquilmagpie.spring.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tranquilmagpie.spring.model.shoporder.ShopOrder;
 import com.tranquilmagpie.spring.model.user.UserAddress;
+import com.tranquilmagpie.spring.repo.product.ProductRepo;
+import com.tranquilmagpie.spring.repo.shoporder.ShopOrderItemRepo;
 import com.tranquilmagpie.spring.repo.shoporder.ShopOrderRepo;
 import com.tranquilmagpie.spring.service.impl.shoporder.ShopOrderServiceImpl;
 import com.tranquilmagpie.spring.repo.user.UserAddressRepo;
@@ -19,6 +22,9 @@ class ShopOrderServiceImplTest {
     List<ShopOrder> shopOrdersList;
     ShopOrder shopOrder1;
     ShopOrderRepo ShopOrderRepoMock;
+    ShopOrderItemRepo ShopOrderItemRepoMock;
+    ProductRepo ProductRepoMock;
+
     UserAddressRepo UserAddressRepoMock;
     ShopOrderServiceImpl shopOrderServiceImpl;
 
@@ -40,7 +46,7 @@ class ShopOrderServiceImplTest {
         when(ShopOrderRepoMock.save(shopOrder1)).thenReturn(shopOrder1);
         when(UserAddressRepoMock.findByUserId(any(UUID.class))).thenReturn(Optional.ofNullable(new UserAddress()));
 
-        shopOrderServiceImpl = new ShopOrderServiceImpl(ShopOrderRepoMock, UserAddressRepoMock);
+        shopOrderServiceImpl = new ShopOrderServiceImpl(ShopOrderRepoMock, ShopOrderItemRepoMock, ProductRepoMock, UserAddressRepoMock);
     }
 
     @Test
@@ -65,7 +71,7 @@ class ShopOrderServiceImplTest {
     }
 
     @Test
-    void testCreateOne() {
+    void testCreateOne() throws JsonProcessingException {
         shopOrderServiceImpl.create(shopOrder1);
 
         verify(ShopOrderRepoMock, times(1)).save(any(ShopOrder.class));

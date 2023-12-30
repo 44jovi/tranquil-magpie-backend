@@ -105,8 +105,8 @@ values (
     40.94,
     '[card]',
     '{"id":"28836c68-d464-4c11-ae35-32da5127ccff","userId":"2e53a105-09a4-4e9a-8862-f16558547cc7","line_1":"1 Barry Street","city":"Tranquilton","postcode":"ABC1D23"}',
-    'cs_test_b1jeTA3LtKa9F3edAntGeWFMZoNM1dABMYOB2CJb0eYJPijHgHSUJk3LUs',
-    'pi_3OSo0XBJVuTI1Txi1qQHQV7e',
+    'placeholder_stripe_checkout_session_id',
+    'placeholder_stripe_payment_intent_id',
     '2e53a105-09a4-4e9a-8862-f16558547cc7')
 ;
 

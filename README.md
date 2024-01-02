@@ -1,15 +1,14 @@
 # Project Tranquil Magpie
 
-An E-Commerce Backend API
-
 ## About
 
+- An E-Commerce Backend API
 - A RESTful API designed to serve / process data for an e-commerce frontend client
 - Focused on
     - **Reliability**
     - **Security**
         - Token authentication (JWT)
-            - HMAC-SHA signing key (symmetrical)
+            - HMAC-SHA cryptographic signing key (symmetrical)
                 - HS256 hashing algorithm (HMAC with SHA-256)
         - User authorisation by role
         - Data hashing (BCrypt)
@@ -23,9 +22,10 @@ An E-Commerce Backend API
 - **Java**
     - Spring Boot
     - Spring Security
+        - JWT (symmetrical HMAC-SHA)
+        - BCrypt
     - JUnit / Mockito (Unit Tests)
     - Stripe API for Java
-    - BCrypt
 - **PostgreSQL**
 
 ## Key features
@@ -47,7 +47,7 @@ An E-Commerce Backend API
 ### Database setup
 
 - Install PostgreSQL on your local system
-- Run the SQL scripts found in
+- Using PostgreSQL, run the SQL scripts found in
     - `src/main/resources/db`
         1. `db-create-db-and-schemas.sql`
         2. `db-create-tables.sql`
@@ -56,7 +56,7 @@ An E-Commerce Backend API
 
 ### Required local environment variables
 
-- Refer to the local system environment variables (surrounded by `${}`) in:
+- Refer to the local system environment variables in:
     - `application.properties`
         - They must first be set up on the local system
         - e.g. `${TRANQUIL_MAGPIE_DB_BASE_URL}` = data source base URL
@@ -87,3 +87,4 @@ An E-Commerce Backend API
 - This application is for demonstration purposes only
     - Not to be used commercially
 - **Do not use/expose any real, confidential data with this application**
+- 

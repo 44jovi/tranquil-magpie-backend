@@ -47,18 +47,19 @@ An E-Commerce Backend API
 ### Database setup
 
 - Install PostgreSQL on your local system
-- Use a SQL databse management tool or command line to run the scripts found in
+- Run the SQL scripts found in
     - `src/main/resources/db`
-        - `db-init.sql` - database and schema creation
-            - Note you may first need to run the `CREATE DATABASE` and `CREATE SCHEMA` statements separately
-    - `db-data-insert.sql` - initial example data inserts
+        1. `db-create-db-and-schemas.sql`
+        2. `db-create-tables.sql`
+        3. `db-insert-initial-data.sql`
+            - Only required for the `backend` schema
 
 ### Required local environment variables
 
-- Refer to the local environment variables in the following configuration files:
+- Refer to the local system environment variables (surrounded by `${}`) in:
     - `application.properties`
-    - `application-test.properties`
-- They must first be set up on the local system running to application
+        - They must first be set up on the local system
+        - e.g. `${TRANQUIL_MAGPIE_DB_BASE_URL}` = data source base URL
 
 ### Application secret key (symmetrical)
 
@@ -76,11 +77,10 @@ An E-Commerce Backend API
 
 ## Future features
 
-- Integration testing
 - OAuth / social authentication
-- Order returns
 - Enhanced IAM (identity / access management)
 - Compatibility with cloud deployments / CI/CD
+- Order returns
 
 ## Disclaimer
 

@@ -25,8 +25,8 @@ import java.util.UUID;
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
-    @Value("${stripe.api.key}")
-    private String apiKey;
+    @Value("${tranquil.magpie.stripe.api.sk}")
+    private String apiSecretKey;
 
     @Value("${frontend.base.url}")
     private String frontendBaseUrl;
@@ -45,7 +45,7 @@ public class PaymentServiceImpl implements PaymentService {
     public CheckoutSessionResponse createCheckoutSessionByShopOrderId(UUID shopOrderID) throws StripeException {
 
         try {
-            Stripe.apiKey = apiKey;
+            Stripe.apiKey = apiSecretKey;
 
             ShopOrder shopOrder = this.shopOrderService.getById(shopOrderID);
 
@@ -88,7 +88,7 @@ public class PaymentServiceImpl implements PaymentService {
                 SessionCreateParams params = SessionCreateParams.builder()
                         .addAllLineItem(lineItems)
                         .setMode(SessionCreateParams.Mode.PAYMENT)
-                            .setSuccessUrl(frontendBaseUrl + "/checkout-success" + "?orderId=" + shopOrderID)
+                        .setSuccessUrl(frontendBaseUrl + "/checkout-success" + "?orderId=" + shopOrderID)
                         .setCancelUrl(frontendBaseUrl + "/checkout-cancel" + "?orderId=" + shopOrderID)
                         .setPaymentIntentData(new SessionCreateParams.PaymentIntentData.Builder()
                                 .setDescription("Shop Order ID: " + shopOrderID)
@@ -116,7 +116,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     public ShopOrder updatePaymentStatus(UUID shopOrderId) throws StripeException {
-        Stripe.apiKey = apiKey;
+        Stripe.apiKey = apiSecretKey;
 
         String checkoutSessionId = shopOrderService.getById(shopOrderId).getStripeCheckoutSessionId();
 

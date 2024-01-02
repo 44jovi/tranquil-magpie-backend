@@ -42,7 +42,7 @@ public class AppConfig {
         // Retrieve user details from UserDetailsService and authenticate credentials
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService());
-        // @sourcesmith: "These can be constructor injected and so immutable."
+        // TODO: review injecting via constructor for immutability"
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;

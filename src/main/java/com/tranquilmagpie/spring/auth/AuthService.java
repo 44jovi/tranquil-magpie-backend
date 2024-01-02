@@ -52,7 +52,7 @@ public class AuthService {
                         request.getPassword()
                 )
         );
-        // TODO: refer to @sourcesmith comment re propagating exceptions to last resort handler
+        // TODO: review passing exceptions to last resort handler
         User user = repo.findByUsername(request.getUsername()).orElseThrow();
         String jwt = jwtService.generateToken(user);
 

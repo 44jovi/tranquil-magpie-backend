@@ -1,17 +1,6 @@
--- PRE-REQUISITES
--- Install PostgreSQL on your local system.
+-- PostgreSQL
 
--- OTHER NOTES
--- DROP commands should be executed separately to avoid accidental deletions.
-
--- NOTE: These CREATE statements may first need to be executed via command line ('psql') or other SQL DB tool.
-CREATE DATABASE tranquil_magpie;
--- Main (production) schema
-CREATE SCHEMA backend;
--- Dev / test schema
-CREATE SCHEMA backend_dev;
-
--- IMPORTANT: Set 'search_path' to the relevant schema listed above.
+-- IMPORTANT: First set the 'search_path' to the relevant schema: 'backend' / 'backend_dev' / 'backend_test'
 SET search_path TO backend;
 
 -- TODO: refactor 'users' to 'user'

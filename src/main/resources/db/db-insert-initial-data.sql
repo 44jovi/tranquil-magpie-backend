@@ -1,4 +1,6 @@
--- IMPORTANT: Set 'search_path' to the relevant schema
+-- PostgreSQL
+
+-- IMPORTANT: First set the 'search_path' to the relevant schema: 'backend' / 'backend_dev' / 'backend_test'
 SET search_path TO backend;
 
 -- 'user'
